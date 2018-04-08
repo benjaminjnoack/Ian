@@ -46,6 +46,9 @@ BOARD_InitPins:
   - {pin_num: M5, peripheral: ADC0, signal: 'CH, 5', pin_signal: PIO0_31/FC0_CTS_SDA_SSEL0/SD_D(2)/CTIMER0_MAT1/SCT0_OUT3/TRACEDATA(0)/ADC0_5}
   - {pin_num: P3, peripheral: ADC0, signal: 'CH, 7', pin_signal: PIO2_0/FC0_RXD_SDA_MOSI/CTIMER1_CAP0/ADC0_7}
   - {pin_num: N3, peripheral: ADC0, signal: 'CH, 6', pin_signal: PIO1_0/FC0_RTS_SCL_SSEL1/SD_D(3)/CTIMER0_CAP2/SCT0_GPI4/TRACECLK/ADC0_6}
+  - {pin_num: E3, peripheral: GPIO, signal: 'PIO3, 14', pin_signal: PIO3_14/SCT0_OUT4/FC9_RTS_SCL_SSEL1/CTIMER3_MAT1/TRACEDATA(2), direction: OUTPUT}
+  - {pin_num: A13, peripheral: GPIO, signal: 'PIO3, 3', pin_signal: PIO3_3/LCD_VD(17)/FC9_TXD_SCL_MISO, direction: OUTPUT}
+  - {pin_num: C3, peripheral: GPIO, signal: 'PIO2, 2', pin_signal: PIO2_2/ENET_CRS/FC3_SSEL3/SCT0_OUT6/CTIMER1_MAT1, direction: OUTPUT}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -135,6 +138,36 @@ void BOARD_InitPins(void)
 
                         /* Select Analog/Digital mode.: Analog mode. */
                         | IOCON_PIO_DIGIMODE(PIO20_DIGIMODE_ANALOG));
+
+    IOCON->PIO[2][2] = ((IOCON->PIO[2][2] &
+                         /* Mask bits to zero which are setting */
+                         (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
+
+                        /* Selects pin function.: PORT22 (pin C3) is configured as PIO2_2 */
+                        | IOCON_PIO_FUNC(PIO22_FUNC_ALT0)
+
+                        /* Select Analog/Digital mode.: Digital mode. */
+                        | IOCON_PIO_DIGIMODE(PIO22_DIGIMODE_DIGITAL));
+
+    IOCON->PIO[3][14] = ((IOCON->PIO[3][14] &
+                          /* Mask bits to zero which are setting */
+                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
+
+                         /* Selects pin function.: PORT314 (pin E3) is configured as PIO3_14 */
+                         | IOCON_PIO_FUNC(PIO314_FUNC_ALT0)
+
+                         /* Select Analog/Digital mode.: Digital mode. */
+                         | IOCON_PIO_DIGIMODE(PIO314_DIGIMODE_DIGITAL));
+
+    IOCON->PIO[3][3] = ((IOCON->PIO[3][3] &
+                         /* Mask bits to zero which are setting */
+                         (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
+
+                        /* Selects pin function.: PORT33 (pin A13) is configured as PIO3_3 */
+                        | IOCON_PIO_FUNC(PIO33_FUNC_ALT0)
+
+                        /* Select Analog/Digital mode.: Digital mode. */
+                        | IOCON_PIO_DIGIMODE(PIO33_DIGIMODE_DIGITAL));
 }
 /***********************************************************************************************************************
  * EOF

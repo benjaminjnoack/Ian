@@ -32,10 +32,68 @@ component:
 #include "peripherals.h"
 
 /***********************************************************************************************************************
+ * BOARD_InitPeripherals functional group
+ **********************************************************************************************************************/
+/***********************************************************************************************************************
+ * GPIO_1 initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'GPIO_1'
+- type: 'lpc_gpio'
+- mode: 'GPIO'
+- type_id: 'lpc_gpio_8c9ab9b3668a514c1f4609fe43001865'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'GPIO'
+- config_sets:
+  - lpc_gpio:
+    - gpioConfig:
+      - 0:
+        - signal_number: 'PIO3.14'
+        - pinDirection: 'kGPIO_DigitalOutput'
+        - outputLogic: '1U'
+      - 1:
+        - signal_number: 'PIO3.3'
+        - pinDirection: 'kGPIO_DigitalOutput'
+        - outputLogic: '1U'
+      - 2:
+        - signal_number: 'PIO2.2'
+        - pinDirection: 'kGPIO_DigitalOutput'
+        - outputLogic: '0U'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+gpio_pin_config_t GPIO_1_config[3] = {
+  {
+    .pinDirection = kGPIO_DigitalOutput,
+    .outputLogic = 1U
+  },
+  {
+    .pinDirection = kGPIO_DigitalOutput,
+    .outputLogic = 1U
+  },
+  {
+    .pinDirection = kGPIO_DigitalOutput,
+    .outputLogic = 0U
+  }
+};
+
+void GPIO_1_init(void) {
+  /* Initialize GPIO functionality on pin PIO3_14 */
+  GPIO_PinInit(GPIO_1_GPIO, 3U, 14U, &GPIO_1_config[0]);
+  /* Initialize GPIO functionality on pin PIO3_3 */
+  GPIO_PinInit(GPIO_1_GPIO, 3U, 3U, &GPIO_1_config[1]);
+  /* Initialize GPIO functionality on pin PIO2_2 */
+  GPIO_PinInit(GPIO_1_GPIO, 2U, 2U, &GPIO_1_config[2]);
+}
+
+/***********************************************************************************************************************
  * Initialization functions
  **********************************************************************************************************************/
 void BOARD_InitPeripherals(void)
 {
+  /* Initialize components */
+  GPIO_1_init();
 }
 
 /***********************************************************************************************************************

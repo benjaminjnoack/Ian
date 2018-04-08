@@ -48,7 +48,7 @@
 #include "peripherals.h"
 #include "pin_mux.h"
 #include "adc.h"
-#include <stdbool.h>
+#include "fsl_gpio.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -73,7 +73,8 @@ int main(void)
     BOARD_InitPins();
     BOARD_BootClockPLL180M();
     BOARD_InitDebugConsole();
-
+    GPIO_PortInit(GPIO, 2U);
+    GPIO_PortInit(GPIO, 3U);
     /* Enable the power and clock for ADC. */
     BOARD_InitBootPeripherals();
     Joy_ADC_Init();

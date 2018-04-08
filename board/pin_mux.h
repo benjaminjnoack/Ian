@@ -52,6 +52,12 @@ void BOARD_InitBootPins(void);
 #define PIO10_FUNC_ALT0 0x00u         /*!<@brief Selects pin function.: Alternative connection 0. */
 #define PIO20_DIGIMODE_ANALOG 0x00u   /*!<@brief Select Analog/Digital mode.: Analog mode. */
 #define PIO20_FUNC_ALT0 0x00u         /*!<@brief Selects pin function.: Alternative connection 0. */
+#define PIO22_DIGIMODE_DIGITAL 0x01u  /*!<@brief Select Analog/Digital mode.: Digital mode. */
+#define PIO22_FUNC_ALT0 0x00u         /*!<@brief Selects pin function.: Alternative connection 0. */
+#define PIO314_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
+#define PIO314_FUNC_ALT0 0x00u        /*!<@brief Selects pin function.: Alternative connection 0. */
+#define PIO33_DIGIMODE_DIGITAL 0x01u  /*!<@brief Select Analog/Digital mode.: Digital mode. */
+#define PIO33_FUNC_ALT0 0x00u         /*!<@brief Selects pin function.: Alternative connection 0. */
 
 /*! @name FC0_RXD_SDA_MOSI (coord B13), U24[13]/P0_29-ISP_FC0_RXD
   @{ */
@@ -69,6 +75,51 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_ISP_FC0_TXD_PIN_NAME FC0_TXD_SCL_MISO         /*!<@brief Pin name */
 #define BOARD_INITPINS_ISP_FC0_TXD_LABEL "U24[12]/P0_30-ISP_FC0_TXD" /*!<@brief Label */
 #define BOARD_INITPINS_ISP_FC0_TXD_NAME "ISP_FC0_TXD"                /*!<@brief Identifier name */
+                                                                     /* @} */
+
+/*! @name PIO3_14 (coord E3), J13[5]/LED1/P3_14-CT3MAT1-USR_LED1
+  @{ */
+#define BOARD_INITPINS_LED1_PERIPHERAL GPIO                            /*!<@brief Device name: GPIO */
+#define BOARD_INITPINS_LED1_SIGNAL PIO3                                /*!<@brief GPIO signal: PIO3 */
+#define BOARD_INITPINS_LED1_GPIO GPIO                                  /*!<@brief GPIO device name: GPIO */
+#define BOARD_INITPINS_LED1_GPIO_PIN 14U                               /*!<@brief PIO3 pin index: 14 */
+#define BOARD_INITPINS_LED1_PORT 3U                                    /*!<@brief PORT device name: 3U */
+#define BOARD_INITPINS_LED1_PIN 14U                                    /*!<@brief 3U pin index: 14 */
+#define BOARD_INITPINS_LED1_CHANNEL 14                                 /*!<@brief GPIO PIO3 channel: 14 */
+#define BOARD_INITPINS_LED1_PIN_NAME PIO3_14                           /*!<@brief Pin name */
+#define BOARD_INITPINS_LED1_LABEL "J13[5]/LED1/P3_14-CT3MAT1-USR_LED1" /*!<@brief Label */
+#define BOARD_INITPINS_LED1_NAME "LED1"                                /*!<@brief Identifier name */
+#define BOARD_INITPINS_LED1_DIRECTION kPIN_MUX_DirectionOutput         /*!<@brief Direction */
+                                                                       /* @} */
+
+/*! @name PIO3_3 (coord A13), J9[8]/LED2/P3_3-USR_LED2
+  @{ */
+#define BOARD_INITPINS_LED2_PERIPHERAL GPIO                    /*!<@brief Device name: GPIO */
+#define BOARD_INITPINS_LED2_SIGNAL PIO3                        /*!<@brief GPIO signal: PIO3 */
+#define BOARD_INITPINS_LED2_GPIO GPIO                          /*!<@brief GPIO device name: GPIO */
+#define BOARD_INITPINS_LED2_GPIO_PIN 3U                        /*!<@brief PIO3 pin index: 3 */
+#define BOARD_INITPINS_LED2_PORT 3U                            /*!<@brief PORT device name: 3U */
+#define BOARD_INITPINS_LED2_PIN 3U                             /*!<@brief 3U pin index: 3 */
+#define BOARD_INITPINS_LED2_CHANNEL 3                          /*!<@brief GPIO PIO3 channel: 3 */
+#define BOARD_INITPINS_LED2_PIN_NAME PIO3_3                    /*!<@brief Pin name */
+#define BOARD_INITPINS_LED2_LABEL "J9[8]/LED2/P3_3-USR_LED2"   /*!<@brief Label */
+#define BOARD_INITPINS_LED2_NAME "LED2"                        /*!<@brief Identifier name */
+#define BOARD_INITPINS_LED2_DIRECTION kPIN_MUX_DirectionOutput /*!<@brief Direction */
+                                                               /* @} */
+
+/*! @name PIO2_2 (coord C3), J9[6]/LED3/P2_2-CT1MAT1-USR_LED3
+  @{ */
+#define BOARD_INITPINS_LED3_PERIPHERAL GPIO                          /*!<@brief Device name: GPIO */
+#define BOARD_INITPINS_LED3_SIGNAL PIO2                              /*!<@brief GPIO signal: PIO2 */
+#define BOARD_INITPINS_LED3_GPIO GPIO                                /*!<@brief GPIO device name: GPIO */
+#define BOARD_INITPINS_LED3_GPIO_PIN 2U                              /*!<@brief PIO2 pin index: 2 */
+#define BOARD_INITPINS_LED3_PORT 2U                                  /*!<@brief PORT device name: 2U */
+#define BOARD_INITPINS_LED3_PIN 2U                                   /*!<@brief 2U pin index: 2 */
+#define BOARD_INITPINS_LED3_CHANNEL 2                                /*!<@brief GPIO PIO2 channel: 2 */
+#define BOARD_INITPINS_LED3_PIN_NAME PIO2_2                          /*!<@brief Pin name */
+#define BOARD_INITPINS_LED3_LABEL "J9[6]/LED3/P2_2-CT1MAT1-USR_LED3" /*!<@brief Label */
+#define BOARD_INITPINS_LED3_NAME "LED3"                              /*!<@brief Identifier name */
+#define BOARD_INITPINS_LED3_DIRECTION kPIN_MUX_DirectionOutput       /*!<@brief Direction */
                                                                      /* @} */
 
 /*!

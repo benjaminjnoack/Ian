@@ -37,6 +37,11 @@
                         <data>true</data>
                      </feature>
                   </dependency>
+                  <dependency resourceType="Peripheral" resourceId="GPIO" description="Peripheral GPIO is not initialized" problem_level="1" source="Pins: BOARD_InitPins">
+                     <feature name="initialized" evaluation="">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
                   <dependency resourceType="SWComponent" resourceId="platform.drivers.common" description="Pins initialization requires the COMMON Driver in the project." problem_level="2" source="Pins.BOARD_InitPins">
                      <feature name="enabled" evaluation="equal" configuration="core0">
                         <data>true</data>
@@ -71,6 +76,21 @@
                   <pin peripheral="ADC0" signal="CH, 5" pin_num="M5" pin_signal="PIO0_31/FC0_CTS_SDA_SSEL0/SD_D(2)/CTIMER0_MAT1/SCT0_OUT3/TRACEDATA(0)/ADC0_5"/>
                   <pin peripheral="ADC0" signal="CH, 7" pin_num="P3" pin_signal="PIO2_0/FC0_RXD_SDA_MOSI/CTIMER1_CAP0/ADC0_7"/>
                   <pin peripheral="ADC0" signal="CH, 6" pin_num="N3" pin_signal="PIO1_0/FC0_RTS_SCL_SSEL1/SD_D(3)/CTIMER0_CAP2/SCT0_GPI4/TRACECLK/ADC0_6"/>
+                  <pin peripheral="GPIO" signal="PIO3, 14" pin_num="E3" pin_signal="PIO3_14/SCT0_OUT4/FC9_RTS_SCL_SSEL1/CTIMER3_MAT1/TRACEDATA(2)">
+                     <pin_features>
+                        <pin_feature name="direction" value="OUTPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIO" signal="PIO3, 3" pin_num="A13" pin_signal="PIO3_3/LCD_VD(17)/FC9_TXD_SCL_MISO">
+                     <pin_features>
+                        <pin_feature name="direction" value="OUTPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIO" signal="PIO2, 2" pin_num="C3" pin_signal="PIO2_2/ENET_CRS/FC3_SSEL3/SCT0_OUT6/CTIMER1_MAT1">
+                     <pin_features>
+                        <pin_feature name="direction" value="OUTPUT"/>
+                     </pin_features>
+                  </pin>
                </pins>
             </function>
          </functions_list>
@@ -229,6 +249,18 @@
          </clock_configurations>
       </clocks>
       <periphs name="Peripherals" version="1.0" update_project_code="true">
+         <dependencies>
+            <dependency resourceType="SWComponent" resourceId="platform.drivers.lpc_gpio" description="GPIO Driver not found in the toolchain/IDE project." problem_level="2" source="Peripherals">
+               <feature name="enabled" evaluation="equal">
+                  <data type="Boolean">true</data>
+               </feature>
+            </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.drivers.lpc_gpio" description="Unsupported version of the GPIO Driver in the toolchain/IDE project. Required: ${required_value}, actual: ${actual_value}." problem_level="1" source="Peripherals">
+               <feature name="version" evaluation="compatible">
+                  <data type="Version">2.1.1</data>
+               </feature>
+            </dependency>
+         </dependencies>
          <peripherals_profile>
             <processor_version>3.0.1</processor_version>
          </peripherals_profile>
@@ -236,8 +268,61 @@
             <functional_group name="BOARD_InitPeripherals" called_from_default_init="true" id_prefix="" core="core0">
                <description></description>
                <options/>
-               <dependencies/>
-               <instances/>
+               <dependencies>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="GPIO.pio3.14" description="Signal channel 14 of the peripheral GPIO - PIO3 is not routed." problem_level="1" source="Peripherals: BOARD_InitPeripherals">
+                     <feature name="routed" evaluation="">
+                        <data type="Boolean">true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="GPIO.pio3.14" description="Direction of channel 14 of peripheral GPIO - PIO3 does not match with direction in pins tool." problem_level="1" source="Peripherals: BOARD_InitPeripherals">
+                     <feature name="direction" evaluation="equal">
+                        <data type="String">OUTPUT</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="GPIO.pio3.3" description="Signal channel 3 of the peripheral GPIO - PIO3 is not routed." problem_level="1" source="Peripherals: BOARD_InitPeripherals">
+                     <feature name="routed" evaluation="">
+                        <data type="Boolean">true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="GPIO.pio3.3" description="Direction of channel 3 of peripheral GPIO - PIO3 does not match with direction in pins tool." problem_level="1" source="Peripherals: BOARD_InitPeripherals">
+                     <feature name="direction" evaluation="equal">
+                        <data type="String">OUTPUT</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="GPIO.pio2.2" description="Signal channel 2 of the peripheral GPIO - PIO2 is not routed." problem_level="1" source="Peripherals: BOARD_InitPeripherals">
+                     <feature name="routed" evaluation="">
+                        <data type="Boolean">true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="GPIO.pio2.2" description="Direction of channel 2 of peripheral GPIO - PIO2 does not match with direction in pins tool." problem_level="1" source="Peripherals: BOARD_InitPeripherals">
+                     <feature name="direction" evaluation="equal">
+                        <data type="String">OUTPUT</data>
+                     </feature>
+                  </dependency>
+               </dependencies>
+               <instances>
+                  <instance name="GPIO_1" type="lpc_gpio" type_id="lpc_gpio_8c9ab9b3668a514c1f4609fe43001865" mode="GPIO" peripheral="GPIO" enabled="true">
+                     <config_set name="lpc_gpio">
+                        <array name="gpioConfig">
+                           <struct name="0">
+                              <setting name="signal_number" value="PIO3.14"/>
+                              <setting name="pinDirection" value="kGPIO_DigitalOutput"/>
+                              <setting name="outputLogic" value="1U"/>
+                           </struct>
+                           <struct name="1">
+                              <setting name="signal_number" value="PIO3.3"/>
+                              <setting name="pinDirection" value="kGPIO_DigitalOutput"/>
+                              <setting name="outputLogic" value="1U"/>
+                           </struct>
+                           <struct name="2">
+                              <setting name="signal_number" value="PIO2.2"/>
+                              <setting name="pinDirection" value="kGPIO_DigitalOutput"/>
+                              <setting name="outputLogic" value="0U"/>
+                           </struct>
+                        </array>
+                     </config_set>
+                  </instance>
+               </instances>
             </functional_group>
          </functional_groups>
          <components>

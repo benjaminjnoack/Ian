@@ -386,26 +386,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./drivers/fsl_gpio.o
  .data          0x0000000000000000        0x0 ./drivers/fsl_gpio.o
  .bss           0x0000000000000000        0x0 ./drivers/fsl_gpio.o
- .text.CLOCK_EnableClock
-                0x0000000000000000       0x54 ./drivers/fsl_gpio.o
- .rodata.s_gpioClockName
-                0x0000000000000000        0xc ./drivers/fsl_gpio.o
- .rodata        0x0000000000000000       0x3e ./drivers/fsl_gpio.o
- .text.GPIO_PortInit
-                0x0000000000000000       0x34 ./drivers/fsl_gpio.o
- .text.GPIO_PinInit
-                0x0000000000000000       0xa0 ./drivers/fsl_gpio.o
- .debug_info    0x0000000000000000     0x1306 ./drivers/fsl_gpio.o
- .debug_abbrev  0x0000000000000000      0x206 ./drivers/fsl_gpio.o
- .debug_aranges
-                0x0000000000000000       0x30 ./drivers/fsl_gpio.o
- .debug_ranges  0x0000000000000000       0x20 ./drivers/fsl_gpio.o
- .debug_line    0x0000000000000000      0x1b4 ./drivers/fsl_gpio.o
- .debug_str     0x0000000000000000     0x16b2 ./drivers/fsl_gpio.o
- .comment       0x0000000000000000       0x80 ./drivers/fsl_gpio.o
- .debug_frame   0x0000000000000000       0x84 ./drivers/fsl_gpio.o
- .ARM.attributes
-                0x0000000000000000       0x39 ./drivers/fsl_gpio.o
  .text          0x0000000000000000        0x0 ./drivers/fsl_inputmux.o
  .data          0x0000000000000000        0x0 ./drivers/fsl_inputmux.o
  .bss           0x0000000000000000        0x0 ./drivers/fsl_inputmux.o
@@ -1126,7 +1106,7 @@ END GROUP
  *(.rodata.$Flash2*)
  *(.rodata.$BOARD_FLASH*)
 
-.text           0x0000000000000000     0x721c
+.text           0x0000000000000000     0x73f8
  FILL mask 0xff
                 0x0000000000000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -1136,21 +1116,21 @@ END GROUP
                 0x0000000000000124                . = ALIGN (0x4)
                 0x0000000000000124                __section_table_start = .
                 0x0000000000000124                __data_section_table = .
-                0x0000000000000124        0x4 LONG 0x721c LOADADDR (.data)
+                0x0000000000000124        0x4 LONG 0x73f8 LOADADDR (.data)
                 0x0000000000000128        0x4 LONG 0x20000000 ADDR (.data)
-                0x000000000000012c        0x4 LONG 0x8 SIZEOF (.data)
-                0x0000000000000130        0x4 LONG 0x721c LOADADDR (.data_RAM2)
+                0x000000000000012c        0x4 LONG 0x10 SIZEOF (.data)
+                0x0000000000000130        0x4 LONG 0x73f8 LOADADDR (.data_RAM2)
                 0x0000000000000134        0x4 LONG 0x4000000 ADDR (.data_RAM2)
                 0x0000000000000138        0x4 LONG 0x0 SIZEOF (.data_RAM2)
-                0x000000000000013c        0x4 LONG 0x721c LOADADDR (.data_RAM3)
+                0x000000000000013c        0x4 LONG 0x73f8 LOADADDR (.data_RAM3)
                 0x0000000000000140        0x4 LONG 0x40100000 ADDR (.data_RAM3)
                 0x0000000000000144        0x4 LONG 0x0 SIZEOF (.data_RAM3)
-                0x0000000000000148        0x4 LONG 0x721c LOADADDR (.data_RAM4)
+                0x0000000000000148        0x4 LONG 0x73f8 LOADADDR (.data_RAM4)
                 0x000000000000014c        0x4 LONG 0xa0000000 ADDR (.data_RAM4)
                 0x0000000000000150        0x4 LONG 0x0 SIZEOF (.data_RAM4)
                 0x0000000000000154                __data_section_table_end = .
                 0x0000000000000154                __bss_section_table = .
-                0x0000000000000154        0x4 LONG 0x20000008 ADDR (.bss)
+                0x0000000000000154        0x4 LONG 0x20000010 ADDR (.bss)
                 0x0000000000000158        0x4 LONG 0x2b14 SIZEOF (.bss)
                 0x000000000000015c        0x4 LONG 0x4000000 ADDR (.bss_RAM2)
                 0x0000000000000160        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
@@ -1421,620 +1401,637 @@ END GROUP
                 0x0000000000000666       0x1c ./source/adc.o
  .text.POWER_DisablePD
                 0x0000000000000682       0x2e ./source/adc.o
+ .text.GPIO_PortToggle
+                0x00000000000006b0       0x26 ./source/adc.o
+ *fill*         0x00000000000006d6        0x2 ff
  .text.ADC_Read_A
-                0x00000000000006b0       0x64 ./source/adc.o
-                0x00000000000006b0                ADC_Read_A
+                0x00000000000006d8       0x54 ./source/adc.o
+                0x00000000000006d8                ADC_Read_A
  .text.ADC_Read_B
-                0x0000000000000714       0x64 ./source/adc.o
-                0x0000000000000714                ADC_Read_B
+                0x000000000000072c       0x50 ./source/adc.o
+                0x000000000000072c                ADC_Read_B
  .text.Joy_ADC_Init
-                0x0000000000000778       0xc8 ./source/adc.o
-                0x0000000000000778                Joy_ADC_Init
+                0x000000000000077c       0xc8 ./source/adc.o
+                0x000000000000077c                Joy_ADC_Init
  .text.ADC_Conversion_Configuration
-                0x0000000000000840       0x78 ./source/adc.o
-                0x0000000000000840                ADC_Conversion_Configuration
+                0x0000000000000844       0x78 ./source/adc.o
+                0x0000000000000844                ADC_Conversion_Configuration
  .text.ADC_ClockPower_Configuration
-                0x00000000000008b8       0x38 ./source/adc.o
-                0x00000000000008b8                ADC_ClockPower_Configuration
+                0x00000000000008bc       0x38 ./source/adc.o
+                0x00000000000008bc                ADC_ClockPower_Configuration
  .text.ADC0_SEQA_IRQHandler
-                0x00000000000008f0       0x3c ./source/adc.o
-                0x00000000000008f0                ADC0_SEQA_IRQHandler
+                0x00000000000008f4       0x3c ./source/adc.o
+                0x00000000000008f4                ADC0_SEQA_IRQHandler
  .text.ADC0_SEQB_IRQHandler
-                0x000000000000092c       0x3c ./source/adc.o
-                0x000000000000092c                ADC0_SEQB_IRQHandler
- .text.main     0x0000000000000968       0x34 ./source/main.o
-                0x0000000000000968                main
+                0x0000000000000930       0x3c ./source/adc.o
+                0x0000000000000930                ADC0_SEQB_IRQHandler
+ .text.main     0x000000000000096c       0x48 ./source/main.o
+                0x000000000000096c                main
  .text.HardFault_Handler
-                0x000000000000099c       0x2a ./source/semihost_hardfault.o
-                0x000000000000099c                HardFault_Handler
- *fill*         0x00000000000009c6        0x2 ff
+                0x00000000000009b4       0x2a ./source/semihost_hardfault.o
+                0x00000000000009b4                HardFault_Handler
+ *fill*         0x00000000000009de        0x2 ff
  .text.CLOCK_EnableClock
-                0x00000000000009c8       0x54 ./drivers/fsl_adc.o
+                0x00000000000009e0       0x54 ./drivers/fsl_adc.o
  .text.ADC_GetInstance
-                0x0000000000000a1c       0x44 ./drivers/fsl_adc.o
+                0x0000000000000a34       0x44 ./drivers/fsl_adc.o
  .text.ADC_Init
-                0x0000000000000a60       0x8c ./drivers/fsl_adc.o
-                0x0000000000000a60                ADC_Init
+                0x0000000000000a78       0x8c ./drivers/fsl_adc.o
+                0x0000000000000a78                ADC_Init
  .text.ADC_DoSelfCalibration
-                0x0000000000000aec       0xc0 ./drivers/fsl_adc.o
-                0x0000000000000aec                ADC_DoSelfCalibration
+                0x0000000000000b04       0xc0 ./drivers/fsl_adc.o
+                0x0000000000000b04                ADC_DoSelfCalibration
  .text.ADC_SetConvSeqAConfig
-                0x0000000000000bac       0x88 ./drivers/fsl_adc.o
-                0x0000000000000bac                ADC_SetConvSeqAConfig
+                0x0000000000000bc4       0x88 ./drivers/fsl_adc.o
+                0x0000000000000bc4                ADC_SetConvSeqAConfig
  .text.ADC_SetConvSeqBConfig
-                0x0000000000000c34       0x88 ./drivers/fsl_adc.o
-                0x0000000000000c34                ADC_SetConvSeqBConfig
+                0x0000000000000c4c       0x88 ./drivers/fsl_adc.o
+                0x0000000000000c4c                ADC_SetConvSeqBConfig
  .text.ADC_GetChannelConversionResult
-                0x0000000000000cbc       0x94 ./drivers/fsl_adc.o
-                0x0000000000000cbc                ADC_GetChannelConversionResult
+                0x0000000000000cd4       0x94 ./drivers/fsl_adc.o
+                0x0000000000000cd4                ADC_GetChannelConversionResult
  .text.CLOCK_SetFLASHAccessCycles
-                0x0000000000000d50       0x34 ./drivers/fsl_clock.o
+                0x0000000000000d68       0x34 ./drivers/fsl_clock.o
  .text.CLOCK_GetAsyncApbClkSrc
-                0x0000000000000d84       0x20 ./drivers/fsl_clock.o
+                0x0000000000000d9c       0x20 ./drivers/fsl_clock.o
  .text.CLOCK_IsSystemPLLLocked
-                0x0000000000000da4       0x24 ./drivers/fsl_clock.o
+                0x0000000000000dbc       0x24 ./drivers/fsl_clock.o
  .text.CLOCK_Enable_SysOsc
-                0x0000000000000dc8       0x5c ./drivers/fsl_clock.o
+                0x0000000000000de0       0x5c ./drivers/fsl_clock.o
  .text.POWER_EnablePD
-                0x0000000000000e24       0x2e ./drivers/fsl_clock.o
+                0x0000000000000e3c       0x2e ./drivers/fsl_clock.o
  .text.POWER_DisablePD
-                0x0000000000000e52       0x2e ./drivers/fsl_clock.o
+                0x0000000000000e6a       0x2e ./drivers/fsl_clock.o
  .text.CLOCK_AttachClk
-                0x0000000000000e80       0x98 ./drivers/fsl_clock.o
-                0x0000000000000e80                CLOCK_AttachClk
+                0x0000000000000e98       0x98 ./drivers/fsl_clock.o
+                0x0000000000000e98                CLOCK_AttachClk
  .text.CLOCK_SetClkDiv
-                0x0000000000000f18       0x5c ./drivers/fsl_clock.o
-                0x0000000000000f18                CLOCK_SetClkDiv
+                0x0000000000000f30       0x5c ./drivers/fsl_clock.o
+                0x0000000000000f30                CLOCK_SetClkDiv
  .text.CLOCK_GetClockOutClkFreq
-                0x0000000000000f74       0x98 ./drivers/fsl_clock.o
-                0x0000000000000f74                CLOCK_GetClockOutClkFreq
+                0x0000000000000f8c       0x98 ./drivers/fsl_clock.o
+                0x0000000000000f8c                CLOCK_GetClockOutClkFreq
  .text.CLOCK_GetSpifiClkFreq
-                0x000000000000100c       0x88 ./drivers/fsl_clock.o
-                0x000000000000100c                CLOCK_GetSpifiClkFreq
+                0x0000000000001024       0x88 ./drivers/fsl_clock.o
+                0x0000000000001024                CLOCK_GetSpifiClkFreq
  .text.CLOCK_GetAdcClkFreq
-                0x0000000000001094       0x80 ./drivers/fsl_clock.o
-                0x0000000000001094                CLOCK_GetAdcClkFreq
+                0x00000000000010ac       0x80 ./drivers/fsl_clock.o
+                0x00000000000010ac                CLOCK_GetAdcClkFreq
  .text.CLOCK_GetUsb0ClkFreq
-                0x0000000000001114       0x78 ./drivers/fsl_clock.o
-                0x0000000000001114                CLOCK_GetUsb0ClkFreq
+                0x000000000000112c       0x78 ./drivers/fsl_clock.o
+                0x000000000000112c                CLOCK_GetUsb0ClkFreq
  .text.CLOCK_GetUsb1ClkFreq
-                0x000000000000118c       0x78 ./drivers/fsl_clock.o
-                0x000000000000118c                CLOCK_GetUsb1ClkFreq
+                0x00000000000011a4       0x78 ./drivers/fsl_clock.o
+                0x00000000000011a4                CLOCK_GetUsb1ClkFreq
  .text.CLOCK_GetMclkClkFreq
-                0x0000000000001204       0x62 ./drivers/fsl_clock.o
-                0x0000000000001204                CLOCK_GetMclkClkFreq
- *fill*         0x0000000000001266        0x2 ff
+                0x000000000000121c       0x62 ./drivers/fsl_clock.o
+                0x000000000000121c                CLOCK_GetMclkClkFreq
+ *fill*         0x000000000000127e        0x2 ff
  .text.CLOCK_GetSctClkFreq
-                0x0000000000001268       0x80 ./drivers/fsl_clock.o
-                0x0000000000001268                CLOCK_GetSctClkFreq
+                0x0000000000001280       0x80 ./drivers/fsl_clock.o
+                0x0000000000001280                CLOCK_GetSctClkFreq
  .text.CLOCK_GetSdioClkFreq
-                0x00000000000012e8       0x88 ./drivers/fsl_clock.o
-                0x00000000000012e8                CLOCK_GetSdioClkFreq
+                0x0000000000001300       0x88 ./drivers/fsl_clock.o
+                0x0000000000001300                CLOCK_GetSdioClkFreq
  .text.CLOCK_GetLcdClkFreq
-                0x0000000000001370       0x68 ./drivers/fsl_clock.o
-                0x0000000000001370                CLOCK_GetLcdClkFreq
+                0x0000000000001388       0x68 ./drivers/fsl_clock.o
+                0x0000000000001388                CLOCK_GetLcdClkFreq
  .text.CLOCK_GetLcdClkIn
-                0x00000000000013d8       0x10 ./drivers/fsl_clock.o
-                0x00000000000013d8                CLOCK_GetLcdClkIn
+                0x00000000000013f0       0x10 ./drivers/fsl_clock.o
+                0x00000000000013f0                CLOCK_GetLcdClkIn
  .text.CLOCK_GetFro12MFreq
-                0x00000000000013e8       0x28 ./drivers/fsl_clock.o
-                0x00000000000013e8                CLOCK_GetFro12MFreq
+                0x0000000000001400       0x28 ./drivers/fsl_clock.o
+                0x0000000000001400                CLOCK_GetFro12MFreq
  .text.CLOCK_GetExtClkFreq
-                0x0000000000001410       0x14 ./drivers/fsl_clock.o
-                0x0000000000001410                CLOCK_GetExtClkFreq
+                0x0000000000001428       0x14 ./drivers/fsl_clock.o
+                0x0000000000001428                CLOCK_GetExtClkFreq
  .text.CLOCK_GetWdtOscFreq
-                0x0000000000001424       0x68 ./drivers/fsl_clock.o
-                0x0000000000001424                CLOCK_GetWdtOscFreq
+                0x000000000000143c       0x68 ./drivers/fsl_clock.o
+                0x000000000000143c                CLOCK_GetWdtOscFreq
  .text.CLOCK_GetFroHfFreq
-                0x000000000000148c       0x50 ./drivers/fsl_clock.o
-                0x000000000000148c                CLOCK_GetFroHfFreq
+                0x00000000000014a4       0x50 ./drivers/fsl_clock.o
+                0x00000000000014a4                CLOCK_GetFroHfFreq
  .text.CLOCK_GetPllOutFreq
-                0x00000000000014dc       0x18 ./drivers/fsl_clock.o
-                0x00000000000014dc                CLOCK_GetPllOutFreq
- .text.CLOCK_GetAudioPllOutFreq
                 0x00000000000014f4       0x18 ./drivers/fsl_clock.o
-                0x00000000000014f4                CLOCK_GetAudioPllOutFreq
- .text.CLOCK_GetUsbPllOutFreq
+                0x00000000000014f4                CLOCK_GetPllOutFreq
+ .text.CLOCK_GetAudioPllOutFreq
                 0x000000000000150c       0x18 ./drivers/fsl_clock.o
-                0x000000000000150c                CLOCK_GetUsbPllOutFreq
+                0x000000000000150c                CLOCK_GetAudioPllOutFreq
+ .text.CLOCK_GetUsbPllOutFreq
+                0x0000000000001524       0x18 ./drivers/fsl_clock.o
+                0x0000000000001524                CLOCK_GetUsbPllOutFreq
  .text.CLOCK_GetOsc32KFreq
-                0x0000000000001524       0x12 ./drivers/fsl_clock.o
-                0x0000000000001524                CLOCK_GetOsc32KFreq
+                0x000000000000153c       0x12 ./drivers/fsl_clock.o
+                0x000000000000153c                CLOCK_GetOsc32KFreq
  .text.CLOCK_GetCoreSysClkFreq
-                0x0000000000001536       0x8c ./drivers/fsl_clock.o
-                0x0000000000001536                CLOCK_GetCoreSysClkFreq
+                0x000000000000154e       0x8c ./drivers/fsl_clock.o
+                0x000000000000154e                CLOCK_GetCoreSysClkFreq
  .text.CLOCK_GetI2SMClkFreq
-                0x00000000000015c2       0x10 ./drivers/fsl_clock.o
-                0x00000000000015c2                CLOCK_GetI2SMClkFreq
- *fill*         0x00000000000015d2        0x2 ff
+                0x00000000000015da       0x10 ./drivers/fsl_clock.o
+                0x00000000000015da                CLOCK_GetI2SMClkFreq
+ *fill*         0x00000000000015ea        0x2 ff
  .text.CLOCK_GetAsyncApbClkFreq
-                0x00000000000015d4       0x3c ./drivers/fsl_clock.o
-                0x00000000000015d4                CLOCK_GetAsyncApbClkFreq
+                0x00000000000015ec       0x3c ./drivers/fsl_clock.o
+                0x00000000000015ec                CLOCK_GetAsyncApbClkFreq
  .text.CLOCK_GetFlexCommClkFreq
-                0x0000000000001610       0x6c ./drivers/fsl_clock.o
-                0x0000000000001610                CLOCK_GetFlexCommClkFreq
+                0x0000000000001628       0x6c ./drivers/fsl_clock.o
+                0x0000000000001628                CLOCK_GetFlexCommClkFreq
  .text.CLOCK_GetFrgClkFreq
-                0x000000000000167c       0x58 ./drivers/fsl_clock.o
-                0x000000000000167c                CLOCK_GetFrgClkFreq
+                0x0000000000001694       0x58 ./drivers/fsl_clock.o
+                0x0000000000001694                CLOCK_GetFrgClkFreq
  .text.CLOCK_GetDmicClkFreq
-                0x00000000000016d4       0x80 ./drivers/fsl_clock.o
-                0x00000000000016d4                CLOCK_GetDmicClkFreq
+                0x00000000000016ec       0x80 ./drivers/fsl_clock.o
+                0x00000000000016ec                CLOCK_GetDmicClkFreq
  .text.CLOCK_GetFreq
-                0x0000000000001754      0x228 ./drivers/fsl_clock.o
-                0x0000000000001754                CLOCK_GetFreq
+                0x000000000000176c      0x228 ./drivers/fsl_clock.o
+                0x000000000000176c                CLOCK_GetFreq
  .text.CLOCK_SetFLASHAccessCyclesForFreq
-                0x000000000000197c       0xb8 ./drivers/fsl_clock.o
-                0x000000000000197c                CLOCK_SetFLASHAccessCyclesForFreq
+                0x0000000000001994       0xb8 ./drivers/fsl_clock.o
+                0x0000000000001994                CLOCK_SetFLASHAccessCyclesForFreq
  .text.CLOCK_SetPLLFreq
-                0x0000000000001a34      0x12c ./drivers/fsl_clock.o
-                0x0000000000001a34                CLOCK_SetPLLFreq
+                0x0000000000001a4c      0x12c ./drivers/fsl_clock.o
+                0x0000000000001a4c                CLOCK_SetPLLFreq
  .text.CLOCK_EnableClock
-                0x0000000000001b60       0x54 ./drivers/fsl_flexcomm.o
+                0x0000000000001b78       0x54 ./drivers/fsl_flexcomm.o
  .text.FLEXCOMM_PeripheralIsPresent
-                0x0000000000001bb4       0x6a ./drivers/fsl_flexcomm.o
- *fill*         0x0000000000001c1e        0x2 ff
+                0x0000000000001bcc       0x6a ./drivers/fsl_flexcomm.o
+ *fill*         0x0000000000001c36        0x2 ff
  .text.FLEXCOMM_GetInstance
-                0x0000000000001c20       0x44 ./drivers/fsl_flexcomm.o
-                0x0000000000001c20                FLEXCOMM_GetInstance
+                0x0000000000001c38       0x44 ./drivers/fsl_flexcomm.o
+                0x0000000000001c38                FLEXCOMM_GetInstance
  .text.FLEXCOMM_SetPeriph
-                0x0000000000001c64       0x74 ./drivers/fsl_flexcomm.o
-                0x0000000000001c64                FLEXCOMM_SetPeriph
+                0x0000000000001c7c       0x74 ./drivers/fsl_flexcomm.o
+                0x0000000000001c7c                FLEXCOMM_SetPeriph
  .text.FLEXCOMM_Init
-                0x0000000000001cd8       0x48 ./drivers/fsl_flexcomm.o
-                0x0000000000001cd8                FLEXCOMM_Init
+                0x0000000000001cf0       0x48 ./drivers/fsl_flexcomm.o
+                0x0000000000001cf0                FLEXCOMM_Init
  .text.FLEXCOMM0_DriverIRQHandler
-                0x0000000000001d20       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001d20                FLEXCOMM0_DriverIRQHandler
+                0x0000000000001d38       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001d38                FLEXCOMM0_DriverIRQHandler
  .text.FLEXCOMM1_DriverIRQHandler
-                0x0000000000001d5c       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001d5c                FLEXCOMM1_DriverIRQHandler
+                0x0000000000001d74       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001d74                FLEXCOMM1_DriverIRQHandler
  .text.FLEXCOMM2_DriverIRQHandler
-                0x0000000000001d98       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001d98                FLEXCOMM2_DriverIRQHandler
+                0x0000000000001db0       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001db0                FLEXCOMM2_DriverIRQHandler
  .text.FLEXCOMM3_DriverIRQHandler
-                0x0000000000001dd4       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001dd4                FLEXCOMM3_DriverIRQHandler
+                0x0000000000001dec       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001dec                FLEXCOMM3_DriverIRQHandler
  .text.FLEXCOMM4_DriverIRQHandler
-                0x0000000000001e10       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001e10                FLEXCOMM4_DriverIRQHandler
+                0x0000000000001e28       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001e28                FLEXCOMM4_DriverIRQHandler
  .text.FLEXCOMM5_DriverIRQHandler
-                0x0000000000001e4c       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001e4c                FLEXCOMM5_DriverIRQHandler
+                0x0000000000001e64       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001e64                FLEXCOMM5_DriverIRQHandler
  .text.FLEXCOMM6_DriverIRQHandler
-                0x0000000000001e88       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001e88                FLEXCOMM6_DriverIRQHandler
+                0x0000000000001ea0       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001ea0                FLEXCOMM6_DriverIRQHandler
  .text.FLEXCOMM7_DriverIRQHandler
-                0x0000000000001ec4       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001ec4                FLEXCOMM7_DriverIRQHandler
+                0x0000000000001edc       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001edc                FLEXCOMM7_DriverIRQHandler
  .text.FLEXCOMM8_DriverIRQHandler
-                0x0000000000001f00       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001f00                FLEXCOMM8_DriverIRQHandler
+                0x0000000000001f18       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001f18                FLEXCOMM8_DriverIRQHandler
  .text.FLEXCOMM9_DriverIRQHandler
-                0x0000000000001f3c       0x3c ./drivers/fsl_flexcomm.o
-                0x0000000000001f3c                FLEXCOMM9_DriverIRQHandler
- .text.RESET_SetPeripheralReset
-                0x0000000000001f78       0x7c ./drivers/fsl_reset.o
-                0x0000000000001f78                RESET_SetPeripheralReset
- .text.RESET_ClearPeripheralReset
-                0x0000000000001ff4       0x80 ./drivers/fsl_reset.o
-                0x0000000000001ff4                RESET_ClearPeripheralReset
- .text.RESET_PeripheralReset
-                0x0000000000002074       0x1c ./drivers/fsl_reset.o
-                0x0000000000002074                RESET_PeripheralReset
- .text.USART_Init
-                0x0000000000002090      0x14c ./drivers/fsl_usart.o
-                0x0000000000002090                USART_Init
- .text.USART_GetDefaultConfig
-                0x00000000000021dc       0x58 ./drivers/fsl_usart.o
-                0x00000000000021dc                USART_GetDefaultConfig
- .text.USART_SetBaudRate
-                0x0000000000002234       0xe4 ./drivers/fsl_usart.o
-                0x0000000000002234                USART_SetBaudRate
- .text.BOARD_InitDebugConsole
-                0x0000000000002318       0x44 ./board/board.o
-                0x0000000000002318                BOARD_InitDebugConsole
- .text.POWER_DisablePD
-                0x000000000000235c       0x2e ./board/clock_config.o
- *fill*         0x000000000000238a        0x2 ff
- .text.BOARD_BootClockPLL180M
-                0x000000000000238c       0xa8 ./board/clock_config.o
-                0x000000000000238c                BOARD_BootClockPLL180M
- .text.BOARD_InitPeripherals
-                0x0000000000002434        0xe ./board/peripherals.o
-                0x0000000000002434                BOARD_InitPeripherals
- .text.BOARD_InitBootPeripherals
-                0x0000000000002442        0xc ./board/peripherals.o
-                0x0000000000002442                BOARD_InitBootPeripherals
- *fill*         0x000000000000244e        0x2 ff
+                0x0000000000001f54       0x3c ./drivers/fsl_flexcomm.o
+                0x0000000000001f54                FLEXCOMM9_DriverIRQHandler
  .text.CLOCK_EnableClock
-                0x0000000000002450       0x54 ./board/pin_mux.o
+                0x0000000000001f90       0x54 ./drivers/fsl_gpio.o
+ .text.GPIO_PortInit
+                0x0000000000001fe4       0x34 ./drivers/fsl_gpio.o
+                0x0000000000001fe4                GPIO_PortInit
+ .text.GPIO_PinInit
+                0x0000000000002018       0xa0 ./drivers/fsl_gpio.o
+                0x0000000000002018                GPIO_PinInit
+ .text.RESET_SetPeripheralReset
+                0x00000000000020b8       0x7c ./drivers/fsl_reset.o
+                0x00000000000020b8                RESET_SetPeripheralReset
+ .text.RESET_ClearPeripheralReset
+                0x0000000000002134       0x80 ./drivers/fsl_reset.o
+                0x0000000000002134                RESET_ClearPeripheralReset
+ .text.RESET_PeripheralReset
+                0x00000000000021b4       0x1c ./drivers/fsl_reset.o
+                0x00000000000021b4                RESET_PeripheralReset
+ .text.USART_Init
+                0x00000000000021d0      0x14c ./drivers/fsl_usart.o
+                0x00000000000021d0                USART_Init
+ .text.USART_GetDefaultConfig
+                0x000000000000231c       0x58 ./drivers/fsl_usart.o
+                0x000000000000231c                USART_GetDefaultConfig
+ .text.USART_SetBaudRate
+                0x0000000000002374       0xe4 ./drivers/fsl_usart.o
+                0x0000000000002374                USART_SetBaudRate
+ .text.BOARD_InitDebugConsole
+                0x0000000000002458       0x44 ./board/board.o
+                0x0000000000002458                BOARD_InitDebugConsole
+ .text.POWER_DisablePD
+                0x000000000000249c       0x2e ./board/clock_config.o
+ *fill*         0x00000000000024ca        0x2 ff
+ .text.BOARD_BootClockPLL180M
+                0x00000000000024cc       0xa8 ./board/clock_config.o
+                0x00000000000024cc                BOARD_BootClockPLL180M
+ .text.GPIO_1_init
+                0x0000000000002574       0x3c ./board/peripherals.o
+                0x0000000000002574                GPIO_1_init
+ .text.BOARD_InitPeripherals
+                0x00000000000025b0        0xc ./board/peripherals.o
+                0x00000000000025b0                BOARD_InitPeripherals
+ .text.BOARD_InitBootPeripherals
+                0x00000000000025bc        0xc ./board/peripherals.o
+                0x00000000000025bc                BOARD_InitBootPeripherals
+ .text.CLOCK_EnableClock
+                0x00000000000025c8       0x54 ./board/pin_mux.o
  .text.IOCON_PinMuxSet
-                0x00000000000024a4       0x2e ./board/pin_mux.o
- *fill*         0x00000000000024d2        0x2 ff
+                0x000000000000261c       0x2e ./board/pin_mux.o
+ *fill*         0x000000000000264a        0x2 ff
  .text.BOARD_InitPins
-                0x00000000000024d4       0x84 ./board/pin_mux.o
-                0x00000000000024d4                BOARD_InitPins
+                0x000000000000264c       0xcc ./board/pin_mux.o
+                0x000000000000264c                BOARD_InitPins
  .text.vPortSetupTimerInterrupt
-                0x0000000000002558       0x48 ./amazon-freertos/portable/fsl_tickless_systick.o
-                0x0000000000002558                vPortSetupTimerInterrupt
+                0x0000000000002718       0x48 ./amazon-freertos/portable/fsl_tickless_systick.o
+                0x0000000000002718                vPortSetupTimerInterrupt
  .text.pvPortMalloc
-                0x00000000000025a0      0x184 ./amazon-freertos/portable/heap_4.o
-                0x00000000000025a0                pvPortMalloc
+                0x0000000000002760      0x184 ./amazon-freertos/portable/heap_4.o
+                0x0000000000002760                pvPortMalloc
  .text.vPortFree
-                0x0000000000002724       0xb0 ./amazon-freertos/portable/heap_4.o
-                0x0000000000002724                vPortFree
+                0x00000000000028e4       0xb0 ./amazon-freertos/portable/heap_4.o
+                0x00000000000028e4                vPortFree
  .text.prvHeapInit
-                0x00000000000027d4       0xc4 ./amazon-freertos/portable/heap_4.o
+                0x0000000000002994       0xc4 ./amazon-freertos/portable/heap_4.o
  .text.prvInsertBlockIntoFreeList
-                0x0000000000002898       0xb4 ./amazon-freertos/portable/heap_4.o
+                0x0000000000002a58       0xb4 ./amazon-freertos/portable/heap_4.o
  .text.pxPortInitialiseStack
-                0x000000000000294c       0x68 ./amazon-freertos/FreeRTOS/portable/port.o
-                0x000000000000294c                pxPortInitialiseStack
+                0x0000000000002b0c       0x68 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002b0c                pxPortInitialiseStack
  .text.prvTaskExitError
-                0x00000000000029b4       0x54 ./amazon-freertos/FreeRTOS/portable/port.o
- *fill*         0x0000000000002a08        0x8 ff
+                0x0000000000002b74       0x54 ./amazon-freertos/FreeRTOS/portable/port.o
+ *fill*         0x0000000000002bc8        0x8 ff
  .text.SVC_Handler
-                0x0000000000002a10       0x28 ./amazon-freertos/FreeRTOS/portable/port.o
-                0x0000000000002a10                SVC_Handler
+                0x0000000000002bd0       0x28 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002bd0                SVC_Handler
  .text.prvPortStartFirstTask
-                0x0000000000002a38       0x28 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002bf8       0x28 ./amazon-freertos/FreeRTOS/portable/port.o
  .text.xPortStartScheduler
-                0x0000000000002a60      0x13c ./amazon-freertos/FreeRTOS/portable/port.o
-                0x0000000000002a60                xPortStartScheduler
+                0x0000000000002c20      0x13c ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002c20                xPortStartScheduler
  .text.vPortEnterCritical
-                0x0000000000002b9c       0x5c ./amazon-freertos/FreeRTOS/portable/port.o
-                0x0000000000002b9c                vPortEnterCritical
+                0x0000000000002d5c       0x5c ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002d5c                vPortEnterCritical
  .text.vPortExitCritical
-                0x0000000000002bf8       0x50 ./amazon-freertos/FreeRTOS/portable/port.o
-                0x0000000000002bf8                vPortExitCritical
- *fill*         0x0000000000002c48        0x8 ff
+                0x0000000000002db8       0x50 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002db8                vPortExitCritical
+ *fill*         0x0000000000002e08        0x8 ff
  .text.PendSV_Handler
-                0x0000000000002c50       0x68 ./amazon-freertos/FreeRTOS/portable/port.o
-                0x0000000000002c50                PendSV_Handler
+                0x0000000000002e10       0x68 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002e10                PendSV_Handler
  .text.SysTick_Handler
-                0x0000000000002cb8       0x40 ./amazon-freertos/FreeRTOS/portable/port.o
-                0x0000000000002cb8                SysTick_Handler
+                0x0000000000002e78       0x40 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002e78                SysTick_Handler
  .text.vPortEnableVFP
-                0x0000000000002cf8       0x14 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002eb8       0x14 ./amazon-freertos/FreeRTOS/portable/port.o
  .text.vPortValidateInterruptPriority
-                0x0000000000002d0c       0x7c ./amazon-freertos/FreeRTOS/portable/port.o
-                0x0000000000002d0c                vPortValidateInterruptPriority
+                0x0000000000002ecc       0x7c ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000002ecc                vPortValidateInterruptPriority
  .text.vListInitialise
-                0x0000000000002d88       0x40 ./amazon-freertos/FreeRTOS/list.o
-                0x0000000000002d88                vListInitialise
+                0x0000000000002f48       0x40 ./amazon-freertos/FreeRTOS/list.o
+                0x0000000000002f48                vListInitialise
  .text.vListInitialiseItem
-                0x0000000000002dc8       0x1a ./amazon-freertos/FreeRTOS/list.o
-                0x0000000000002dc8                vListInitialiseItem
+                0x0000000000002f88       0x1a ./amazon-freertos/FreeRTOS/list.o
+                0x0000000000002f88                vListInitialiseItem
  .text.vListInsertEnd
-                0x0000000000002de2       0x48 ./amazon-freertos/FreeRTOS/list.o
-                0x0000000000002de2                vListInsertEnd
+                0x0000000000002fa2       0x48 ./amazon-freertos/FreeRTOS/list.o
+                0x0000000000002fa2                vListInsertEnd
  .text.vListInsert
-                0x0000000000002e2a       0x72 ./amazon-freertos/FreeRTOS/list.o
-                0x0000000000002e2a                vListInsert
+                0x0000000000002fea       0x72 ./amazon-freertos/FreeRTOS/list.o
+                0x0000000000002fea                vListInsert
  .text.uxListRemove
-                0x0000000000002e9c       0x54 ./amazon-freertos/FreeRTOS/list.o
-                0x0000000000002e9c                uxListRemove
+                0x000000000000305c       0x54 ./amazon-freertos/FreeRTOS/list.o
+                0x000000000000305c                uxListRemove
  .text.xQueueGenericReset
-                0x0000000000002ef0       0xd0 ./amazon-freertos/FreeRTOS/queue.o
-                0x0000000000002ef0                xQueueGenericReset
+                0x00000000000030b0       0xd0 ./amazon-freertos/FreeRTOS/queue.o
+                0x00000000000030b0                xQueueGenericReset
  .text.xQueueGenericCreate
-                0x0000000000002fc0       0x72 ./amazon-freertos/FreeRTOS/queue.o
-                0x0000000000002fc0                xQueueGenericCreate
+                0x0000000000003180       0x72 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003180                xQueueGenericCreate
  .text.prvInitialiseNewQueue
-                0x0000000000003032       0x46 ./amazon-freertos/FreeRTOS/queue.o
+                0x00000000000031f2       0x46 ./amazon-freertos/FreeRTOS/queue.o
  .text.xQueueGenericSend
-                0x0000000000003078      0x1f4 ./amazon-freertos/FreeRTOS/queue.o
-                0x0000000000003078                xQueueGenericSend
+                0x0000000000003238      0x1f4 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003238                xQueueGenericSend
  .text.xQueueGenericSendFromISR
-                0x000000000000326c      0x128 ./amazon-freertos/FreeRTOS/queue.o
-                0x000000000000326c                xQueueGenericSendFromISR
+                0x000000000000342c      0x128 ./amazon-freertos/FreeRTOS/queue.o
+                0x000000000000342c                xQueueGenericSendFromISR
  .text.xQueueGiveFromISR
-                0x0000000000003394      0x112 ./amazon-freertos/FreeRTOS/queue.o
-                0x0000000000003394                xQueueGiveFromISR
- *fill*         0x00000000000034a6        0x2 ff
+                0x0000000000003554      0x112 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003554                xQueueGiveFromISR
+ *fill*         0x0000000000003666        0x2 ff
  .text.xQueueReceive
-                0x00000000000034a8      0x1b8 ./amazon-freertos/FreeRTOS/queue.o
-                0x00000000000034a8                xQueueReceive
+                0x0000000000003668      0x1b8 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003668                xQueueReceive
  .text.xQueueSemaphoreTake
-                0x0000000000003660      0x214 ./amazon-freertos/FreeRTOS/queue.o
-                0x0000000000003660                xQueueSemaphoreTake
+                0x0000000000003820      0x214 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003820                xQueueSemaphoreTake
  .text.prvGetDisinheritPriorityAfterTimeout
-                0x0000000000003874       0x30 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003a34       0x30 ./amazon-freertos/FreeRTOS/queue.o
  .text.prvCopyDataToQueue
-                0x00000000000038a4       0xd4 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003a64       0xd4 ./amazon-freertos/FreeRTOS/queue.o
  .text.prvCopyDataFromQueue
-                0x0000000000003978       0x4c ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003b38       0x4c ./amazon-freertos/FreeRTOS/queue.o
  .text.prvUnlockQueue
-                0x00000000000039c4       0xa4 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003b84       0xa4 ./amazon-freertos/FreeRTOS/queue.o
  .text.prvIsQueueEmpty
-                0x0000000000003a68       0x2c ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003c28       0x2c ./amazon-freertos/FreeRTOS/queue.o
  .text.prvIsQueueFull
-                0x0000000000003a94       0x30 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003c54       0x30 ./amazon-freertos/FreeRTOS/queue.o
  .text.vQueueAddToRegistry
-                0x0000000000003ac4       0x50 ./amazon-freertos/FreeRTOS/queue.o
-                0x0000000000003ac4                vQueueAddToRegistry
+                0x0000000000003c84       0x50 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003c84                vQueueAddToRegistry
  .text.vQueueWaitForMessageRestricted
-                0x0000000000003b14       0x68 ./amazon-freertos/FreeRTOS/queue.o
-                0x0000000000003b14                vQueueWaitForMessageRestricted
+                0x0000000000003cd4       0x68 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000003cd4                vQueueWaitForMessageRestricted
  .text.xTaskCreate
-                0x0000000000003b7c       0x82 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000003b7c                xTaskCreate
+                0x0000000000003d3c       0x82 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000003d3c                xTaskCreate
  .text.prvInitialiseNewTask
-                0x0000000000003bfe      0x132 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000003dbe      0x132 ./amazon-freertos/FreeRTOS/tasks.o
  .text.prvAddNewTaskToReadyList
-                0x0000000000003d30       0xdc ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000003ef0       0xdc ./amazon-freertos/FreeRTOS/tasks.o
  .text.vTaskStartScheduler
-                0x0000000000003e0c       0x98 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000003e0c                vTaskStartScheduler
+                0x0000000000003fcc       0x98 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000003fcc                vTaskStartScheduler
  .text.vTaskSuspendAll
-                0x0000000000003ea4       0x1c ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000003ea4                vTaskSuspendAll
+                0x0000000000004064       0x1c ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004064                vTaskSuspendAll
  .text.xTaskResumeAll
-                0x0000000000003ec0      0x138 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000003ec0                xTaskResumeAll
+                0x0000000000004080      0x138 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004080                xTaskResumeAll
  .text.xTaskGetTickCount
-                0x0000000000003ff8       0x20 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000003ff8                xTaskGetTickCount
+                0x00000000000041b8       0x20 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000000041b8                xTaskGetTickCount
  .text.xTaskIncrementTick
-                0x0000000000004018      0x158 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000004018                xTaskIncrementTick
+                0x00000000000041d8      0x158 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000000041d8                xTaskIncrementTick
  .text.vTaskSwitchContext
-                0x0000000000004170       0xb4 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000004170                vTaskSwitchContext
+                0x0000000000004330       0xb4 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004330                vTaskSwitchContext
  .text.vTaskPlaceOnEventList
-                0x0000000000004224       0x48 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000004224                vTaskPlaceOnEventList
+                0x00000000000043e4       0x48 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000000043e4                vTaskPlaceOnEventList
  .text.vTaskPlaceOnEventListRestricted
-                0x000000000000426c       0x54 ./amazon-freertos/FreeRTOS/tasks.o
-                0x000000000000426c                vTaskPlaceOnEventListRestricted
+                0x000000000000442c       0x54 ./amazon-freertos/FreeRTOS/tasks.o
+                0x000000000000442c                vTaskPlaceOnEventListRestricted
  .text.xTaskRemoveFromEventList
-                0x00000000000042c0       0xc4 ./amazon-freertos/FreeRTOS/tasks.o
-                0x00000000000042c0                xTaskRemoveFromEventList
+                0x0000000000004480       0xc4 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004480                xTaskRemoveFromEventList
  .text.vTaskInternalSetTimeOutState
-                0x0000000000004384       0x2c ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000004384                vTaskInternalSetTimeOutState
+                0x0000000000004544       0x2c ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004544                vTaskInternalSetTimeOutState
  .text.xTaskCheckForTimeOut
-                0x00000000000043b0       0xc0 ./amazon-freertos/FreeRTOS/tasks.o
-                0x00000000000043b0                xTaskCheckForTimeOut
+                0x0000000000004570       0xc0 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004570                xTaskCheckForTimeOut
  .text.vTaskMissedYield
-                0x0000000000004470       0x18 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000004470                vTaskMissedYield
+                0x0000000000004630       0x18 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004630                vTaskMissedYield
  .text.prvIdleTask
-                0x0000000000004488       0x30 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004648       0x30 ./amazon-freertos/FreeRTOS/tasks.o
  .text.prvInitialiseTaskLists
-                0x00000000000044b8       0x80 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004678       0x80 ./amazon-freertos/FreeRTOS/tasks.o
  .text.prvCheckTasksWaitingTermination
-                0x0000000000004538       0x58 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000000046f8       0x58 ./amazon-freertos/FreeRTOS/tasks.o
  .text.prvDeleteTCB
-                0x0000000000004590       0x20 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004750       0x20 ./amazon-freertos/FreeRTOS/tasks.o
  .text.prvResetNextTaskUnblockTime
-                0x00000000000045b0       0x4c ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004770       0x4c ./amazon-freertos/FreeRTOS/tasks.o
  .text.xTaskGetSchedulerState
-                0x00000000000045fc       0x3c ./amazon-freertos/FreeRTOS/tasks.o
-                0x00000000000045fc                xTaskGetSchedulerState
+                0x00000000000047bc       0x3c ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000000047bc                xTaskGetSchedulerState
  .text.xTaskPriorityInherit
-                0x0000000000004638      0x10c ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000004638                xTaskPriorityInherit
+                0x00000000000047f8      0x10c ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000000047f8                xTaskPriorityInherit
  .text.xTaskPriorityDisinherit
-                0x0000000000004744      0x108 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000004744                xTaskPriorityDisinherit
+                0x0000000000004904      0x108 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004904                xTaskPriorityDisinherit
  .text.vTaskPriorityDisinheritAfterTimeout
-                0x000000000000484c      0x13c ./amazon-freertos/FreeRTOS/tasks.o
-                0x000000000000484c                vTaskPriorityDisinheritAfterTimeout
+                0x0000000000004a0c      0x13c ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004a0c                vTaskPriorityDisinheritAfterTimeout
  .text.pvTaskIncrementMutexHeldCount
-                0x0000000000004988       0x28 ./amazon-freertos/FreeRTOS/tasks.o
-                0x0000000000004988                pvTaskIncrementMutexHeldCount
+                0x0000000000004b48       0x28 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004b48                pvTaskIncrementMutexHeldCount
  .text.prvAddCurrentTaskToDelayedList
-                0x00000000000049b0       0xcc ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000004b70       0xcc ./amazon-freertos/FreeRTOS/tasks.o
  .text.xTimerCreateTimerTask
-                0x0000000000004a7c       0x60 ./amazon-freertos/FreeRTOS/timers.o
-                0x0000000000004a7c                xTimerCreateTimerTask
+                0x0000000000004c3c       0x60 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000004c3c                xTimerCreateTimerTask
  .text.xTimerGenericCommand
-                0x0000000000004adc       0x98 ./amazon-freertos/FreeRTOS/timers.o
-                0x0000000000004adc                xTimerGenericCommand
+                0x0000000000004c9c       0x98 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000004c9c                xTimerGenericCommand
  .text.prvProcessExpiredTimer
-                0x0000000000004b74       0x80 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000004d34       0x80 ./amazon-freertos/FreeRTOS/timers.o
  .text.prvTimerTask
-                0x0000000000004bf4       0x24 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000004db4       0x24 ./amazon-freertos/FreeRTOS/timers.o
  .text.prvProcessTimerOrBlockTask
-                0x0000000000004c18       0x9c ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000004dd8       0x9c ./amazon-freertos/FreeRTOS/timers.o
  .text.prvGetNextExpireTime
-                0x0000000000004cb4       0x48 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000004e74       0x48 ./amazon-freertos/FreeRTOS/timers.o
  .text.prvSampleTimeNow
-                0x0000000000004cfc       0x40 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000004ebc       0x40 ./amazon-freertos/FreeRTOS/timers.o
  .text.prvInsertTimerInActiveList
-                0x0000000000004d3c       0x84 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000004efc       0x84 ./amazon-freertos/FreeRTOS/timers.o
  .text.prvProcessReceivedCommands
-                0x0000000000004dc0      0x154 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000004f80      0x154 ./amazon-freertos/FreeRTOS/timers.o
  .text.prvSwitchTimerLists
-                0x0000000000004f14       0xc0 ./amazon-freertos/FreeRTOS/timers.o
+                0x00000000000050d4       0xc0 ./amazon-freertos/FreeRTOS/timers.o
  .text.prvCheckForValidListAndQueue
-                0x0000000000004fd4       0x6c ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000005194       0x6c ./amazon-freertos/FreeRTOS/timers.o
  .text.SystemInit
-                0x0000000000005040       0x40 ./CMSIS/system_LPC54628.o
-                0x0000000000005040                SystemInit
+                0x0000000000005200       0x40 ./CMSIS/system_LPC54628.o
+                0x0000000000005200                SystemInit
  .text.SystemInitHook
-                0x0000000000005080        0xe ./CMSIS/system_LPC54628.o
-                0x0000000000005080                SystemInitHook
- *fill*         0x000000000000508e        0x2 ff
+                0x0000000000005240        0xe ./CMSIS/system_LPC54628.o
+                0x0000000000005240                SystemInitHook
+ *fill*         0x000000000000524e        0x2 ff
  .text.POWER_SetVoltageForFreq
-                0x0000000000005090       0x44 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
-                0x0000000000005090                POWER_SetVoltageForFreq
+                0x0000000000005250       0x44 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+                0x0000000000005250                POWER_SetVoltageForFreq
  .text.POWER_SetPLL
-                0x00000000000050d4       0x1c /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
-                0x00000000000050d4                POWER_SetPLL
- .text.__main   0x00000000000050f0        0xe /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr__main.o)
-                0x00000000000050f0                __main
-                0x00000000000050f0                __CR_SEMIHOST
- *fill*         0x00000000000050fe        0x2 ff
+                0x0000000000005294       0x1c /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+                0x0000000000005294                POWER_SetPLL
+ .text.__main   0x00000000000052b0        0xe /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr__main.o)
+                0x00000000000052b0                __main
+                0x00000000000052b0                __CR_SEMIHOST
+ *fill*         0x00000000000052be        0x2 ff
  .text.__assertion_failed
-                0x0000000000005100       0x4c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr_assert.o)
-                0x0000000000005100                __assertion_failed
+                0x00000000000052c0       0x4c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr_assert.o)
+                0x00000000000052c0                __assertion_failed
  .text.__sys_appexit
-                0x000000000000514c        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_appexit.o)
-                0x000000000000514c                __exit
-                0x000000000000514c                __sys_appexit
- .text.memcpy   0x0000000000005158        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(memcpy.o)
-                0x0000000000005158                memcpy
- .text.memset   0x000000000000515c        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(memset.o)
-                0x000000000000515c                memset
+                0x000000000000530c        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_appexit.o)
+                0x000000000000530c                __exit
+                0x000000000000530c                __sys_appexit
+ .text.memcpy   0x0000000000005318        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(memcpy.o)
+                0x0000000000005318                memcpy
+ .text.memset   0x000000000000531c        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(memset.o)
+                0x000000000000531c                memset
  .text._deferredlazyseek
-                0x0000000000005160       0x40 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_deferredlazyseek.o)
-                0x0000000000005160                _deferredlazyseek
+                0x0000000000005320       0x40 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_deferredlazyseek.o)
+                0x0000000000005320                _deferredlazyseek
  .text.__flsbuf
-                0x00000000000051a0      0x148 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_deferredlazyseek.o)
-                0x00000000000051a0                __flsbuf
- .text._fflush  0x00000000000052e8       0x54 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_fflush.o)
-                0x00000000000052e8                _fflush
+                0x0000000000005360      0x148 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_deferredlazyseek.o)
+                0x0000000000005360                __flsbuf
+ .text._fflush  0x00000000000054a8       0x54 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_fflush.o)
+                0x00000000000054a8                _fflush
  .text._Cwritebuf
-                0x000000000000533c       0x6c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_writebuf.o)
-                0x000000000000533c                _Cwritebuf
- .text.malloc   0x00000000000053a8       0xc4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
-                0x00000000000053a8                malloc
- .text.free     0x000000000000546c       0x30 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
-                0x000000000000546c                free
+                0x00000000000054fc       0x6c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_writebuf.o)
+                0x00000000000054fc                _Cwritebuf
+ .text.malloc   0x0000000000005568       0xc4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
+                0x0000000000005568                malloc
+ .text.free     0x000000000000562c       0x30 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
+                0x000000000000562c                free
  .text._Csys_alloc
-                0x000000000000549c       0x20 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
-                0x000000000000549c                _Csys_alloc
- .text.fputs    0x00000000000054bc       0x2c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fputs.o)
-                0x00000000000054bc                fputs
- .text.fseek    0x00000000000054e8      0x100 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fseek.o)
-                0x00000000000054e8                fseek
- .text.ftell    0x00000000000055e8       0x48 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(ftell.o)
-                0x00000000000055e8                ftell
- .text._initio  0x0000000000005630       0x78 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(initio.o)
-                0x0000000000005630                _initio
+                0x000000000000565c       0x20 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
+                0x000000000000565c                _Csys_alloc
+ .text.fputs    0x000000000000567c       0x2c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fputs.o)
+                0x000000000000567c                fputs
+ .text.fseek    0x00000000000056a8      0x100 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fseek.o)
+                0x00000000000056a8                fseek
+ .text.ftell    0x00000000000057a8       0x48 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(ftell.o)
+                0x00000000000057a8                ftell
+ .text._initio  0x00000000000057f0       0x78 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(initio.o)
+                0x00000000000057f0                _initio
  .text.no_fp_display
-                0x00000000000056a8        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
+                0x0000000000005868        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
  .text.__vfprintf
-                0x00000000000056ac      0xb7c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
-                0x00000000000056ac                __vfprintf
+                0x000000000000586c      0xb7c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
+                0x000000000000586c                __vfprintf
  .text._vsnprintf
-                0x0000000000006228       0x5c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
-                0x0000000000006228                _vsnprintf
- .text._printf  0x0000000000006284       0x54 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
-                0x0000000000006284                _printf
- .text.setvbuf  0x00000000000062d8       0x40 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(setvbuf.o)
-                0x00000000000062d8                setvbuf
- .text.strlen   0x0000000000006318       0x4a /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(strlen.o)
-                0x0000000000006318                strlen
- *fill*         0x0000000000006362        0x2 ff
- .text._sbrk    0x0000000000006364       0x3c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_cr_sbrk.o)
-                0x0000000000006364                _sbrk
- .text._fdopen  0x00000000000063a0       0x68 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_fdopen.o)
-                0x00000000000063a0                _fdopen
- .text.fclose   0x0000000000006408       0x58 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fclose.o)
-                0x0000000000006408                fclose
- .text.fflush   0x0000000000006460       0x44 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fflush.o)
-                0x0000000000006460                fflush
- .text.remove   0x00000000000064a4       0x14 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(remove.o)
-                0x00000000000064a4                remove
+                0x00000000000063e8       0x5c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
+                0x00000000000063e8                _vsnprintf
+ .text._printf  0x0000000000006444       0x54 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
+                0x0000000000006444                _printf
+ .text.setvbuf  0x0000000000006498       0x40 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(setvbuf.o)
+                0x0000000000006498                setvbuf
+ .text.strlen   0x00000000000064d8       0x4a /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(strlen.o)
+                0x00000000000064d8                strlen
+ *fill*         0x0000000000006522        0x2 ff
+ .text._sbrk    0x0000000000006524       0x3c /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_cr_sbrk.o)
+                0x0000000000006524                _sbrk
+ .text._fdopen  0x0000000000006560       0x68 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_fdopen.o)
+                0x0000000000006560                _fdopen
+ .text.fclose   0x00000000000065c8       0x58 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fclose.o)
+                0x00000000000065c8                fclose
+ .text.fflush   0x0000000000006620       0x44 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fflush.o)
+                0x0000000000006620                fflush
+ .text.remove   0x0000000000006664       0x14 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(remove.o)
+                0x0000000000006664                remove
  .text.__check_heap_overflow
-                0x00000000000064b8       0x18 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_cr_check_heap.o)
-                0x00000000000064b8                __check_heap_overflow
+                0x0000000000006678       0x18 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_cr_check_heap.o)
+                0x0000000000006678                __check_heap_overflow
  .text._do_fflush
-                0x00000000000064d0       0x40 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_do_fflush.o)
-                0x00000000000064d0                _do_fflush
+                0x0000000000006690       0x40 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_do_fflush.o)
+                0x0000000000006690                _do_fflush
  .text.__aeabi_memcpy
-                0x0000000000006510       0x34 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/libcr_eabihelpers.a(memcpy.o)
-                0x0000000000006510                __aeabi_memcpy
-                0x000000000000651a                __aeabi_memcpy4
-                0x000000000000651a                __aeabi_memcpy8
+                0x00000000000066d0       0x34 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/libcr_eabihelpers.a(memcpy.o)
+                0x00000000000066d0                __aeabi_memcpy
+                0x00000000000066da                __aeabi_memcpy4
+                0x00000000000066da                __aeabi_memcpy8
  .text.__aeabi_memset_lowlevel
-                0x0000000000006544       0x32 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/libcr_eabihelpers.a(memcpy.o)
-                0x0000000000006544                __aeabi_lowlevel_memset
+                0x0000000000006704       0x32 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/libcr_eabihelpers.a(memcpy.o)
+                0x0000000000006704                __aeabi_lowlevel_memset
  .text.__sys_close
-                0x0000000000006576        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_close.o)
-                0x0000000000006576                __sys_close
+                0x0000000000006736        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_close.o)
+                0x0000000000006736                __sys_close
  .text.__sys_flen
-                0x0000000000006582        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_flen.o)
-                0x0000000000006582                __sys_flen
+                0x0000000000006742        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_flen.o)
+                0x0000000000006742                __sys_flen
  .text.__sys_istty
-                0x000000000000658e        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_istty.o)
-                0x000000000000658e                __sys_istty
+                0x000000000000674e        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_istty.o)
+                0x000000000000674e                __sys_istty
  .text.__sys_remove
-                0x000000000000659a        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_remove.o)
-                0x000000000000659a                __sys_remove
+                0x000000000000675a        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_remove.o)
+                0x000000000000675a                __sys_remove
  .text.__sys_seek
-                0x00000000000065a6        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_seek.o)
-                0x00000000000065a6                __sys_seek
+                0x0000000000006766        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_seek.o)
+                0x0000000000006766                __sys_seek
  .text.__sys_tmpnam
-                0x00000000000065b2        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_tmpnam.o)
-                0x00000000000065b2                __sys_tmpnam
+                0x0000000000006772        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_tmpnam.o)
+                0x0000000000006772                __sys_tmpnam
  .text.__sys_write
-                0x00000000000065be        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_write.o)
-                0x00000000000065be                __sys_write
+                0x000000000000677e        0xc /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_write.o)
+                0x000000000000677e                __sys_write
  *(.rodata .rodata.* .constdata .constdata.*)
- *fill*         0x00000000000065ca        0x2 ff
- .rodata        0x00000000000065cc       0x50 ./utilities/fsl_debug_console.o
- .rodata        0x000000000000661c       0x27 ./utilities/fsl_io.o
- *fill*         0x0000000000006643        0x1 ff
- .rodata        0x0000000000006644       0xc4 ./source/adc.o
- .rodata        0x0000000000006708       0x16 ./source/main.o
- *fill*         0x000000000000671e        0x2 ff
- .rodata        0x0000000000006720      0x16b ./drivers/fsl_adc.o
- *fill*         0x000000000000688b        0x1 ff
+ *fill*         0x000000000000678a        0x2 ff
+ .rodata        0x000000000000678c       0x50 ./utilities/fsl_debug_console.o
+ .rodata        0x00000000000067dc       0x27 ./utilities/fsl_io.o
+ *fill*         0x0000000000006803        0x1 ff
+ .rodata        0x0000000000006804       0x94 ./source/adc.o
+ .rodata        0x0000000000006898       0x16 ./source/main.o
+ *fill*         0x00000000000068ae        0x2 ff
+ .rodata        0x00000000000068b0      0x16b ./drivers/fsl_adc.o
+ *fill*         0x0000000000006a1b        0x1 ff
  .rodata.wdtFreqLookup
-                0x000000000000688c       0x20 ./drivers/fsl_clock.o
+                0x0000000000006a1c       0x20 ./drivers/fsl_clock.o
  .rodata.s_flexcommBaseAddrs
-                0x00000000000068ac       0x28 ./drivers/fsl_flexcomm.o
+                0x0000000000006a3c       0x28 ./drivers/fsl_flexcomm.o
  .rodata.s_flexcommClocks
-                0x00000000000068d4       0x14 ./drivers/fsl_flexcomm.o
- .rodata        0x00000000000068e8      0x258 ./drivers/fsl_flexcomm.o
- .rodata        0x0000000000006b40       0x55 ./drivers/fsl_reset.o
- *fill*         0x0000000000006b95        0x3 ff
- .rodata        0x0000000000006b98      0x5d0 ./drivers/fsl_usart.o
- .rodata        0x0000000000007168       0x30 ./board/board.o
- .rodata        0x0000000000007198        0x5 ./amazon-freertos/FreeRTOS/tasks.o
- *fill*         0x000000000000719d        0x3 ff
- .rodata        0x00000000000071a0        0xd ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000006a64       0x14 ./drivers/fsl_flexcomm.o
+ .rodata        0x0000000000006a78      0x258 ./drivers/fsl_flexcomm.o
+ .rodata.s_gpioClockName
+                0x0000000000006cd0        0xc ./drivers/fsl_gpio.o
+ .rodata        0x0000000000006cdc       0x3e ./drivers/fsl_gpio.o
+ *fill*         0x0000000000006d1a        0x2 ff
+ .rodata        0x0000000000006d1c       0x55 ./drivers/fsl_reset.o
+ *fill*         0x0000000000006d71        0x3 ff
+ .rodata        0x0000000000006d74      0x5d0 ./drivers/fsl_usart.o
+ .rodata        0x0000000000007344       0x30 ./board/board.o
+ .rodata        0x0000000000007374        0x5 ./amazon-freertos/FreeRTOS/tasks.o
+ *fill*         0x0000000000007379        0x3 ff
+ .rodata        0x000000000000737c        0xd ./amazon-freertos/FreeRTOS/timers.o
  .rodata.__assertion_failed.str1.1
-                0x00000000000071ad       0x15 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr_assert.o)
- *fill*         0x00000000000071c2        0x2 ff
+                0x0000000000007389       0x15 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr_assert.o)
+ *fill*         0x000000000000739e        0x2 ff
  .rodata.__num_Ciob_streams
-                0x00000000000071c4        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__ciob.o)
-                0x00000000000071c4                __num_Ciob_streams
+                0x00000000000073a0        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__ciob.o)
+                0x00000000000073a0                __num_Ciob_streams
  .rodata._Csys_alloc.str1.1
-                0x00000000000071c8       0x18 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
+                0x00000000000073a4       0x18 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
  .rodata._initio.str1.1
-                0x00000000000071e0        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(initio.o)
+                0x00000000000073bc        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(initio.o)
  .rodata.__vfprintf.str1.1
-                0x00000000000071e4       0x35 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
+                0x00000000000073c0       0x35 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
                                          0x38 (size before relaxing)
-                0x000000000000721c                . = ALIGN (0x4)
- *fill*         0x0000000000007219        0x3 ff
+                0x00000000000073f8                . = ALIGN (0x4)
+ *fill*         0x00000000000073f5        0x3 ff
 
-.glue_7         0x000000000000721c        0x0
- .glue_7        0x000000000000721c        0x0 linker stubs
+.glue_7         0x00000000000073f8        0x0
+ .glue_7        0x00000000000073f8        0x0 linker stubs
 
-.glue_7t        0x000000000000721c        0x0
- .glue_7t       0x000000000000721c        0x0 linker stubs
+.glue_7t        0x00000000000073f8        0x0
+ .glue_7t       0x00000000000073f8        0x0 linker stubs
 
-.vfp11_veneer   0x000000000000721c        0x0
- .vfp11_veneer  0x000000000000721c        0x0 linker stubs
+.vfp11_veneer   0x00000000000073f8        0x0
+ .vfp11_veneer  0x00000000000073f8        0x0 linker stubs
 
-.v4_bx          0x000000000000721c        0x0
- .v4_bx         0x000000000000721c        0x0 linker stubs
+.v4_bx          0x00000000000073f8        0x0
+ .v4_bx         0x00000000000073f8        0x0 linker stubs
 
-.iplt           0x000000000000721c        0x0
- .iplt          0x000000000000721c        0x0 ./utilities/fsl_assert.o
+.iplt           0x00000000000073f8        0x0
+ .iplt          0x00000000000073f8        0x0 ./utilities/fsl_assert.o
 
-.rel.dyn        0x000000000000721c        0x0
- .rel.iplt      0x000000000000721c        0x0 ./utilities/fsl_assert.o
+.rel.dyn        0x00000000000073f8        0x0
+ .rel.iplt      0x00000000000073f8        0x0 ./utilities/fsl_assert.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x000000000000721c                __exidx_start = .
+                0x00000000000073f8                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x000000000000721c                __exidx_end = .
-                0x000000000000721c                _etext = .
+                0x00000000000073f8                __exidx_end = .
+                0x00000000000073f8                _etext = .
 
 .m_usb_data
  *(m_usb_global)
 
-.data_RAM2      0x0000000004000000        0x0 load address 0x000000000000721c
+.data_RAM2      0x0000000004000000        0x0 load address 0x00000000000073f8
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM2, .)
  *(.ramfunc.$RAM2)
@@ -2044,7 +2041,7 @@ END GROUP
                 0x0000000004000000                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__end_data_RAM2, .)
 
-.data_RAM3      0x0000000040100000        0x0 load address 0x000000000000721c
+.data_RAM3      0x0000000040100000        0x0 load address 0x00000000000073f8
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM3, .)
  *(.ramfunc.$RAM3)
@@ -2054,7 +2051,7 @@ END GROUP
                 0x0000000040100000                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__end_data_RAM3, .)
 
-.data_RAM4      0x00000000a0000000        0x0 load address 0x000000000000721c
+.data_RAM4      0x00000000a0000000        0x0 load address 0x00000000000073f8
  FILL mask 0xff
                 [!provide]                        PROVIDE (__start_data_RAM4, .)
  *(.ramfunc.$RAM4)
@@ -2070,22 +2067,26 @@ END GROUP
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _end_uninit_RESERVED = .
 
-.data           0x0000000020000000        0x8 load address 0x000000000000721c
+.data           0x0000000020000000       0x10 load address 0x00000000000073f8
  FILL mask 0xff
                 0x0000000020000000                _data = .
  *(vtable)
  *(.ramfunc*)
  *(.data*)
+ .data.GPIO_1_config
+                0x0000000020000000        0x6 ./board/peripherals.o
+                0x0000000020000000                GPIO_1_config
+ *fill*         0x0000000020000006        0x2 ff
  .data.uxCriticalNesting
-                0x0000000020000000        0x4 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000020000008        0x4 ./amazon-freertos/FreeRTOS/portable/port.o
  .data.SystemCoreClock
-                0x0000000020000004        0x4 ./CMSIS/system_LPC54628.o
-                0x0000000020000004                SystemCoreClock
-                0x0000000020000008                . = ALIGN (0x4)
-                0x0000000020000008                _edata = .
+                0x000000002000000c        0x4 ./CMSIS/system_LPC54628.o
+                0x000000002000000c                SystemCoreClock
+                0x0000000020000010                . = ALIGN (0x4)
+                0x0000000020000010                _edata = .
 
-.igot.plt       0x0000000020000008        0x0 load address 0x0000000000007224
- .igot.plt      0x0000000020000008        0x0 ./utilities/fsl_assert.o
+.igot.plt       0x0000000020000010        0x0 load address 0x0000000000007408
+ .igot.plt      0x0000000020000010        0x0 ./utilities/fsl_assert.o
 
 .bss_RAM2       0x0000000004000000        0x0
                 [!provide]                        PROVIDE (__start_bss_RAM2, .)
@@ -2108,124 +2109,124 @@ END GROUP
                 0x00000000a0000000                . = ALIGN ((. != 0x0)?0x4:0x1)
                 [!provide]                        PROVIDE (__end_bss_RAM4, .)
 
-.bss            0x0000000020000008     0x2b14
-                0x0000000020000008                _bss = .
+.bss            0x0000000020000010     0x2b14
+                0x0000000020000010                _bss = .
  *(.bss*)
  .bss.s_debugConsoleIO
-                0x0000000020000008        0x8 ./utilities/fsl_io.o
+                0x0000000020000010        0x8 ./utilities/fsl_io.o
  .bss.xSequenceASemaphore
-                0x0000000020000010        0x4 ./source/adc.o
-                0x0000000020000010                xSequenceASemaphore
+                0x0000000020000018        0x4 ./source/adc.o
+                0x0000000020000018                xSequenceASemaphore
  .bss.xSequenceBSemaphore
-                0x0000000020000014        0x4 ./source/adc.o
-                0x0000000020000014                xSequenceBSemaphore
- .bss.yaw.8678  0x0000000020000018       0x10 ./source/adc.o
- .bss.power.8679
-                0x0000000020000028       0x10 ./source/adc.o
- .bss.pitch.8684
-                0x0000000020000038       0x10 ./source/adc.o
- .bss.roll.8685
-                0x0000000020000048       0x10 ./source/adc.o
- .bss.xHigherPriorityTaskWoken.8704
-                0x0000000020000058        0x4 ./source/adc.o
- .bss.xHigherPriorityTaskWoken.8708
-                0x000000002000005c        0x4 ./source/adc.o
+                0x000000002000001c        0x4 ./source/adc.o
+                0x000000002000001c                xSequenceBSemaphore
+ .bss.yaw.8796  0x0000000020000020       0x10 ./source/adc.o
+ .bss.power.8797
+                0x0000000020000030       0x10 ./source/adc.o
+ .bss.pitch.8802
+                0x0000000020000040       0x10 ./source/adc.o
+ .bss.roll.8803
+                0x0000000020000050       0x10 ./source/adc.o
+ .bss.xHigherPriorityTaskWoken.8822
+                0x0000000020000060        0x4 ./source/adc.o
+ .bss.xHigherPriorityTaskWoken.8826
+                0x0000000020000064        0x4 ./source/adc.o
  .bss.s_Pll_Freq
-                0x0000000020000060        0x4 ./drivers/fsl_clock.o
- .bss.s_Usb_Pll_Freq
-                0x0000000020000064        0x4 ./drivers/fsl_clock.o
- .bss.s_Audio_Pll_Freq
                 0x0000000020000068        0x4 ./drivers/fsl_clock.o
+ .bss.s_Usb_Pll_Freq
+                0x000000002000006c        0x4 ./drivers/fsl_clock.o
+ .bss.s_Audio_Pll_Freq
+                0x0000000020000070        0x4 ./drivers/fsl_clock.o
  .bss.s_flexcommIrqHandler
-                0x000000002000006c       0x28 ./drivers/fsl_flexcomm.o
+                0x0000000020000074       0x28 ./drivers/fsl_flexcomm.o
  .bss.s_flexcommHandle
-                0x0000000020000094       0x28 ./drivers/fsl_flexcomm.o
- .bss.ucHeap    0x00000000200000bc     0x2800 ./amazon-freertos/portable/heap_4.o
- .bss.xStart    0x00000000200028bc        0x8 ./amazon-freertos/portable/heap_4.o
- .bss.pxEnd     0x00000000200028c4        0x4 ./amazon-freertos/portable/heap_4.o
+                0x000000002000009c       0x28 ./drivers/fsl_flexcomm.o
+ .bss.ucHeap    0x00000000200000c4     0x2800 ./amazon-freertos/portable/heap_4.o
+ .bss.xStart    0x00000000200028c4        0x8 ./amazon-freertos/portable/heap_4.o
+ .bss.pxEnd     0x00000000200028cc        0x4 ./amazon-freertos/portable/heap_4.o
  .bss.xFreeBytesRemaining
-                0x00000000200028c8        0x4 ./amazon-freertos/portable/heap_4.o
- .bss.xMinimumEverFreeBytesRemaining
-                0x00000000200028cc        0x4 ./amazon-freertos/portable/heap_4.o
- .bss.xBlockAllocatedBit
                 0x00000000200028d0        0x4 ./amazon-freertos/portable/heap_4.o
+ .bss.xMinimumEverFreeBytesRemaining
+                0x00000000200028d4        0x4 ./amazon-freertos/portable/heap_4.o
+ .bss.xBlockAllocatedBit
+                0x00000000200028d8        0x4 ./amazon-freertos/portable/heap_4.o
  .bss.ucMaxSysCallPriority
-                0x00000000200028d4        0x1 ./amazon-freertos/FreeRTOS/portable/port.o
- *fill*         0x00000000200028d5        0x3 
+                0x00000000200028dc        0x1 ./amazon-freertos/FreeRTOS/portable/port.o
+ *fill*         0x00000000200028dd        0x3 
  .bss.ulMaxPRIGROUPValue
-                0x00000000200028d8        0x4 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x00000000200028e0        0x4 ./amazon-freertos/FreeRTOS/portable/port.o
  .bss.xQueueRegistry
-                0x00000000200028dc       0x40 ./amazon-freertos/FreeRTOS/queue.o
-                0x00000000200028dc                xQueueRegistry
+                0x00000000200028e4       0x40 ./amazon-freertos/FreeRTOS/queue.o
+                0x00000000200028e4                xQueueRegistry
  .bss.pxCurrentTCB
-                0x000000002000291c        0x4 ./amazon-freertos/FreeRTOS/tasks.o
-                0x000000002000291c                pxCurrentTCB
+                0x0000000020002924        0x4 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000020002924                pxCurrentTCB
  .bss.pxReadyTasksLists
-                0x0000000020002920       0x64 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000020002928       0x64 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.xDelayedTaskList1
-                0x0000000020002984       0x14 ./amazon-freertos/FreeRTOS/tasks.o
+                0x000000002000298c       0x14 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.xDelayedTaskList2
-                0x0000000020002998       0x14 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000200029a0       0x14 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.pxDelayedTaskList
-                0x00000000200029ac        0x4 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000200029b4        0x4 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.pxOverflowDelayedTaskList
-                0x00000000200029b0        0x4 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000200029b8        0x4 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.xPendingReadyList
-                0x00000000200029b4       0x14 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000200029bc       0x14 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.xTasksWaitingTermination
-                0x00000000200029c8       0x14 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000200029d0       0x14 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.uxDeletedTasksWaitingCleanUp
-                0x00000000200029dc        0x4 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000200029e4        0x4 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.xSuspendedTaskList
-                0x00000000200029e0       0x14 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000200029e8       0x14 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.uxCurrentNumberOfTasks
-                0x00000000200029f4        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.xTickCount
-                0x00000000200029f8        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.uxTopReadyPriority
                 0x00000000200029fc        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.xSchedulerRunning
+ .bss.xTickCount
                 0x0000000020002a00        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.uxPendedTicks
+ .bss.uxTopReadyPriority
                 0x0000000020002a04        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.xYieldPending
+ .bss.xSchedulerRunning
                 0x0000000020002a08        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.xNumOfOverflows
+ .bss.uxPendedTicks
                 0x0000000020002a0c        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.uxTaskNumber
+ .bss.xYieldPending
                 0x0000000020002a10        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.xNextTaskUnblockTime
+ .bss.xNumOfOverflows
                 0x0000000020002a14        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.xIdleTaskHandle
+ .bss.uxTaskNumber
                 0x0000000020002a18        0x4 ./amazon-freertos/FreeRTOS/tasks.o
- .bss.uxSchedulerSuspended
+ .bss.xNextTaskUnblockTime
                 0x0000000020002a1c        0x4 ./amazon-freertos/FreeRTOS/tasks.o
+ .bss.xIdleTaskHandle
+                0x0000000020002a20        0x4 ./amazon-freertos/FreeRTOS/tasks.o
+ .bss.uxSchedulerSuspended
+                0x0000000020002a24        0x4 ./amazon-freertos/FreeRTOS/tasks.o
  .bss.xActiveTimerList1
-                0x0000000020002a20       0x14 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000020002a28       0x14 ./amazon-freertos/FreeRTOS/timers.o
  .bss.xActiveTimerList2
-                0x0000000020002a34       0x14 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000020002a3c       0x14 ./amazon-freertos/FreeRTOS/timers.o
  .bss.pxCurrentTimerList
-                0x0000000020002a48        0x4 ./amazon-freertos/FreeRTOS/timers.o
- .bss.pxOverflowTimerList
-                0x0000000020002a4c        0x4 ./amazon-freertos/FreeRTOS/timers.o
- .bss.xTimerQueue
                 0x0000000020002a50        0x4 ./amazon-freertos/FreeRTOS/timers.o
- .bss.xTimerTaskHandle
+ .bss.pxOverflowTimerList
                 0x0000000020002a54        0x4 ./amazon-freertos/FreeRTOS/timers.o
- .bss.xLastTime.5713
+ .bss.xTimerQueue
                 0x0000000020002a58        0x4 ./amazon-freertos/FreeRTOS/timers.o
- .bss.__Ciob    0x0000000020002a5c       0xb4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__ciob.o)
-                0x0000000020002a5c                __Ciob
+ .bss.xTimerTaskHandle
+                0x0000000020002a5c        0x4 ./amazon-freertos/FreeRTOS/timers.o
+ .bss.xLastTime.5713
+                0x0000000020002a60        0x4 ./amazon-freertos/FreeRTOS/timers.o
+ .bss.__Ciob    0x0000000020002a64       0xb4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__ciob.o)
+                0x0000000020002a64                __Ciob
  .bss.__end_of_heap
-                0x0000000020002b10        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(__init_alloc.o)
-                0x0000000020002b10                __end_of_heap
- .bss.__heaps   0x0000000020002b14        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(__init_alloc.o)
-                0x0000000020002b14                __heaps
- .bss.errno     0x0000000020002b18        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(errno.o)
-                0x0000000020002b18                errno
+                0x0000000020002b18        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(__init_alloc.o)
+                0x0000000020002b18                __end_of_heap
+ .bss.__heaps   0x0000000020002b1c        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(__init_alloc.o)
+                0x0000000020002b1c                __heaps
+ .bss.errno     0x0000000020002b20        0x4 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(errno.o)
+                0x0000000020002b20                errno
  *(COMMON)
-                0x0000000020002b1c                . = ALIGN (0x4)
-                0x0000000020002b1c                _ebss = .
+                0x0000000020002b24                . = ALIGN (0x4)
+                0x0000000020002b24                _ebss = .
                 [!provide]                        PROVIDE (end, .)
 
 .noinit_RAM2    0x0000000004000000        0x0
@@ -2243,91 +2244,93 @@ END GROUP
  *(.noinit.$BOARD_SDRAM*)
                 0x00000000a0000000                . = ALIGN (0x4)
 
-.noinit         0x0000000020002b1c        0x0
-                0x0000000020002b1c                _noinit = .
+.noinit         0x0000000020002b24        0x0
+                0x0000000020002b24                _noinit = .
  *(.noinit*)
-                0x0000000020002b1c                . = ALIGN (0x4)
-                0x0000000020002b1c                _end_noinit = .
+                0x0000000020002b24                . = ALIGN (0x4)
+                0x0000000020002b24                _end_noinit = .
                 0x0000000000001000                _HeapSize = 0x1000
 
-.heap           0x0000000020002b1c     0x1000
-                0x0000000020002b1c                _pvHeapStart = .
-                0x0000000020003b1c                . = (. + _HeapSize)
- *fill*         0x0000000020002b1c     0x1000 
-                0x0000000020003b1c                . = ALIGN (0x4)
-                0x0000000020003b1c                _pvHeapLimit = .
+.heap           0x0000000020002b24     0x1000
+                0x0000000020002b24                _pvHeapStart = .
+                0x0000000020003b24                . = (. + _HeapSize)
+ *fill*         0x0000000020002b24     0x1000 
+                0x0000000020003b24                . = ALIGN (0x4)
+                0x0000000020003b24                _pvHeapLimit = .
                 0x0000000000001000                _StackSize = 0x1000
 
 .heap2stackfill
-                0x0000000020003b1c     0x1000
-                0x0000000020004b1c                . = (. + _StackSize)
- *fill*         0x0000000020003b1c     0x1000 
+                0x0000000020003b24     0x1000
+                0x0000000020004b24                . = (. + _StackSize)
+ *fill*         0x0000000020003b24     0x1000 
 
 .stack          0x0000000020027000        0x0
                 0x0000000020027000                _vStackBase = .
                 0x0000000020027000                . = ALIGN (0x4)
                 0x0000000020028000                _vStackTop = (. + _StackSize)
-                0xffffffffdffd6cb8                PROVIDE (__valid_user_code_checksum, (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
+                0xffffffffdffd6ca0                PROVIDE (__valid_user_code_checksum, (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x0000000000000000                _image_start = LOADADDR (.text)
-                0x0000000000007224                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x0000000000007224                _image_size = (_image_end - _image_start)
+                0x0000000000007408                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x0000000000007408                _image_size = (_image_end - _image_start)
 OUTPUT(Joy.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000    0x158f2
+.debug_info     0x0000000000000000    0x17681
  .debug_info    0x0000000000000000      0x2b0 ./utilities/fsl_debug_console.o
  .debug_info    0x00000000000002b0      0x8b8 ./utilities/fsl_io.o
  .debug_info    0x0000000000000b68      0x334 ./utilities/fsl_log.o
  .debug_info    0x0000000000000e9c      0x670 ./startup/startup_LPC54628.o
- .debug_info    0x000000000000150c     0x21c9 ./source/adc.o
- .debug_info    0x00000000000036d5      0x5c2 ./source/main.o
- .debug_info    0x0000000000003c97       0x37 ./source/semihost_hardfault.o
- .debug_info    0x0000000000003cce     0x1642 ./drivers/fsl_adc.o
- .debug_info    0x0000000000005310     0x2e5a ./drivers/fsl_clock.o
- .debug_info    0x000000000000816a     0x1672 ./drivers/fsl_flexcomm.o
- .debug_info    0x00000000000097dc      0xd3d ./drivers/fsl_reset.o
- .debug_info    0x000000000000a519     0x13a2 ./drivers/fsl_usart.o
- .debug_info    0x000000000000b8bb      0xd3f ./board/board.o
- .debug_info    0x000000000000c5fa     0x103a ./board/clock_config.o
- .debug_info    0x000000000000d634       0x48 ./board/peripherals.o
- .debug_info    0x000000000000d67c      0xe81 ./board/pin_mux.o
- .debug_info    0x000000000000e4fd       0xe8 ./amazon-freertos/portable/fsl_tickless_systick.o
- .debug_info    0x000000000000e5e5      0x3ed ./amazon-freertos/portable/heap_4.o
- .debug_info    0x000000000000e9d2      0x531 ./amazon-freertos/FreeRTOS/portable/port.o
- .debug_info    0x000000000000ef03      0x2cc ./amazon-freertos/FreeRTOS/list.o
- .debug_info    0x000000000000f1cf     0x1693 ./amazon-freertos/FreeRTOS/queue.o
- .debug_info    0x0000000000010862     0x1f67 ./amazon-freertos/FreeRTOS/tasks.o
- .debug_info    0x00000000000127c9      0xda8 ./amazon-freertos/FreeRTOS/timers.o
- .debug_info    0x0000000000013571      0xe5d ./CMSIS/system_LPC54628.o
- .debug_info    0x00000000000143ce     0x1524 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+ .debug_info    0x000000000000150c     0x2442 ./source/adc.o
+ .debug_info    0x000000000000394e      0x81a ./source/main.o
+ .debug_info    0x0000000000004168       0x37 ./source/semihost_hardfault.o
+ .debug_info    0x000000000000419f     0x1642 ./drivers/fsl_adc.o
+ .debug_info    0x00000000000057e1     0x2e5a ./drivers/fsl_clock.o
+ .debug_info    0x000000000000863b     0x1672 ./drivers/fsl_flexcomm.o
+ .debug_info    0x0000000000009cad     0x1306 ./drivers/fsl_gpio.o
+ .debug_info    0x000000000000afb3      0xd3d ./drivers/fsl_reset.o
+ .debug_info    0x000000000000bcf0     0x13a2 ./drivers/fsl_usart.o
+ .debug_info    0x000000000000d092      0xd3f ./board/board.o
+ .debug_info    0x000000000000ddd1     0x103a ./board/clock_config.o
+ .debug_info    0x000000000000ee0b      0x600 ./board/peripherals.o
+ .debug_info    0x000000000000f40b      0xe81 ./board/pin_mux.o
+ .debug_info    0x000000000001028c       0xe8 ./amazon-freertos/portable/fsl_tickless_systick.o
+ .debug_info    0x0000000000010374      0x3ed ./amazon-freertos/portable/heap_4.o
+ .debug_info    0x0000000000010761      0x531 ./amazon-freertos/FreeRTOS/portable/port.o
+ .debug_info    0x0000000000010c92      0x2cc ./amazon-freertos/FreeRTOS/list.o
+ .debug_info    0x0000000000010f5e     0x1693 ./amazon-freertos/FreeRTOS/queue.o
+ .debug_info    0x00000000000125f1     0x1f67 ./amazon-freertos/FreeRTOS/tasks.o
+ .debug_info    0x0000000000014558      0xda8 ./amazon-freertos/FreeRTOS/timers.o
+ .debug_info    0x0000000000015300      0xe5d ./CMSIS/system_LPC54628.o
+ .debug_info    0x000000000001615d     0x1524 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
 
-.debug_abbrev   0x0000000000000000     0x2e75
+.debug_abbrev   0x0000000000000000     0x3204
  .debug_abbrev  0x0000000000000000      0x102 ./utilities/fsl_debug_console.o
  .debug_abbrev  0x0000000000000102      0x208 ./utilities/fsl_io.o
  .debug_abbrev  0x000000000000030a      0x17b ./utilities/fsl_log.o
  .debug_abbrev  0x0000000000000485      0x13d ./startup/startup_LPC54628.o
  .debug_abbrev  0x00000000000005c2      0x296 ./source/adc.o
- .debug_abbrev  0x0000000000000858       0xe2 ./source/main.o
- .debug_abbrev  0x000000000000093a       0x2c ./source/semihost_hardfault.o
- .debug_abbrev  0x0000000000000966      0x27f ./drivers/fsl_adc.o
- .debug_abbrev  0x0000000000000be5      0x349 ./drivers/fsl_clock.o
- .debug_abbrev  0x0000000000000f2e      0x27a ./drivers/fsl_flexcomm.o
- .debug_abbrev  0x00000000000011a8      0x167 ./drivers/fsl_reset.o
- .debug_abbrev  0x000000000000130f      0x331 ./drivers/fsl_usart.o
- .debug_abbrev  0x0000000000001640      0x1a0 ./board/board.o
- .debug_abbrev  0x00000000000017e0      0x1b1 ./board/clock_config.o
- .debug_abbrev  0x0000000000001991       0x44 ./board/peripherals.o
- .debug_abbrev  0x00000000000019d5      0x1de ./board/pin_mux.o
- .debug_abbrev  0x0000000000001bb3       0x8f ./amazon-freertos/portable/fsl_tickless_systick.o
- .debug_abbrev  0x0000000000001c42      0x1e5 ./amazon-freertos/portable/heap_4.o
- .debug_abbrev  0x0000000000001e27      0x249 ./amazon-freertos/FreeRTOS/portable/port.o
- .debug_abbrev  0x0000000000002070      0x116 ./amazon-freertos/FreeRTOS/list.o
- .debug_abbrev  0x0000000000002186      0x2b3 ./amazon-freertos/FreeRTOS/queue.o
- .debug_abbrev  0x0000000000002439      0x2db ./amazon-freertos/FreeRTOS/tasks.o
- .debug_abbrev  0x0000000000002714      0x253 ./amazon-freertos/FreeRTOS/timers.o
- .debug_abbrev  0x0000000000002967      0x1d1 ./CMSIS/system_LPC54628.o
- .debug_abbrev  0x0000000000002b38      0x33d /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+ .debug_abbrev  0x0000000000000858      0x15b ./source/main.o
+ .debug_abbrev  0x00000000000009b3       0x2c ./source/semihost_hardfault.o
+ .debug_abbrev  0x00000000000009df      0x27f ./drivers/fsl_adc.o
+ .debug_abbrev  0x0000000000000c5e      0x349 ./drivers/fsl_clock.o
+ .debug_abbrev  0x0000000000000fa7      0x27a ./drivers/fsl_flexcomm.o
+ .debug_abbrev  0x0000000000001221      0x206 ./drivers/fsl_gpio.o
+ .debug_abbrev  0x0000000000001427      0x167 ./drivers/fsl_reset.o
+ .debug_abbrev  0x000000000000158e      0x331 ./drivers/fsl_usart.o
+ .debug_abbrev  0x00000000000018bf      0x1a0 ./board/board.o
+ .debug_abbrev  0x0000000000001a5f      0x1b1 ./board/clock_config.o
+ .debug_abbrev  0x0000000000001c10      0x154 ./board/peripherals.o
+ .debug_abbrev  0x0000000000001d64      0x1de ./board/pin_mux.o
+ .debug_abbrev  0x0000000000001f42       0x8f ./amazon-freertos/portable/fsl_tickless_systick.o
+ .debug_abbrev  0x0000000000001fd1      0x1e5 ./amazon-freertos/portable/heap_4.o
+ .debug_abbrev  0x00000000000021b6      0x249 ./amazon-freertos/FreeRTOS/portable/port.o
+ .debug_abbrev  0x00000000000023ff      0x116 ./amazon-freertos/FreeRTOS/list.o
+ .debug_abbrev  0x0000000000002515      0x2b3 ./amazon-freertos/FreeRTOS/queue.o
+ .debug_abbrev  0x00000000000027c8      0x2db ./amazon-freertos/FreeRTOS/tasks.o
+ .debug_abbrev  0x0000000000002aa3      0x253 ./amazon-freertos/FreeRTOS/timers.o
+ .debug_abbrev  0x0000000000002cf6      0x1d1 ./CMSIS/system_LPC54628.o
+ .debug_abbrev  0x0000000000002ec7      0x33d /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
 
-.debug_aranges  0x0000000000000000      0xfa0
+.debug_aranges  0x0000000000000000      0xfe0
  .debug_aranges
                 0x0000000000000000       0x30 ./utilities/fsl_debug_console.o
  .debug_aranges
@@ -2337,103 +2340,107 @@ OUTPUT(Joy.axf elf32-littlearm)
  .debug_aranges
                 0x00000000000000c8      0x248 ./startup/startup_LPC54628.o
  .debug_aranges
-                0x0000000000000310       0xa8 ./source/adc.o
+                0x0000000000000310       0xb0 ./source/adc.o
  .debug_aranges
-                0x00000000000003b8       0x20 ./source/main.o
+                0x00000000000003c0       0x20 ./source/main.o
  .debug_aranges
-                0x00000000000003d8       0x20 ./source/semihost_hardfault.o
+                0x00000000000003e0       0x20 ./source/semihost_hardfault.o
  .debug_aranges
-                0x00000000000003f8       0x78 ./drivers/fsl_adc.o
+                0x0000000000000400       0x78 ./drivers/fsl_adc.o
  .debug_aranges
-                0x0000000000000470      0x2c0 ./drivers/fsl_clock.o
+                0x0000000000000478      0x2c0 ./drivers/fsl_clock.o
  .debug_aranges
-                0x0000000000000730       0x98 ./drivers/fsl_flexcomm.o
+                0x0000000000000738       0x98 ./drivers/fsl_flexcomm.o
  .debug_aranges
-                0x00000000000007c8       0x30 ./drivers/fsl_reset.o
+                0x00000000000007d0       0x30 ./drivers/fsl_gpio.o
  .debug_aranges
-                0x00000000000007f8       0xd0 ./drivers/fsl_usart.o
+                0x0000000000000800       0x30 ./drivers/fsl_reset.o
  .debug_aranges
-                0x00000000000008c8       0x28 ./board/board.o
+                0x0000000000000830       0xd0 ./drivers/fsl_usart.o
  .debug_aranges
-                0x00000000000008f0       0x48 ./board/clock_config.o
+                0x0000000000000900       0x28 ./board/board.o
  .debug_aranges
-                0x0000000000000938       0x28 ./board/peripherals.o
+                0x0000000000000928       0x48 ./board/clock_config.o
  .debug_aranges
-                0x0000000000000960       0x38 ./board/pin_mux.o
+                0x0000000000000970       0x30 ./board/peripherals.o
  .debug_aranges
-                0x0000000000000998       0x20 ./amazon-freertos/portable/fsl_tickless_systick.o
+                0x00000000000009a0       0x38 ./board/pin_mux.o
  .debug_aranges
-                0x00000000000009b8       0x50 ./amazon-freertos/portable/heap_4.o
+                0x00000000000009d8       0x20 ./amazon-freertos/portable/fsl_tickless_systick.o
  .debug_aranges
-                0x0000000000000a08       0x78 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x00000000000009f8       0x50 ./amazon-freertos/portable/heap_4.o
  .debug_aranges
-                0x0000000000000a80       0x40 ./amazon-freertos/FreeRTOS/list.o
+                0x0000000000000a48       0x78 ./amazon-freertos/FreeRTOS/portable/port.o
  .debug_aranges
-                0x0000000000000ac0      0x130 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000000ac0       0x40 ./amazon-freertos/FreeRTOS/list.o
  .debug_aranges
-                0x0000000000000bf0      0x1f8 ./amazon-freertos/FreeRTOS/tasks.o
+                0x0000000000000b00      0x130 ./amazon-freertos/FreeRTOS/queue.o
  .debug_aranges
-                0x0000000000000de8       0xd8 ./amazon-freertos/FreeRTOS/timers.o
+                0x0000000000000c30      0x1f8 ./amazon-freertos/FreeRTOS/tasks.o
  .debug_aranges
-                0x0000000000000ec0       0x68 ./CMSIS/system_LPC54628.o
+                0x0000000000000e28       0xd8 ./amazon-freertos/FreeRTOS/timers.o
  .debug_aranges
-                0x0000000000000f28       0x78 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+                0x0000000000000f00       0x68 ./CMSIS/system_LPC54628.o
+ .debug_aranges
+                0x0000000000000f68       0x78 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
 
-.debug_ranges   0x0000000000000000      0xe58
+.debug_ranges   0x0000000000000000      0xe88
  .debug_ranges  0x0000000000000000       0x20 ./utilities/fsl_debug_console.o
  .debug_ranges  0x0000000000000020       0x30 ./utilities/fsl_io.o
  .debug_ranges  0x0000000000000050       0x48 ./utilities/fsl_log.o
  .debug_ranges  0x0000000000000098      0x238 ./startup/startup_LPC54628.o
- .debug_ranges  0x00000000000002d0       0x98 ./source/adc.o
- .debug_ranges  0x0000000000000368       0x10 ./source/main.o
- .debug_ranges  0x0000000000000378       0x10 ./source/semihost_hardfault.o
- .debug_ranges  0x0000000000000388       0x68 ./drivers/fsl_adc.o
- .debug_ranges  0x00000000000003f0      0x2b0 ./drivers/fsl_clock.o
- .debug_ranges  0x00000000000006a0       0x88 ./drivers/fsl_flexcomm.o
- .debug_ranges  0x0000000000000728       0x20 ./drivers/fsl_reset.o
- .debug_ranges  0x0000000000000748       0xc0 ./drivers/fsl_usart.o
- .debug_ranges  0x0000000000000808       0x18 ./board/board.o
- .debug_ranges  0x0000000000000820       0x38 ./board/clock_config.o
- .debug_ranges  0x0000000000000858       0x18 ./board/peripherals.o
- .debug_ranges  0x0000000000000870       0x28 ./board/pin_mux.o
- .debug_ranges  0x0000000000000898       0x10 ./amazon-freertos/portable/fsl_tickless_systick.o
- .debug_ranges  0x00000000000008a8       0x40 ./amazon-freertos/portable/heap_4.o
- .debug_ranges  0x00000000000008e8       0x68 ./amazon-freertos/FreeRTOS/portable/port.o
- .debug_ranges  0x0000000000000950       0x30 ./amazon-freertos/FreeRTOS/list.o
- .debug_ranges  0x0000000000000980      0x120 ./amazon-freertos/FreeRTOS/queue.o
- .debug_ranges  0x0000000000000aa0      0x1e8 ./amazon-freertos/FreeRTOS/tasks.o
- .debug_ranges  0x0000000000000c88       0xc8 ./amazon-freertos/FreeRTOS/timers.o
- .debug_ranges  0x0000000000000d50       0x58 ./CMSIS/system_LPC54628.o
- .debug_ranges  0x0000000000000da8       0xb0 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+ .debug_ranges  0x00000000000002d0       0xa0 ./source/adc.o
+ .debug_ranges  0x0000000000000370       0x10 ./source/main.o
+ .debug_ranges  0x0000000000000380       0x10 ./source/semihost_hardfault.o
+ .debug_ranges  0x0000000000000390       0x68 ./drivers/fsl_adc.o
+ .debug_ranges  0x00000000000003f8      0x2b0 ./drivers/fsl_clock.o
+ .debug_ranges  0x00000000000006a8       0x88 ./drivers/fsl_flexcomm.o
+ .debug_ranges  0x0000000000000730       0x20 ./drivers/fsl_gpio.o
+ .debug_ranges  0x0000000000000750       0x20 ./drivers/fsl_reset.o
+ .debug_ranges  0x0000000000000770       0xc0 ./drivers/fsl_usart.o
+ .debug_ranges  0x0000000000000830       0x18 ./board/board.o
+ .debug_ranges  0x0000000000000848       0x38 ./board/clock_config.o
+ .debug_ranges  0x0000000000000880       0x20 ./board/peripherals.o
+ .debug_ranges  0x00000000000008a0       0x28 ./board/pin_mux.o
+ .debug_ranges  0x00000000000008c8       0x10 ./amazon-freertos/portable/fsl_tickless_systick.o
+ .debug_ranges  0x00000000000008d8       0x40 ./amazon-freertos/portable/heap_4.o
+ .debug_ranges  0x0000000000000918       0x68 ./amazon-freertos/FreeRTOS/portable/port.o
+ .debug_ranges  0x0000000000000980       0x30 ./amazon-freertos/FreeRTOS/list.o
+ .debug_ranges  0x00000000000009b0      0x120 ./amazon-freertos/FreeRTOS/queue.o
+ .debug_ranges  0x0000000000000ad0      0x1e8 ./amazon-freertos/FreeRTOS/tasks.o
+ .debug_ranges  0x0000000000000cb8       0xc8 ./amazon-freertos/FreeRTOS/timers.o
+ .debug_ranges  0x0000000000000d80       0x58 ./CMSIS/system_LPC54628.o
+ .debug_ranges  0x0000000000000dd8       0xb0 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
 
-.debug_line     0x0000000000000000     0x63eb
+.debug_line     0x0000000000000000     0x67fc
  .debug_line    0x0000000000000000      0x1c1 ./utilities/fsl_debug_console.o
  .debug_line    0x00000000000001c1      0x243 ./utilities/fsl_io.o
  .debug_line    0x0000000000000404      0x25d ./utilities/fsl_log.o
  .debug_line    0x0000000000000661      0x493 ./startup/startup_LPC54628.o
- .debug_line    0x0000000000000af4      0x445 ./source/adc.o
- .debug_line    0x0000000000000f39      0x18e ./source/main.o
- .debug_line    0x00000000000010c7       0x54 ./source/semihost_hardfault.o
- .debug_line    0x000000000000111b      0x332 ./drivers/fsl_adc.o
- .debug_line    0x000000000000144d      0xdc2 ./drivers/fsl_clock.o
- .debug_line    0x000000000000220f      0x3b7 ./drivers/fsl_flexcomm.o
- .debug_line    0x00000000000025c6      0x1c0 ./drivers/fsl_reset.o
- .debug_line    0x0000000000002786      0x694 ./drivers/fsl_usart.o
- .debug_line    0x0000000000002e1a      0x1f0 ./board/board.o
- .debug_line    0x000000000000300a      0x21f ./board/clock_config.o
- .debug_line    0x0000000000003229       0x58 ./board/peripherals.o
- .debug_line    0x0000000000003281      0x1fa ./board/pin_mux.o
- .debug_line    0x000000000000347b      0x164 ./amazon-freertos/portable/fsl_tickless_systick.o
- .debug_line    0x00000000000035df      0x28c ./amazon-freertos/portable/heap_4.o
- .debug_line    0x000000000000386b      0x39f ./amazon-freertos/FreeRTOS/portable/port.o
- .debug_line    0x0000000000003c0a      0x20f ./amazon-freertos/FreeRTOS/list.o
- .debug_line    0x0000000000003e19      0xb24 ./amazon-freertos/FreeRTOS/queue.o
- .debug_line    0x000000000000493d      0xeab ./amazon-freertos/FreeRTOS/tasks.o
- .debug_line    0x00000000000057e8      0x582 ./amazon-freertos/FreeRTOS/timers.o
- .debug_line    0x0000000000005d6a      0x26b ./CMSIS/system_LPC54628.o
- .debug_line    0x0000000000005fd5      0x416 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+ .debug_line    0x0000000000000af4      0x4a0 ./source/adc.o
+ .debug_line    0x0000000000000f94      0x1ef ./source/main.o
+ .debug_line    0x0000000000001183       0x54 ./source/semihost_hardfault.o
+ .debug_line    0x00000000000011d7      0x332 ./drivers/fsl_adc.o
+ .debug_line    0x0000000000001509      0xdc2 ./drivers/fsl_clock.o
+ .debug_line    0x00000000000022cb      0x3b7 ./drivers/fsl_flexcomm.o
+ .debug_line    0x0000000000002682      0x1b4 ./drivers/fsl_gpio.o
+ .debug_line    0x0000000000002836      0x1c0 ./drivers/fsl_reset.o
+ .debug_line    0x00000000000029f6      0x694 ./drivers/fsl_usart.o
+ .debug_line    0x000000000000308a      0x1f0 ./board/board.o
+ .debug_line    0x000000000000327a      0x21f ./board/clock_config.o
+ .debug_line    0x0000000000003499      0x1e1 ./board/peripherals.o
+ .debug_line    0x000000000000367a      0x212 ./board/pin_mux.o
+ .debug_line    0x000000000000388c      0x164 ./amazon-freertos/portable/fsl_tickless_systick.o
+ .debug_line    0x00000000000039f0      0x28c ./amazon-freertos/portable/heap_4.o
+ .debug_line    0x0000000000003c7c      0x39f ./amazon-freertos/FreeRTOS/portable/port.o
+ .debug_line    0x000000000000401b      0x20f ./amazon-freertos/FreeRTOS/list.o
+ .debug_line    0x000000000000422a      0xb24 ./amazon-freertos/FreeRTOS/queue.o
+ .debug_line    0x0000000000004d4e      0xeab ./amazon-freertos/FreeRTOS/tasks.o
+ .debug_line    0x0000000000005bf9      0x582 ./amazon-freertos/FreeRTOS/timers.o
+ .debug_line    0x000000000000617b      0x26b ./CMSIS/system_LPC54628.o
+ .debug_line    0x00000000000063e6      0x416 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
 
-.debug_str      0x0000000000000000     0x8507
+.debug_str      0x0000000000000000     0x8622
  .debug_str     0x0000000000000000      0x37d ./utilities/fsl_debug_console.o
                                         0x3ce (size before relaxing)
  .debug_str     0x000000000000037d      0xbf7 ./utilities/fsl_io.o
@@ -2442,47 +2449,49 @@ OUTPUT(Joy.axf elf32-littlearm)
                                         0x395 (size before relaxing)
  .debug_str     0x0000000000000ff9      0x5fd ./startup/startup_LPC54628.o
                                         0x72d (size before relaxing)
- .debug_str     0x00000000000015f6     0x2794 ./source/adc.o
-                                       0x328a (size before relaxing)
- .debug_str     0x0000000000003d8a       0x11 ./source/main.o
-                                        0xd32 (size before relaxing)
- .debug_str     0x0000000000003d9b       0x1f ./source/semihost_hardfault.o
+ .debug_str     0x00000000000015f6     0x2862 ./source/adc.o
+                                       0x3362 (size before relaxing)
+ .debug_str     0x0000000000003e58       0x11 ./source/main.o
+                                        0xe77 (size before relaxing)
+ .debug_str     0x0000000000003e69       0x1f ./source/semihost_hardfault.o
                                         0x145 (size before relaxing)
- .debug_str     0x0000000000003dba      0x133 ./drivers/fsl_adc.o
+ .debug_str     0x0000000000003e88      0x133 ./drivers/fsl_adc.o
                                        0x1ba7 (size before relaxing)
- .debug_str     0x0000000000003eed      0xf51 ./drivers/fsl_clock.o
+ .debug_str     0x0000000000003fbb      0xf51 ./drivers/fsl_clock.o
                                        0x3313 (size before relaxing)
- .debug_str     0x0000000000004e3e      0x2bf ./drivers/fsl_flexcomm.o
+ .debug_str     0x0000000000004f0c      0x2bf ./drivers/fsl_flexcomm.o
                                        0x1cd5 (size before relaxing)
- .debug_str     0x00000000000050fd      0x53e ./drivers/fsl_reset.o
+ .debug_str     0x00000000000051cb       0x41 ./drivers/fsl_gpio.o
+                                       0x16b2 (size before relaxing)
+ .debug_str     0x000000000000520c      0x53e ./drivers/fsl_reset.o
                                         0xdbe (size before relaxing)
- .debug_str     0x000000000000563b      0x5c1 ./drivers/fsl_usart.o
+ .debug_str     0x000000000000574a      0x5c1 ./drivers/fsl_usart.o
                                        0x1884 (size before relaxing)
- .debug_str     0x0000000000005bfc      0x461 ./board/board.o
+ .debug_str     0x0000000000005d0b      0x461 ./board/board.o
                                        0x148f (size before relaxing)
- .debug_str     0x000000000000605d       0x93 ./board/clock_config.o
+ .debug_str     0x000000000000616c       0x93 ./board/clock_config.o
                                        0x1746 (size before relaxing)
- .debug_str     0x00000000000060f0       0x47 ./board/peripherals.o
-                                        0x15b (size before relaxing)
- .debug_str     0x0000000000006137       0x7f ./board/pin_mux.o
+ .debug_str     0x00000000000061ff       0x53 ./board/peripherals.o
+                                        0xadd (size before relaxing)
+ .debug_str     0x0000000000006252       0x7f ./board/pin_mux.o
                                         0xeef (size before relaxing)
- .debug_str     0x00000000000061b6       0x4c ./amazon-freertos/portable/fsl_tickless_systick.o
+ .debug_str     0x00000000000062d1       0x4c ./amazon-freertos/portable/fsl_tickless_systick.o
                                         0x253 (size before relaxing)
- .debug_str     0x0000000000006202      0x202 ./amazon-freertos/portable/heap_4.o
+ .debug_str     0x000000000000631d      0x202 ./amazon-freertos/portable/heap_4.o
                                         0x3fd (size before relaxing)
- .debug_str     0x0000000000006404      0x1f7 ./amazon-freertos/FreeRTOS/portable/port.o
+ .debug_str     0x000000000000651f      0x1f7 ./amazon-freertos/FreeRTOS/portable/port.o
                                         0x469 (size before relaxing)
- .debug_str     0x00000000000065fb      0x135 ./amazon-freertos/FreeRTOS/list.o
+ .debug_str     0x0000000000006716      0x135 ./amazon-freertos/FreeRTOS/list.o
                                         0x349 (size before relaxing)
- .debug_str     0x0000000000006730      0x61b ./amazon-freertos/FreeRTOS/queue.o
+ .debug_str     0x000000000000684b      0x61b ./amazon-freertos/FreeRTOS/queue.o
                                         0x95d (size before relaxing)
- .debug_str     0x0000000000006d4b      0xcb4 ./amazon-freertos/FreeRTOS/tasks.o
+ .debug_str     0x0000000000006e66      0xcb4 ./amazon-freertos/FreeRTOS/tasks.o
                                        0x10f4 (size before relaxing)
- .debug_str     0x00000000000079ff      0x518 ./amazon-freertos/FreeRTOS/timers.o
+ .debug_str     0x0000000000007b1a      0x518 ./amazon-freertos/FreeRTOS/timers.o
                                         0x875 (size before relaxing)
- .debug_str     0x0000000000007f17       0x59 ./CMSIS/system_LPC54628.o
+ .debug_str     0x0000000000008032       0x59 ./CMSIS/system_LPC54628.o
                                         0x991 (size before relaxing)
- .debug_str     0x0000000000007f70      0x597 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+ .debug_str     0x000000000000808b      0x597 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
                                         0xd6b (size before relaxing)
 
 .comment        0x0000000000000000       0xfd
@@ -2497,6 +2506,7 @@ OUTPUT(Joy.axf elf32-littlearm)
  .comment       0x000000000000007f       0x80 ./drivers/fsl_adc.o
  .comment       0x000000000000007f       0x80 ./drivers/fsl_clock.o
  .comment       0x000000000000007f       0x80 ./drivers/fsl_flexcomm.o
+ .comment       0x000000000000007f       0x80 ./drivers/fsl_gpio.o
  .comment       0x000000000000007f       0x80 ./drivers/fsl_reset.o
  .comment       0x000000000000007f       0x80 ./drivers/fsl_usart.o
  .comment       0x000000000000007f       0x80 ./board/board.o
@@ -2562,130 +2572,133 @@ OUTPUT(Joy.axf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000201       0x39 ./drivers/fsl_flexcomm.o
  .ARM.attributes
-                0x000000000000023a       0x39 ./drivers/fsl_reset.o
+                0x000000000000023a       0x39 ./drivers/fsl_gpio.o
  .ARM.attributes
-                0x0000000000000273       0x39 ./drivers/fsl_usart.o
+                0x0000000000000273       0x39 ./drivers/fsl_reset.o
  .ARM.attributes
-                0x00000000000002ac       0x39 ./board/board.o
+                0x00000000000002ac       0x39 ./drivers/fsl_usart.o
  .ARM.attributes
-                0x00000000000002e5       0x39 ./board/clock_config.o
+                0x00000000000002e5       0x39 ./board/board.o
  .ARM.attributes
-                0x000000000000031e       0x39 ./board/peripherals.o
+                0x000000000000031e       0x39 ./board/clock_config.o
  .ARM.attributes
-                0x0000000000000357       0x39 ./board/pin_mux.o
+                0x0000000000000357       0x39 ./board/peripherals.o
  .ARM.attributes
-                0x0000000000000390       0x39 ./amazon-freertos/portable/fsl_tickless_systick.o
+                0x0000000000000390       0x39 ./board/pin_mux.o
  .ARM.attributes
-                0x00000000000003c9       0x39 ./amazon-freertos/portable/heap_4.o
+                0x00000000000003c9       0x39 ./amazon-freertos/portable/fsl_tickless_systick.o
  .ARM.attributes
-                0x0000000000000402       0x39 ./amazon-freertos/FreeRTOS/portable/port.o
+                0x0000000000000402       0x39 ./amazon-freertos/portable/heap_4.o
  .ARM.attributes
-                0x000000000000043b       0x39 ./amazon-freertos/FreeRTOS/list.o
+                0x000000000000043b       0x39 ./amazon-freertos/FreeRTOS/portable/port.o
  .ARM.attributes
-                0x0000000000000474       0x39 ./amazon-freertos/FreeRTOS/queue.o
+                0x0000000000000474       0x39 ./amazon-freertos/FreeRTOS/list.o
  .ARM.attributes
-                0x00000000000004ad       0x39 ./amazon-freertos/FreeRTOS/tasks.o
+                0x00000000000004ad       0x39 ./amazon-freertos/FreeRTOS/queue.o
  .ARM.attributes
-                0x00000000000004e6       0x39 ./amazon-freertos/FreeRTOS/timers.o
+                0x00000000000004e6       0x39 ./amazon-freertos/FreeRTOS/tasks.o
  .ARM.attributes
-                0x000000000000051f       0x39 ./CMSIS/system_LPC54628.o
+                0x000000000000051f       0x39 ./amazon-freertos/FreeRTOS/timers.o
  .ARM.attributes
-                0x0000000000000558       0x39 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+                0x0000000000000558       0x39 ./CMSIS/system_LPC54628.o
  .ARM.attributes
-                0x0000000000000591       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr__main.o)
+                0x0000000000000591       0x39 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
  .ARM.attributes
-                0x00000000000005ca       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr_assert.o)
+                0x00000000000005ca       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr__main.o)
  .ARM.attributes
-                0x0000000000000603       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__ciob.o)
+                0x0000000000000603       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(_cr_assert.o)
  .ARM.attributes
-                0x000000000000063c       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_appexit.o)
+                0x000000000000063c       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__ciob.o)
  .ARM.attributes
-                0x0000000000000661       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(memcpy.o)
+                0x0000000000000675       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_appexit.o)
  .ARM.attributes
-                0x000000000000069a       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(memset.o)
+                0x000000000000069a       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(memcpy.o)
  .ARM.attributes
-                0x00000000000006d3       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_deferredlazyseek.o)
+                0x00000000000006d3       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(memset.o)
  .ARM.attributes
-                0x000000000000070c       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_fflush.o)
+                0x000000000000070c       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_deferredlazyseek.o)
  .ARM.attributes
-                0x0000000000000745       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_writebuf.o)
+                0x0000000000000745       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_fflush.o)
  .ARM.attributes
-                0x000000000000077e       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
+                0x000000000000077e       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_writebuf.o)
  .ARM.attributes
-                0x00000000000007b7       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fputs.o)
+                0x00000000000007b7       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(alloc.o)
  .ARM.attributes
-                0x00000000000007f0       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fseek.o)
+                0x00000000000007f0       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fputs.o)
  .ARM.attributes
-                0x0000000000000829       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(ftell.o)
+                0x0000000000000829       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fseek.o)
  .ARM.attributes
-                0x0000000000000862       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(initio.o)
+                0x0000000000000862       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(ftell.o)
  .ARM.attributes
-                0x000000000000089b       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
+                0x000000000000089b       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(initio.o)
  .ARM.attributes
-                0x00000000000008d4       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(setvbuf.o)
+                0x00000000000008d4       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(printf.o)
  .ARM.attributes
-                0x000000000000090d       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(strlen.o)
+                0x000000000000090d       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(setvbuf.o)
  .ARM.attributes
-                0x0000000000000946       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(__init_alloc.o)
+                0x0000000000000946       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(strlen.o)
  .ARM.attributes
-                0x000000000000097f       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_cr_sbrk.o)
+                0x000000000000097f       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(__init_alloc.o)
  .ARM.attributes
-                0x00000000000009b8       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_fdopen.o)
+                0x00000000000009b8       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_cr_sbrk.o)
  .ARM.attributes
-                0x00000000000009f1       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(errno.o)
+                0x00000000000009f1       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_fdopen.o)
  .ARM.attributes
-                0x0000000000000a2a       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fclose.o)
+                0x0000000000000a2a       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(errno.o)
  .ARM.attributes
-                0x0000000000000a63       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fflush.o)
+                0x0000000000000a63       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fclose.o)
  .ARM.attributes
-                0x0000000000000a9c       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(remove.o)
+                0x0000000000000a9c       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(fflush.o)
  .ARM.attributes
-                0x0000000000000ad5       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_cr_check_heap.o)
+                0x0000000000000ad5       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(remove.o)
  .ARM.attributes
-                0x0000000000000b0e       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_do_fflush.o)
+                0x0000000000000b0e       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_cr_check_heap.o)
  .ARM.attributes
-                0x0000000000000b47       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/libcr_eabihelpers.a(memcpy.o)
+                0x0000000000000b47       0x39 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_c.a(_do_fflush.o)
  .ARM.attributes
-                0x0000000000000b6c       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_close.o)
+                0x0000000000000b80       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/libcr_eabihelpers.a(memcpy.o)
  .ARM.attributes
-                0x0000000000000b91       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_flen.o)
+                0x0000000000000ba5       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_close.o)
  .ARM.attributes
-                0x0000000000000bb6       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_istty.o)
+                0x0000000000000bca       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_flen.o)
  .ARM.attributes
-                0x0000000000000bdb       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_remove.o)
+                0x0000000000000bef       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_istty.o)
  .ARM.attributes
-                0x0000000000000c00       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_seek.o)
+                0x0000000000000c14       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_remove.o)
  .ARM.attributes
-                0x0000000000000c25       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_tmpnam.o)
+                0x0000000000000c39       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_seek.o)
  .ARM.attributes
-                0x0000000000000c4a       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_write.o)
+                0x0000000000000c5e       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_tmpnam.o)
+ .ARM.attributes
+                0x0000000000000c83       0x25 /usr/local/mcuxpressoide-10.1.1_606/ide/tools/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libcr_semihost_nf.a(__sys_write.o)
 
-.debug_frame    0x0000000000000000     0x3910
+.debug_frame    0x0000000000000000     0x39d4
  .debug_frame   0x0000000000000000       0x6c ./utilities/fsl_debug_console.o
  .debug_frame   0x000000000000006c       0xb8 ./utilities/fsl_io.o
  .debug_frame   0x0000000000000124      0x120 ./utilities/fsl_log.o
  .debug_frame   0x0000000000000244      0x64c ./startup/startup_LPC54628.o
- .debug_frame   0x0000000000000890      0x2a8 ./source/adc.o
- .debug_frame   0x0000000000000b38       0x2c ./source/main.o
- .debug_frame   0x0000000000000b64       0x20 ./source/semihost_hardfault.o
- .debug_frame   0x0000000000000b84      0x1d0 ./drivers/fsl_adc.o
- .debug_frame   0x0000000000000d54      0xc3c ./drivers/fsl_clock.o
- .debug_frame   0x0000000000001990      0x208 ./drivers/fsl_flexcomm.o
- .debug_frame   0x0000000000001b98       0x7c ./drivers/fsl_reset.o
- .debug_frame   0x0000000000001c14      0x360 ./drivers/fsl_usart.o
- .debug_frame   0x0000000000001f74       0x58 ./board/board.o
- .debug_frame   0x0000000000001fcc       0xd0 ./board/clock_config.o
- .debug_frame   0x000000000000209c       0x4c ./board/peripherals.o
- .debug_frame   0x00000000000020e8       0xa0 ./board/pin_mux.o
- .debug_frame   0x0000000000002188       0x30 ./amazon-freertos/portable/fsl_tickless_systick.o
- .debug_frame   0x00000000000021b8      0x108 ./amazon-freertos/portable/heap_4.o
- .debug_frame   0x00000000000022c0      0x188 ./amazon-freertos/FreeRTOS/portable/port.o
- .debug_frame   0x0000000000002448       0xd8 ./amazon-freertos/FreeRTOS/list.o
- .debug_frame   0x0000000000002520      0x530 ./amazon-freertos/FreeRTOS/queue.o
- .debug_frame   0x0000000000002a50      0x8a4 ./amazon-freertos/FreeRTOS/tasks.o
- .debug_frame   0x00000000000032f4      0x388 ./amazon-freertos/FreeRTOS/timers.o
- .debug_frame   0x000000000000367c      0x184 ./CMSIS/system_LPC54628.o
- .debug_frame   0x0000000000003800      0x110 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+ .debug_frame   0x0000000000000890      0x2d0 ./source/adc.o
+ .debug_frame   0x0000000000000b60       0x2c ./source/main.o
+ .debug_frame   0x0000000000000b8c       0x20 ./source/semihost_hardfault.o
+ .debug_frame   0x0000000000000bac      0x1d0 ./drivers/fsl_adc.o
+ .debug_frame   0x0000000000000d7c      0xc3c ./drivers/fsl_clock.o
+ .debug_frame   0x00000000000019b8      0x208 ./drivers/fsl_flexcomm.o
+ .debug_frame   0x0000000000001bc0       0x84 ./drivers/fsl_gpio.o
+ .debug_frame   0x0000000000001c44       0x7c ./drivers/fsl_reset.o
+ .debug_frame   0x0000000000001cc0      0x360 ./drivers/fsl_usart.o
+ .debug_frame   0x0000000000002020       0x58 ./board/board.o
+ .debug_frame   0x0000000000002078       0xd0 ./board/clock_config.o
+ .debug_frame   0x0000000000002148       0x64 ./board/peripherals.o
+ .debug_frame   0x00000000000021ac       0xa0 ./board/pin_mux.o
+ .debug_frame   0x000000000000224c       0x30 ./amazon-freertos/portable/fsl_tickless_systick.o
+ .debug_frame   0x000000000000227c      0x108 ./amazon-freertos/portable/heap_4.o
+ .debug_frame   0x0000000000002384      0x188 ./amazon-freertos/FreeRTOS/portable/port.o
+ .debug_frame   0x000000000000250c       0xd8 ./amazon-freertos/FreeRTOS/list.o
+ .debug_frame   0x00000000000025e4      0x530 ./amazon-freertos/FreeRTOS/queue.o
+ .debug_frame   0x0000000000002b14      0x8a4 ./amazon-freertos/FreeRTOS/tasks.o
+ .debug_frame   0x00000000000033b8      0x388 ./amazon-freertos/FreeRTOS/timers.o
+ .debug_frame   0x0000000000003740      0x184 ./CMSIS/system_LPC54628.o
+ .debug_frame   0x00000000000038c4      0x110 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
 
 .debug_loc      0x0000000000000000      0x4bb
  .debug_loc     0x0000000000000000      0x4bb /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)

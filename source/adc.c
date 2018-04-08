@@ -3,6 +3,8 @@
  *
  *  Created on: Apr 8, 2018
  *      Author: ben
+ *
+ * Note: Dead from 2000-2200
  */
 
 #include "adc.h"
@@ -16,12 +18,12 @@ void ADC_Read_A(void *pvParameters) {
 
 	for (;;) {
 		xSemaphoreTake(xSequenceASemaphore, portMAX_DELAY);
-
+		GPIO_PortToggle(GPIO, BOARD_INITPINS_LED1_PORT, 1 << BOARD_INITPINS_LED1_PIN);
 		ADC_GetChannelConversionResult(ADC0, 4U, &yaw);
-		PRINTF("YAW = %d\t", yaw.result);
+		//PRINTF("YAW = %d\t", yaw.result);
 
 		ADC_GetChannelConversionResult(ADC0, 5U, &power);
-		PRINTF("POW = %d\t", power.result);
+		//PRINTF("POW = %d\t", power.result);
 
 		ADC_DoSoftwareTriggerConvSeqB(ADC0);
 	}
@@ -33,12 +35,12 @@ void ADC_Read_B(void *pvParameters) {
 
 	for (;;) {
 		xSemaphoreTake(xSequenceBSemaphore, portMAX_DELAY);
-
+		GPIO_PortToggle(GPIO, BOARD_INITPINS_LED2_PORT, 1 << BOARD_INITPINS_LED2_PIN);
 		ADC_GetChannelConversionResult(ADC0, 6U, &pitch);
-		PRINTF("PITCH = %d\t", pitch.result);
+		//PRINTF("PITCH = %d\t", pitch.result);
 
 		ADC_GetChannelConversionResult(ADC0, 7U, &roll);
-		PRINTF("ROLL = %d\r\n", roll.result);
+		//PRINTF("ROLL = %d\r\n", roll.result);
 
 		ADC_DoSoftwareTriggerConvSeqA(ADC0);
 	}

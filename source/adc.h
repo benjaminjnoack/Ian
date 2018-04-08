@@ -16,6 +16,8 @@
 #include "fsl_clock.h"
 #include "fsl_power.h"
 #include "peripherals.h"
+#include "fsl_gpio.h"
+#include "pin_mux.h"
 
 void ADC_Read_A(void *pvParameters);
 void ADC_Read_B(void *pvParameters);
