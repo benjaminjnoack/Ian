@@ -12,7 +12,18 @@ utilities/fsl_log.o utilities/fsl_log.d: ../utilities/fsl_log.c \
  /home/ben/projects/mcuxpresso_workspace/Joy/CMSIS/LPC54628_features.h \
  /home/ben/projects/mcuxpresso_workspace/Joy/drivers/fsl_clock.h \
  /home/ben/projects/mcuxpresso_workspace/Joy/drivers/fsl_reset.h \
- ../utilities/fsl_debug_console_conf.h ../utilities/fsl_io.h
+ ../utilities/fsl_debug_console_conf.h ../utilities/fsl_io.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/FreeRTOS.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/source/FreeRTOSConfig.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/projdefs.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/portable.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/deprecated_definitions.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/FreeRTOS/portable/portmacro.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/mpu_wrappers.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/task.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/list.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/semphr.h \
+ /home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/queue.h
 
 ../utilities/fsl_log.h:
 
@@ -43,3 +54,25 @@ utilities/fsl_log.o utilities/fsl_log.d: ../utilities/fsl_log.c \
 ../utilities/fsl_debug_console_conf.h:
 
 ../utilities/fsl_io.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/FreeRTOS.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/source/FreeRTOSConfig.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/projdefs.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/portable.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/deprecated_definitions.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/FreeRTOS/portable/portmacro.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/mpu_wrappers.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/task.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/list.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/semphr.h:
+
+/home/ben/projects/mcuxpresso_workspace/Joy/amazon-freertos/include/queue.h:

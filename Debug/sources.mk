@@ -15,6 +15,9 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 CMSIS \
+amazon-freertos/FreeRTOS \
+amazon-freertos/FreeRTOS/portable \
+amazon-freertos/portable \
 board \
 drivers \
 source \

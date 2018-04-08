@@ -59,7 +59,7 @@
 #define configENABLE_BACKWARD_COMPATIBILITY     1
 #define configNUM_THREAD_LOCAL_STORAGE_POINTERS 5
 #define configUSE_APPLICATION_TASK_TAG          0
-
+#define configRECORD_STACK_HIGH_ADDRESS			1
 /* Memory allocation related definitions. */
 #define configSUPPORT_STATIC_ALLOCATION         0
 #define configSUPPORT_DYNAMIC_ALLOCATION        1
@@ -112,7 +112,7 @@
 /* __BVIC_PRIO_BITS will be specified when CMSIS is being used. */
 #define configPRIO_BITS __NVIC_PRIO_BITS
 #else
-#define configPRIO_BITS 4 /* 15 priority levels */
+#define configPRIO_BITS 3 /* 8 priority levels */
 #endif
 
 /* The lowest interrupt priority that can be used in a call to a "set priority"

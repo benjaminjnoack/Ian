@@ -6,34 +6,9 @@
 #ifndef _PERIPHERALS_H_
 #define _PERIPHERALS_H_
 
-/***********************************************************************************************************************
- * Included files
- **********************************************************************************************************************/
-#include "fsl_common.h"
-#include "fsl_adc.h"
-
 #if defined(__cplusplus)
 extern "C" {
 #endif /* __cplusplus*/
-
-/***********************************************************************************************************************
- * Definitions
- **********************************************************************************************************************/
-/* Definitions for BOARD_InitPeripherals functional group */
-/* Alias for ADC0 peripheral */
-#define ADC_1_PERIPHERAL ADC0
-/* ADC_1 interrupt vector ID (number). */
-#define ADC_1_IRQN ADC0_SEQA_IRQn
-/* ADC_1 interrupt vector priority. */
-#define ADC_1_IRQ_PRIORITY 4
-/* ADC_1 interrupt handler identifier. */
-#define ADC_1_IRQHANDLER ADC0_SEQA_IRQHandler
-
-/***********************************************************************************************************************
- * Global variables
- **********************************************************************************************************************/
-extern const adc_config_t ADC_1configStruct;
-extern const adc_conv_seq_config_t ADC_1ConvSeqAConfigStruct;
 
 /***********************************************************************************************************************
  * Initialization functions

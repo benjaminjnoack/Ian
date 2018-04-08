@@ -13,6 +13,9 @@ RM := rm -rf
 -include source/subdir.mk
 -include drivers/subdir.mk
 -include board/subdir.mk
+-include amazon-freertos/portable/subdir.mk
+-include amazon-freertos/FreeRTOS/portable/subdir.mk
+-include amazon-freertos/FreeRTOS/subdir.mk
 -include CMSIS/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -34,7 +37,7 @@ all: Joy.axf
 Joy.axf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -L"/home/ben/projects/mcuxpresso_workspace/Joy/libs" -Xlinker -print-memory-usage -Xlinker --gc-sections -Xlinker -Map="Joy.map" -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T lpcxpresso54628_driver_examples_adc_lpc_adc_interrupt_Debug.ld -o "Joy.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -L"/home/ben/projects/mcuxpresso_workspace/Joy/libs" -Xlinker -print-memory-usage -Xlinker --gc-sections -Xlinker -Map="Joy.map" -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T Joy_Debug.ld -o "Joy.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build

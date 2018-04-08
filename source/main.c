@@ -32,6 +32,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/* FreeRTOS kernel includes. */
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "timers.h"
+#include "semphr.h"
+
 #include "fsl_device_registers.h"
 #include "fsl_debug_console.h"
 #include "board.h"
@@ -40,13 +47,11 @@
 #include "fsl_power.h"
 #include "peripherals.h"
 #include "pin_mux.h"
+#include "adc.h"
 #include <stdbool.h>
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-static adc_result_info_t gAdcResultInfoStruct;
-adc_result_info_t *volatile gAdcResultInfoPtr = &gAdcResultInfoStruct;
-volatile bool gAdcConvSeqAIntFlag;
 
 /*******************************************************************************
  * Prototypes
@@ -55,26 +60,6 @@ volatile bool gAdcConvSeqAIntFlag;
 /*******************************************************************************
  * Code
  ******************************************************************************/
-
-static void ADC_ClockPower_Configuration(void)
-{
-    /* SYSCON power. */
-    POWER_DisablePD(kPDRUNCFG_PD_VDDA);    /* Power on VDDA. */
-    POWER_DisablePD(kPDRUNCFG_PD_ADC0);    /* Power on the ADC converter. */
-    POWER_DisablePD(kPDRUNCFG_PD_VD2_ANA); /* Power on the analog power supply. */
-    POWER_DisablePD(kPDRUNCFG_PD_VREFP);   /* Power on the reference voltage source. */
-    POWER_DisablePD(kPDRUNCFG_PD_TS);      /* Power on the temperature sensor. */
-
-    /* Enable the clock. */
-    CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);
-
-    /* CLOCK_AttachClk(kMAIN_CLK_to_ADC_CLK); */
-    /* Sync clock source is not used. Using sync clock source and would be divided by 2.
-     * The divider would be set when configuring the converter.
-     */
-
-    CLOCK_EnableClock(kCLOCK_Adc0); /* SYSCON->AHBCLKCTRL[0] |= SYSCON_AHBCLKCTRL_ADC0_MASK; */
-}
 
 /*!
  * @brief Main function
@@ -90,45 +75,12 @@ int main(void)
     BOARD_InitDebugConsole();
 
     /* Enable the power and clock for ADC. */
-    ADC_ClockPower_Configuration();
     BOARD_InitBootPeripherals();
+    Joy_ADC_Init();
     PRINTF("Configuration Done.\r\n");
 
-    while (1)
-    {
-        GETCHAR();
-        gAdcConvSeqAIntFlag = false;
-        ADC_DoSoftwareTriggerConvSeqA(ADC_1_PERIPHERAL);
+	vTaskStartScheduler();
 
-        while (!gAdcConvSeqAIntFlag)
-        {
-        }
-        PRINTF("gAdcResultInfoStruct.result        = %d\r\n", gAdcResultInfoStruct.result);
-        PRINTF("gAdcResultInfoStruct.channelNumber = %d\r\n", gAdcResultInfoStruct.channelNumber);
-        PRINTF("gAdcResultInfoStruct.overrunFlag   = %d\r\n", gAdcResultInfoStruct.overrunFlag ? 1U : 0U);
-        PRINTF("\r\n");
-    }
-}
-
-/*
- * ISR for ADC conversion sequence A or B done.
- */
-void ADC_1_IRQHANDLER(void)
-{
-	static uint32_t flags = 0;
-	flags = ADC_GetStatusFlags(ADC_1_PERIPHERAL);
-
-    if (kADC_ConvSeqAInterruptFlag == (kADC_ConvSeqAInterruptFlag & flags))
-    {
-        ADC_ClearStatusFlags(ADC_1_PERIPHERAL, kADC_ConvSeqAInterruptFlag);
-        //TODO release A sequence semaphore.
-    } else if (kADC_ConvSeqBInterruptFlag == (kADC_ConvSeqBInterruptFlag & flags)) {
-    	ADC_ClearStatusFlags(ADC_1_PERIPHERAL, kADC_ConvSeqBInterruptFlag);
-    	//TODO
-    }
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
-#if defined __CORTEX_M && (__CORTEX_M == 4U)
-    __DSB();
-#endif
+	for (;;)
+		__asm("NOP");
 }
