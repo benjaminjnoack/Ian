@@ -15,10 +15,15 @@ SemaphoreHandle_t xSequenceBSemaphore = NULL;
 void ADC_Read_A(void *pvParameters) {
 	static adc_result_info_t yaw;
 	static adc_result_info_t power;
+	static uint8_t reads = 0;
 
 	for (;;) {
 		xSemaphoreTake(xSequenceASemaphore, portMAX_DELAY);
-		GPIO_PortToggle(GPIO, BOARD_INITPINS_LED1_PORT, 1 << BOARD_INITPINS_LED1_PIN);
+		reads++;
+		if (reads == 0) {
+			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED1_PORT, 1 << BOARD_INITPINS_LED1_PIN);
+		}
+
 		ADC_GetChannelConversionResult(ADC0, 4U, &yaw);
 		//PRINTF("YAW = %d\t", yaw.result);
 
@@ -32,10 +37,14 @@ void ADC_Read_A(void *pvParameters) {
 void ADC_Read_B(void *pvParameters) {
 	static adc_result_info_t pitch;
 	static adc_result_info_t roll;
-
+	static uint8_t reads = 0;
 	for (;;) {
 		xSemaphoreTake(xSequenceBSemaphore, portMAX_DELAY);
-		GPIO_PortToggle(GPIO, BOARD_INITPINS_LED2_PORT, 1 << BOARD_INITPINS_LED2_PIN);
+		reads++;
+		if (reads == 0) {
+			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED2_PORT, 1 << BOARD_INITPINS_LED2_PIN);
+		}
+
 		ADC_GetChannelConversionResult(ADC0, 6U, &pitch);
 		//PRINTF("PITCH = %d\t", pitch.result);
 
