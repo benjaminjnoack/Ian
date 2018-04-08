@@ -11,46 +11,34 @@ SemaphoreHandle_t xSequenceASemaphore = NULL;
 SemaphoreHandle_t xSequenceBSemaphore = NULL;
 
 void ADC_Read_A(void *pvParameters) {
-	static adc_result_info_t chan4;
-	static adc_result_info_t chan5;
+	static adc_result_info_t yaw;
+	static adc_result_info_t power;
 
 	for (;;) {
 		xSemaphoreTake(xSequenceASemaphore, portMAX_DELAY);
 
-		ADC_GetChannelConversionResult(ADC0, 4U, &chan4);
-		PRINTF("gAdcResultInfoStruct.result        = %d\r\n", chan4.result);
-		PRINTF("gAdcResultInfoStruct.channelNumber = %d\r\n", chan4.channelNumber);
-		PRINTF("gAdcResultInfoStruct.overrunFlag   = %d\r\n", chan4.overrunFlag ? 1U : 0U);
-		PRINTF("\r\n");
+		ADC_GetChannelConversionResult(ADC0, 4U, &yaw);
+		PRINTF("YAW = %d\t", yaw.result);
 
-		ADC_GetChannelConversionResult(ADC0, 5U, &chan5);
-		PRINTF("gAdcResultInfoStruct.result        = %d\r\n", chan5.result);
-		PRINTF("gAdcResultInfoStruct.channelNumber = %d\r\n", chan5.channelNumber);
-		PRINTF("gAdcResultInfoStruct.overrunFlag   = %d\r\n", chan5.overrunFlag ? 1U : 0U);
-		PRINTF("\r\n");
+		ADC_GetChannelConversionResult(ADC0, 5U, &power);
+		PRINTF("POW = %d\t", power.result);
 
 		ADC_DoSoftwareTriggerConvSeqB(ADC0);
 	}
 }
 
 void ADC_Read_B(void *pvParameters) {
-	static adc_result_info_t chan6;
-	static adc_result_info_t chan7;
+	static adc_result_info_t pitch;
+	static adc_result_info_t roll;
 
 	for (;;) {
 		xSemaphoreTake(xSequenceBSemaphore, portMAX_DELAY);
 
-		ADC_GetChannelConversionResult(ADC0, 6U, &chan6);
-		PRINTF("gAdcResultInfoStruct.result        = %d\r\n", chan6.result);
-		PRINTF("gAdcResultInfoStruct.channelNumber = %d\r\n", chan6.channelNumber);
-		PRINTF("gAdcResultInfoStruct.overrunFlag   = %d\r\n", chan6.overrunFlag ? 1U : 0U);
-		PRINTF("\r\n");
+		ADC_GetChannelConversionResult(ADC0, 6U, &pitch);
+		PRINTF("PITCH = %d\t", pitch.result);
 
-		ADC_GetChannelConversionResult(ADC0, 7U, &chan7);
-		PRINTF("gAdcResultInfoStruct.result        = %d\r\n", chan7.result);
-		PRINTF("gAdcResultInfoStruct.channelNumber = %d\r\n", chan7.channelNumber);
-		PRINTF("gAdcResultInfoStruct.overrunFlag   = %d\r\n", chan7.overrunFlag ? 1U : 0U);
-		PRINTF("\r\n");
+		ADC_GetChannelConversionResult(ADC0, 7U, &roll);
+		PRINTF("ROLL = %d\r\n", roll.result);
 
 		ADC_DoSoftwareTriggerConvSeqA(ADC0);
 	}
