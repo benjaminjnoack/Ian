@@ -51,6 +51,7 @@ BOARD_InitPins:
   - {pin_num: C3, peripheral: GPIO, signal: 'PIO2, 2', pin_signal: PIO2_2/ENET_CRS/FC3_SSEL3/SCT0_OUT6/CTIMER1_MAT1, direction: OUTPUT}
   - {pin_num: K5, peripheral: FLEXCOMM4, signal: RXD_SDA_MOSI, pin_signal: PIO3_26/SCT0_OUT0/FC4_RXD_SDA_MOSI/EMC_A(15)}
   - {pin_num: P14, peripheral: FLEXCOMM4, signal: TXD_SCL_MISO, pin_signal: PIO3_27/SCT0_OUT1/FC4_TXD_SCL_MISO/EMC_A(16)}
+  - {pin_num: N2, peripheral: SYSCON, signal: CLKOUT, pin_signal: PIO3_20/FC9_SCK/SD_CARD_INT_N/CLKOUT/SCT0_OUT7}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -160,6 +161,16 @@ void BOARD_InitPins(void)
 
                          /* Select Analog/Digital mode.: Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO314_DIGIMODE_DIGITAL));
+
+    IOCON->PIO[3][20] = ((IOCON->PIO[3][20] &
+                          /* Mask bits to zero which are setting */
+                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
+
+                         /* Selects pin function.: PORT320 (pin N2) is configured as CLKOUT */
+                         | IOCON_PIO_FUNC(PIO320_FUNC_ALT3)
+
+                         /* Select Analog/Digital mode.: Digital mode. */
+                         | IOCON_PIO_DIGIMODE(PIO320_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][26] = ((IOCON->PIO[3][26] &
                           /* Mask bits to zero which are setting */

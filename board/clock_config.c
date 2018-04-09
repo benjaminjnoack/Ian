@@ -47,6 +47,7 @@ extern uint32_t SystemCoreClock;
  ******************************************************************************/
 void BOARD_InitBootClocks(void)
 {
+    BOARD_BootClockPLL220M();
 }
 
 /*******************************************************************************
@@ -249,5 +250,80 @@ void BOARD_BootClockPLL180M(void)
     CLOCK_AttachClk(kFRO12M_to_FLEXCOMM4);                  /*!< Switch FLEXCOMM4 to FRO12M */
     /* Set SystemCoreClock variable. */
     SystemCoreClock = BOARD_BOOTCLOCKPLL180M_CORE_CLOCK;
+}
+
+/*******************************************************************************
+ ******************** Configuration BOARD_BootClockPLL220M *********************
+ ******************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+!!Configuration
+name: BOARD_BootClockPLL220M
+called_from_default_init: true
+outputs:
+- {id: ADC_clock.outFreq, value: 220 MHz}
+- {id: CLKOUT_clock.outFreq, value: 22 MHz}
+- {id: FRO12M_clock.outFreq, value: 12 MHz}
+- {id: FROHF_clock.outFreq, value: 48 MHz}
+- {id: FXCOM4_clock.outFreq, value: 12 MHz}
+- {id: MAIN_clock.outFreq, value: 220 MHz}
+- {id: SYSPLL_clock.outFreq, value: 220 MHz}
+- {id: System_clock.outFreq, value: 220 MHz, locked: true, accuracy: '0.001'}
+settings:
+- {id: SYSCON.ADCCLKDIV.scale, value: '1', locked: true}
+- {id: SYSCON.ADCCLKSEL.sel, value: SYSCON.PLL_BYPASS}
+- {id: SYSCON.CLKOUTDIV.scale, value: '10', locked: true}
+- {id: SYSCON.CLKOUTSELA.sel, value: SYSCON.PLL_BYPASS}
+- {id: SYSCON.FXCLKSEL4.sel, value: SYSCON.fro_12m}
+- {id: SYSCON.MAINCLKSELB.sel, value: SYSCON.PLL_BYPASS}
+- {id: SYSCON.M_MULT.scale, value: '110'}
+- {id: SYSCON.PDEC.scale, value: '2', locked: true}
+- {id: SYSCON_PDRUNCFG0_PDEN_SYS_PLL_CFG, value: Power_up}
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+
+/*******************************************************************************
+ * Variables for BOARD_BootClockPLL220M configuration
+ ******************************************************************************/
+/*******************************************************************************
+ * Code for BOARD_BootClockPLL220M configuration
+ ******************************************************************************/
+void BOARD_BootClockPLL220M(void)
+{
+    /*!< Set up the clock sources */
+    /*!< Set up FRO */
+    POWER_DisablePD(kPDRUNCFG_PD_FRO_EN);                   /*!< Ensure FRO is on  */
+    CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);                  /*!< Switch to FRO 12MHz first to ensure we can change voltage without accidentally
+                                                                being below the voltage for current speed */
+    POWER_SetVoltageForFreq(220000000U);             /*!< Set voltage for the one of the fastest clock outputs: System clock output */
+    CLOCK_SetFLASHAccessCyclesForFreq(220000000U);    /*!< Set FLASH wait states for core */
+
+    /*!< Set up SYS PLL */
+    const pll_setup_t pllSetup = {
+        .pllctrl =  SYSCON_SYSPLLCTRL_SELI(34U) | SYSCON_SYSPLLCTRL_SELP(31U) | SYSCON_SYSPLLCTRL_SELR(0U),
+        .pllmdec = (SYSCON_SYSPLLMDEC_MDEC(13243U)),
+        .pllndec = (SYSCON_SYSPLLNDEC_NDEC(1U)),
+        .pllpdec = (SYSCON_SYSPLLPDEC_PDEC(98U)),
+        .pllRate = 220000000U,
+        .flags =  PLL_SETUPFLAG_WAITLOCK | PLL_SETUPFLAG_POWERUP
+    };
+    CLOCK_AttachClk(kFRO12M_to_SYS_PLL);        /*!< Set sys pll clock source*/
+    CLOCK_SetPLLFreq(&pllSetup);                 /*!< Configure PLL to the desired value */
+
+    /*!< Set up dividers */
+    CLOCK_SetClkDiv(kCLOCK_DivAhbClk, 1U, false);                  /*!< Reset divider counter and set divider to value 1 */
+    CLOCK_SetClkDiv(kCLOCK_DivClkOut, 0U, true);                  /*!< Reset CLKOUTDIV divider counter and halt it */
+    CLOCK_SetClkDiv(kCLOCK_DivClkOut, 10U, false);                  /*!< Set CLKOUTDIV divider to value 10 */
+    CLOCK_SetClkDiv(kCLOCK_DivAdcAsyncClk, 0U, true);                  /*!< Reset ADCCLKDIV divider counter and halt it */
+    CLOCK_SetClkDiv(kCLOCK_DivAdcAsyncClk, 1U, false);                  /*!< Set ADCCLKDIV divider to value 1 */
+
+    /*!< Set up clock selectors - Attach clocks to the peripheries */
+    CLOCK_AttachClk(kSYS_PLL_to_MAIN_CLK);                  /*!< Switch MAIN_CLK to SYS_PLL */
+    CLOCK_AttachClk(kSYS_PLL_to_ADC_CLK);                  /*!< Switch ADC_CLK to SYS_PLL */
+    CLOCK_AttachClk(kFRO12M_to_FLEXCOMM4);                  /*!< Switch FLEXCOMM4 to FRO12M */
+    CLOCK_AttachClk(kSYS_PLL_to_CLKOUT);                  /*!< Switch CLKOUT to SYS_PLL */
+    SYSCON->MAINCLKSELA = ((SYSCON->MAINCLKSELA & ~SYSCON_MAINCLKSELA_SEL_MASK) | SYSCON_MAINCLKSELA_SEL(0U)); /*!< Switch MAINCLKSELA to FRO12M even it is not used for MAINCLKSELB */
+    /* Set SystemCoreClock variable. */
+    SystemCoreClock = BOARD_BOOTCLOCKPLL220M_CORE_CLOCK;
 }
 

@@ -37,6 +37,11 @@
                         <data>true</data>
                      </feature>
                   </dependency>
+                  <dependency resourceType="Peripheral" resourceId="SYSCON" description="Peripheral SYSCON is not initialized" problem_level="1" source="Pins: BOARD_InitPins">
+                     <feature name="initialized" evaluation="">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
                   <dependency resourceType="Peripheral" resourceId="ADC0" description="Peripheral ADC0 is not initialized" problem_level="1" source="Pins: BOARD_InitPins">
                      <feature name="initialized" evaluation="">
                         <data>true</data>
@@ -98,6 +103,7 @@
                   </pin>
                   <pin peripheral="FLEXCOMM4" signal="RXD_SDA_MOSI" pin_num="K5" pin_signal="PIO3_26/SCT0_OUT0/FC4_RXD_SDA_MOSI/EMC_A(15)"/>
                   <pin peripheral="FLEXCOMM4" signal="TXD_SCL_MISO" pin_num="P14" pin_signal="PIO3_27/SCT0_OUT1/FC4_TXD_SCL_MISO/EMC_A(16)"/>
+                  <pin peripheral="SYSCON" signal="CLKOUT" pin_num="N2" pin_signal="PIO3_20/FC9_SCK/SD_CARD_INT_N/CLKOUT/SCT0_OUT7"/>
                </pins>
             </function>
          </functions_list>
@@ -256,6 +262,50 @@
                   <setting id="SYSCON_PDRUNCFG0_PDEN_SYS_PLL_CFG" value="Power_up" locked="false"/>
                </clock_settings>
                <called_from_default_init>false</called_from_default_init>
+            </clock_configuration>
+            <clock_configuration name="BOARD_BootClockPLL220M">
+               <description></description>
+               <options/>
+               <dependencies>
+                  <dependency resourceType="SWComponent" resourceId="platform.drivers.common" description="Clocks initialization requires the COMMON Driver in the project." problem_level="2" source="Clocks.BOARD_BootClockPLL220M">
+                     <feature name="enabled" evaluation="equal" configuration="core0">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="SWComponent" resourceId="platform.drivers.power" description="Clocks initialization requires the POWER Driver in the project." problem_level="2" source="Clocks.BOARD_BootClockPLL220M">
+                     <feature name="enabled" evaluation="equal" configuration="core0">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="SWComponent" resourceId="platform.drivers.clock" description="Clocks initialization requires the CLOCK Driver in the project." problem_level="2" source="Clocks.BOARD_BootClockPLL220M">
+                     <feature name="enabled" evaluation="equal" configuration="core0">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+               </dependencies>
+               <clock_sources/>
+               <clock_outputs>
+                  <clock_output id="ADC_clock.outFreq" value="220 MHz" locked="false" accuracy=""/>
+                  <clock_output id="CLKOUT_clock.outFreq" value="22 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FRO12M_clock.outFreq" value="12 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FROHF_clock.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FXCOM4_clock.outFreq" value="12 MHz" locked="false" accuracy=""/>
+                  <clock_output id="MAIN_clock.outFreq" value="220 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SYSPLL_clock.outFreq" value="220 MHz" locked="false" accuracy=""/>
+                  <clock_output id="System_clock.outFreq" value="220 MHz" locked="true" accuracy="0.001"/>
+               </clock_outputs>
+               <clock_settings>
+                  <setting id="SYSCON.ADCCLKDIV.scale" value="1" locked="true"/>
+                  <setting id="SYSCON.ADCCLKSEL.sel" value="SYSCON.PLL_BYPASS" locked="false"/>
+                  <setting id="SYSCON.CLKOUTDIV.scale" value="10" locked="true"/>
+                  <setting id="SYSCON.CLKOUTSELA.sel" value="SYSCON.PLL_BYPASS" locked="false"/>
+                  <setting id="SYSCON.FXCLKSEL4.sel" value="SYSCON.fro_12m" locked="false"/>
+                  <setting id="SYSCON.MAINCLKSELB.sel" value="SYSCON.PLL_BYPASS" locked="false"/>
+                  <setting id="SYSCON.M_MULT.scale" value="110" locked="false"/>
+                  <setting id="SYSCON.PDEC.scale" value="2" locked="true"/>
+                  <setting id="SYSCON_PDRUNCFG0_PDEN_SYS_PLL_CFG" value="Power_up" locked="false"/>
+               </clock_settings>
+               <called_from_default_init>true</called_from_default_init>
             </clock_configuration>
          </clock_configurations>
       </clocks>
