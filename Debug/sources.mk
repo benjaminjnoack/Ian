@@ -19,6 +19,7 @@ amazon-freertos/FreeRTOS \
 amazon-freertos/FreeRTOS/portable \
 amazon-freertos/portable \
 board \
+drivers/freertos \
 drivers \
 source \
 startup \
