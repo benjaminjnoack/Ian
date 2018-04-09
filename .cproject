@@ -244,7 +244,7 @@
 								<option id="com.crt.advproject.link.gcc.hdrlib.1897363084" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.semihost_nf" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.gcc.nanofloat.1699709449" name="Enable printf float " superClass="com.crt.advproject.link.gcc.nanofloat"/>
 								<option id="com.crt.advproject.link.gcc.nanofloat.scanf.1553129491" name="Enable scanf float " superClass="com.crt.advproject.link.gcc.nanofloat.scanf"/>
-								<option id="com.crt.advproject.link.script.623733891" name="Linker script" superClass="com.crt.advproject.link.script" value="Joy_Debug.ld" valueType="string"/>
+								<option id="com.crt.advproject.link.script.623733891" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;Ian_Debug.ld&quot;" valueType="string"/>
 								<option id="com.crt.advproject.link.scriptdir.1723889346" name="Script path" superClass="com.crt.advproject.link.scriptdir"/>
 								<option defaultValue="com.crt.advproject.heapAndStack.mcuXpressoStyle" id="com.crt.advproject.link.memory.heapAndStack.style.1116592597" name="Heap and Stack placement" superClass="com.crt.advproject.link.memory.heapAndStack.style" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.gcc.multicore.slave.628174748" name="Multicore configuration" superClass="com.crt.advproject.link.gcc.multicore.slave"/>
@@ -515,7 +515,7 @@
 								<option id="com.crt.advproject.link.gcc.hdrlib.2132199086" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.semihost_nf" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.gcc.nanofloat.599316768" name="Enable printf float " superClass="com.crt.advproject.link.gcc.nanofloat"/>
 								<option id="com.crt.advproject.link.gcc.nanofloat.scanf.754680469" name="Enable scanf float " superClass="com.crt.advproject.link.gcc.nanofloat.scanf"/>
-								<option id="com.crt.advproject.link.script.1515603837" name="Linker script" superClass="com.crt.advproject.link.script" value="Joy_Release.ld" valueType="string"/>
+								<option id="com.crt.advproject.link.script.1515603837" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;Ian_Release.ld&quot;" valueType="string"/>
 								<option id="com.crt.advproject.link.scriptdir.1111265660" name="Script path" superClass="com.crt.advproject.link.scriptdir"/>
 								<option defaultValue="com.crt.advproject.heapAndStack.mcuXpressoStyle" id="com.crt.advproject.link.memory.heapAndStack.style.1182602919" name="Heap and Stack placement" superClass="com.crt.advproject.link.memory.heapAndStack.style" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.gcc.multicore.slave.1415927916" name="Multicore configuration" superClass="com.crt.advproject.link.gcc.multicore.slave"/>
@@ -684,4 +684,5 @@
 		<core>cm4</core>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="refreshScope"/>
 </cproject>

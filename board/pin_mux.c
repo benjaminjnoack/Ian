@@ -49,6 +49,8 @@ BOARD_InitPins:
   - {pin_num: E3, peripheral: GPIO, signal: 'PIO3, 14', pin_signal: PIO3_14/SCT0_OUT4/FC9_RTS_SCL_SSEL1/CTIMER3_MAT1/TRACEDATA(2), direction: OUTPUT}
   - {pin_num: A13, peripheral: GPIO, signal: 'PIO3, 3', pin_signal: PIO3_3/LCD_VD(17)/FC9_TXD_SCL_MISO, direction: OUTPUT}
   - {pin_num: C3, peripheral: GPIO, signal: 'PIO2, 2', pin_signal: PIO2_2/ENET_CRS/FC3_SSEL3/SCT0_OUT6/CTIMER1_MAT1, direction: OUTPUT}
+  - {pin_num: K5, peripheral: FLEXCOMM4, signal: RXD_SDA_MOSI, pin_signal: PIO3_26/SCT0_OUT0/FC4_RXD_SDA_MOSI/EMC_A(15)}
+  - {pin_num: P14, peripheral: FLEXCOMM4, signal: TXD_SCL_MISO, pin_signal: PIO3_27/SCT0_OUT1/FC4_TXD_SCL_MISO/EMC_A(16)}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -158,6 +160,26 @@ void BOARD_InitPins(void)
 
                          /* Select Analog/Digital mode.: Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO314_DIGIMODE_DIGITAL));
+
+    IOCON->PIO[3][26] = ((IOCON->PIO[3][26] &
+                          /* Mask bits to zero which are setting */
+                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
+
+                         /* Selects pin function.: PORT326 (pin K5) is configured as FC4_RXD_SDA_MOSI */
+                         | IOCON_PIO_FUNC(PIO326_FUNC_ALT3)
+
+                         /* Select Analog/Digital mode.: Digital mode. */
+                         | IOCON_PIO_DIGIMODE(PIO326_DIGIMODE_DIGITAL));
+
+    IOCON->PIO[3][27] = ((IOCON->PIO[3][27] &
+                          /* Mask bits to zero which are setting */
+                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
+
+                         /* Selects pin function.: PORT327 (pin P14) is configured as FC4_TXD_SCL_MISO */
+                         | IOCON_PIO_FUNC(PIO327_FUNC_ALT3)
+
+                         /* Select Analog/Digital mode.: Digital mode. */
+                         | IOCON_PIO_DIGIMODE(PIO327_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][3] = ((IOCON->PIO[3][3] &
                          /* Mask bits to zero which are setting */

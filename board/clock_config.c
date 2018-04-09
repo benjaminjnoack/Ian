@@ -59,10 +59,12 @@ name: BOARD_BootClockFRO12M
 outputs:
 - {id: FRO12M_clock.outFreq, value: 12 MHz}
 - {id: FROHF_clock.outFreq, value: 48 MHz}
+- {id: FXCOM4_clock.outFreq, value: 12 MHz}
 - {id: MAIN_clock.outFreq, value: 12 MHz}
 - {id: System_clock.outFreq, value: 12 MHz}
 settings:
 - {id: SYSCON.EMCCLKDIV.scale, value: '1', locked: true}
+- {id: SYSCON.FXCLKSEL4.sel, value: SYSCON.fro_12m}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
 
@@ -89,6 +91,7 @@ void BOARD_BootClockFRO12M(void)
 
     /*!< Set up clock selectors - Attach clocks to the peripheries */
     CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);                     /*!< Switch MAIN_CLK to FRO12M */
+    CLOCK_AttachClk(kFRO12M_to_FLEXCOMM4);                  /*!< Switch FLEXCOMM4 to FRO12M */
     /* Set SystemCoreClock variable. */
     SystemCoreClock = BOARD_BOOTCLOCKFRO12M_CORE_CLOCK;
 }
@@ -193,10 +196,12 @@ name: BOARD_BootClockPLL180M
 outputs:
 - {id: FRO12M_clock.outFreq, value: 12 MHz}
 - {id: FROHF_clock.outFreq, value: 48 MHz}
+- {id: FXCOM4_clock.outFreq, value: 12 MHz}
 - {id: MAIN_clock.outFreq, value: 12 MHz}
 - {id: SYSPLL_clock.outFreq, value: 180 MHz}
 - {id: System_clock.outFreq, value: 12 MHz}
 settings:
+- {id: SYSCON.FXCLKSEL4.sel, value: SYSCON.fro_12m}
 - {id: SYSCON.M_MULT.scale, value: '30', locked: true}
 - {id: SYSCON.N_DIV.scale, value: '1', locked: true}
 - {id: SYSCON.PDEC.scale, value: '2', locked: true}
@@ -241,6 +246,7 @@ void BOARD_BootClockPLL180M(void)
 
     /*!< Set up clock selectors - Attach clocks to the peripheries */
     CLOCK_AttachClk(kFRO12M_to_MAIN_CLK);                     /*!< Switch MAIN_CLK to FRO12M */
+    CLOCK_AttachClk(kFRO12M_to_FLEXCOMM4);                  /*!< Switch FLEXCOMM4 to FRO12M */
     /* Set SystemCoreClock variable. */
     SystemCoreClock = BOARD_BOOTCLOCKPLL180M_CORE_CLOCK;
 }

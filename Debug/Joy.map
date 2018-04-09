@@ -2418,33 +2418,33 @@ OUTPUT(Joy.axf elf32-littlearm)
  .debug_ranges  0x0000000000000d80       0x58 ./CMSIS/system_LPC54628.o
  .debug_ranges  0x0000000000000dd8       0xb0 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
 
-.debug_line     0x0000000000000000     0x67d0
+.debug_line     0x0000000000000000     0x67ce
  .debug_line    0x0000000000000000      0x1c1 ./utilities/fsl_debug_console.o
  .debug_line    0x00000000000001c1      0x243 ./utilities/fsl_io.o
  .debug_line    0x0000000000000404      0x25d ./utilities/fsl_log.o
  .debug_line    0x0000000000000661      0x493 ./startup/startup_LPC54628.o
- .debug_line    0x0000000000000af4      0x474 ./source/adc.o
- .debug_line    0x0000000000000f68      0x1ef ./source/main.o
- .debug_line    0x0000000000001157       0x54 ./source/semihost_hardfault.o
- .debug_line    0x00000000000011ab      0x332 ./drivers/fsl_adc.o
- .debug_line    0x00000000000014dd      0xdc2 ./drivers/fsl_clock.o
- .debug_line    0x000000000000229f      0x3b7 ./drivers/fsl_flexcomm.o
- .debug_line    0x0000000000002656      0x1b4 ./drivers/fsl_gpio.o
- .debug_line    0x000000000000280a      0x1c0 ./drivers/fsl_reset.o
- .debug_line    0x00000000000029ca      0x694 ./drivers/fsl_usart.o
- .debug_line    0x000000000000305e      0x1f0 ./board/board.o
- .debug_line    0x000000000000324e      0x21f ./board/clock_config.o
- .debug_line    0x000000000000346d      0x1e1 ./board/peripherals.o
- .debug_line    0x000000000000364e      0x212 ./board/pin_mux.o
- .debug_line    0x0000000000003860      0x164 ./amazon-freertos/portable/fsl_tickless_systick.o
- .debug_line    0x00000000000039c4      0x28c ./amazon-freertos/portable/heap_4.o
- .debug_line    0x0000000000003c50      0x39f ./amazon-freertos/FreeRTOS/portable/port.o
- .debug_line    0x0000000000003fef      0x20f ./amazon-freertos/FreeRTOS/list.o
- .debug_line    0x00000000000041fe      0xb24 ./amazon-freertos/FreeRTOS/queue.o
- .debug_line    0x0000000000004d22      0xeab ./amazon-freertos/FreeRTOS/tasks.o
- .debug_line    0x0000000000005bcd      0x582 ./amazon-freertos/FreeRTOS/timers.o
- .debug_line    0x000000000000614f      0x26b ./CMSIS/system_LPC54628.o
- .debug_line    0x00000000000063ba      0x416 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
+ .debug_line    0x0000000000000af4      0x472 ./source/adc.o
+ .debug_line    0x0000000000000f66      0x1ef ./source/main.o
+ .debug_line    0x0000000000001155       0x54 ./source/semihost_hardfault.o
+ .debug_line    0x00000000000011a9      0x332 ./drivers/fsl_adc.o
+ .debug_line    0x00000000000014db      0xdc2 ./drivers/fsl_clock.o
+ .debug_line    0x000000000000229d      0x3b7 ./drivers/fsl_flexcomm.o
+ .debug_line    0x0000000000002654      0x1b4 ./drivers/fsl_gpio.o
+ .debug_line    0x0000000000002808      0x1c0 ./drivers/fsl_reset.o
+ .debug_line    0x00000000000029c8      0x694 ./drivers/fsl_usart.o
+ .debug_line    0x000000000000305c      0x1f0 ./board/board.o
+ .debug_line    0x000000000000324c      0x21f ./board/clock_config.o
+ .debug_line    0x000000000000346b      0x1e1 ./board/peripherals.o
+ .debug_line    0x000000000000364c      0x212 ./board/pin_mux.o
+ .debug_line    0x000000000000385e      0x164 ./amazon-freertos/portable/fsl_tickless_systick.o
+ .debug_line    0x00000000000039c2      0x28c ./amazon-freertos/portable/heap_4.o
+ .debug_line    0x0000000000003c4e      0x39f ./amazon-freertos/FreeRTOS/portable/port.o
+ .debug_line    0x0000000000003fed      0x20f ./amazon-freertos/FreeRTOS/list.o
+ .debug_line    0x00000000000041fc      0xb24 ./amazon-freertos/FreeRTOS/queue.o
+ .debug_line    0x0000000000004d20      0xeab ./amazon-freertos/FreeRTOS/tasks.o
+ .debug_line    0x0000000000005bcb      0x582 ./amazon-freertos/FreeRTOS/timers.o
+ .debug_line    0x000000000000614d      0x26b ./CMSIS/system_LPC54628.o
+ .debug_line    0x00000000000063b8      0x416 /home/ben/projects/mcuxpresso_workspace/Joy/libs/libpower_hardabi.a(fsl_power_lib.o)
 
 .debug_str      0x0000000000000000     0x8628
  .debug_str     0x0000000000000000      0x37d ./utilities/fsl_debug_console.o

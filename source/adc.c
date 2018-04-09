@@ -4,7 +4,7 @@
  *  Created on: Apr 8, 2018
  *      Author: ben
  *
- * Note: Dead from 2000-2200
+ * Note: Centered from 2000-2200
  */
 
 #include "adc.h"
@@ -19,8 +19,8 @@ void ADC_Read_A(void *pvParameters) {
 
 	for (;;) {
 		xSemaphoreTake(xSequenceASemaphore, portMAX_DELAY);
-		reads++;
-		if (reads == 0) {
+
+		if (++reads == 0) {
 			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED1_PORT, 1 << BOARD_INITPINS_LED1_PIN);
 		}
 
@@ -40,8 +40,8 @@ void ADC_Read_B(void *pvParameters) {
 	static uint8_t reads = 0;
 	for (;;) {
 		xSemaphoreTake(xSequenceBSemaphore, portMAX_DELAY);
-		reads++;
-		if (reads == 0) {
+
+		if (++reads == 0) {
 			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED2_PORT, 1 << BOARD_INITPINS_LED2_PIN);
 		}
 
