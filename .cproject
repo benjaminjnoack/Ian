@@ -81,13 +81,13 @@
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.undef.symbol.2010610024" name="Undefined symbols (-U)" superClass="gnu.c.compiler.option.preprocessor.undef.symbol"/>
 								<option id="gnu.c.compiler.option.include.paths.1393615614" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/FreeRTOS/portable}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/portable}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers/freertos}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/startup}&quot;"/>
@@ -128,13 +128,13 @@
 								<option id="com.crt.advproject.gas.arch.1304855392" name="Architecture" superClass="com.crt.advproject.gas.arch" value="com.crt.advproject.gas.target.cm4" valueType="enumerated"/>
 								<option id="gnu.both.asm.option.flags.crt.816880117" name="Assembler flags" superClass="gnu.both.asm.option.flags.crt"/>
 								<option id="gnu.both.asm.option.include.paths.2052553538" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/FreeRTOS/portable}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/portable}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers/freertos}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/startup}&quot;"/>
@@ -262,9 +262,9 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="drivers"/>
 						<entry excluding="portable/heap_1.c|portable/heap_2.c|portable/heap_3.c|portable/heap_5.c" flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="amazon-freertos"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="source"/>
-						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="drivers"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="startup"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="CMSIS"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="utilities"/>
@@ -353,13 +353,13 @@
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.undef.symbol.475873829" name="Undefined symbols (-U)" superClass="gnu.c.compiler.option.preprocessor.undef.symbol"/>
 								<option id="gnu.c.compiler.option.include.paths.1133117475" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/FreeRTOS/portable}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/portable}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers/freertos}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/startup}&quot;"/>
@@ -402,13 +402,13 @@
 								<option id="com.crt.advproject.gas.arch.440454430" name="Architecture" superClass="com.crt.advproject.gas.arch" value="com.crt.advproject.gas.target.cm4" valueType="enumerated"/>
 								<option id="gnu.both.asm.option.flags.crt.1302059839" name="Assembler flags" superClass="gnu.both.asm.option.flags.crt"/>
 								<option id="gnu.both.asm.option.include.paths.1824387145" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/FreeRTOS/portable}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/portable}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/amazon-freertos/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers/freertos}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/startup}&quot;"/>
@@ -535,9 +535,9 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="drivers"/>
 						<entry excluding="portable/heap_1.c|portable/heap_2.c|portable/heap_3.c|portable/heap_5.c" flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="amazon-freertos"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="source"/>
-						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="drivers"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="startup"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="CMSIS"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="utilities"/>
@@ -682,7 +682,7 @@
 	<storageModule moduleId="com.nxp.mcuxpresso.core.datamodels">
 		<sdkName>SDK_2.x_LPCXpresso54628</sdkName>
 		<sdkVersion>2.3.1</sdkVersion>
-		<sdkComponents>platform.drivers.clock.LPC54628;platform.Include_common.LPC54628;platform.Include_core_cm4.LPC54628;platform.devices.LPC54628_CMSIS.LPC54628;platform.drivers.common.LPC54628;platform.drivers.reset.LPC54628;platform.devices.LPC54628_startup.LPC54628;platform.drivers.flexcomm_usart.LPC54628;platform.drivers.flexcomm.LPC54628;platform.drivers.lpc_iocon.LPC54628;platform.utilities.debug_console.LPC54628;platform.drivers.lpc_gpio.LPC54628;platform.drivers.emc.LPC54628;platform.utilities.assert.LPC54628;middleware.freertos.heap.heap_4.LPC54628;middleware.freertos.LPC54628;platform.drivers.power.LPC54628;platform.drivers.powerlib.LPC54628;platform.drivers.inputmux.LPC54628;platform.drivers.inputmux_connections.LPC54628;lpcxpresso54628_freertos_hello;middleware.template_application.freertos.LPC54628;platform.drivers.flexcomm_usart_freertos.LPC54628;</sdkComponents>
+		<sdkComponents>platform.drivers.clock.LPC54628;platform.Include_common.LPC54628;platform.Include_core_cm4.LPC54628;platform.devices.LPC54628_CMSIS.LPC54628;platform.drivers.common.LPC54628;platform.drivers.reset.LPC54628;platform.devices.LPC54628_startup.LPC54628;platform.drivers.flexcomm_usart.LPC54628;platform.drivers.flexcomm.LPC54628;platform.drivers.lpc_iocon.LPC54628;platform.utilities.debug_console.LPC54628;platform.drivers.lpc_gpio.LPC54628;platform.drivers.emc.LPC54628;platform.utilities.assert.LPC54628;middleware.freertos.heap.heap_4.LPC54628;middleware.freertos.LPC54628;platform.drivers.power.LPC54628;platform.drivers.powerlib.LPC54628;platform.drivers.inputmux.LPC54628;platform.drivers.inputmux_connections.LPC54628;lpcxpresso54628_freertos_hello;middleware.template_application.freertos.LPC54628;platform.drivers.flexcomm_usart_freertos.LPC54628;platform.drivers.lpc_adc.LPC54628;</sdkComponents>
 		<boardId>lpcxpresso54628</boardId>
 		<package>LPC54628J512ET180</package>
 		<core>cm4</core>

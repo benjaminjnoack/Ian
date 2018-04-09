@@ -142,6 +142,7 @@
                   <clock_output id="System_clock.outFreq" value="12 MHz" locked="false" accuracy=""/>
                </clock_outputs>
                <clock_settings>
+                  <setting id="SYSCON.ADCCLKSEL.sel" value="SYSCON.PLL_BYPASS" locked="false"/>
                   <setting id="SYSCON.EMCCLKDIV.scale" value="1" locked="true"/>
                   <setting id="SYSCON.FXCLKSEL4.sel" value="SYSCON.fro_12m" locked="false"/>
                </clock_settings>
@@ -321,6 +322,16 @@
                   <data type="Version">2.1.1</data>
                </feature>
             </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.drivers.lpc_adc" description="ADC Driver not found in the toolchain/IDE project." problem_level="2" source="Peripherals">
+               <feature name="enabled" evaluation="equal">
+                  <data type="Boolean">true</data>
+               </feature>
+            </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.drivers.lpc_adc" description="Unsupported version of the ADC Driver in the toolchain/IDE project. Required: ${required_value}, actual: ${actual_value}." problem_level="1" source="Peripherals">
+               <feature name="version" evaluation="compatible">
+                  <data type="Version">2.1.0</data>
+               </feature>
+            </dependency>
          </dependencies>
          <peripherals_profile>
             <processor_version>3.0.1</processor_version>
@@ -379,6 +390,89 @@
                               <setting name="signal_number" value="PIO2.2"/>
                               <setting name="pinDirection" value="kGPIO_DigitalOutput"/>
                               <setting name="outputLogic" value="0U"/>
+                           </struct>
+                        </array>
+                     </config_set>
+                  </instance>
+               </instances>
+            </functional_group>
+            <functional_group name="PERIPH_InitAdc" called_from_default_init="false" id_prefix="" core="core0">
+               <description></description>
+               <options/>
+               <dependencies/>
+               <instances>
+                  <instance name="ADC_1" type="lpc_adc" type_id="lpc_adc_c8a42a3971e43028d68a2161b5fcb2b2" mode="ADC" peripheral="ADC0" enabled="true">
+                     <config_set name="fsl_adc">
+                        <setting name="enable_irq" value="false"/>
+                        <setting name="irq_src" value="kADC_ConvSeqAInterruptEnable"/>
+                        <struct name="adc_interrupt">
+                           <setting name="IRQn" value="ADC0_SEQA_IRQn"/>
+                           <setting name="enable_priority" value="false"/>
+                           <setting name="enable_custom_name" value="false"/>
+                        </struct>
+                        <setting name="doSelfCalibration" value="true"/>
+                        <setting name="enableTempSensor" value="false"/>
+                        <struct name="adcConfig">
+                           <setting name="clockMode" value="kADC_ClockSynchronousMode"/>
+                           <setting name="clockDividerNumber" value="1"/>
+                           <setting name="resolution" value="kADC_Resolution12bit"/>
+                           <setting name="sampleTimeNumber" value="0"/>
+                           <setting name="enableBypassCalibration" value="false"/>
+                        </struct>
+                        <struct name="thresholdConfig">
+                           <struct name="thresholdSettingsPair0">
+                              <setting name="ADC_SetThreshold" value="false"/>
+                           </struct>
+                           <struct name="thresholdSettingsPair1">
+                              <setting name="ADC_SetThreshold" value="false"/>
+                           </struct>
+                        </struct>
+                        <struct name="adcConvSeqConfigA">
+                           <setting name="enableSeqConfiguration" value="true"/>
+                           <setting name="enableHighPriority" value="false"/>
+                           <struct name="adcConvSeqConfig">
+                              <setting name="triggerMask" value="0U"/>
+                              <setting name="triggerPolarity" value="kADC_TriggerPolarityNegativeEdge"/>
+                              <setting name="enableSyncBypass" value="false"/>
+                              <setting name="enableSingleStep" value="false"/>
+                              <setting name="interruptMode" value="kADC_InterruptForEachSequence"/>
+                           </struct>
+                        </struct>
+                        <struct name="adcConvSeqConfigB">
+                           <setting name="enableSeqConfiguration" value="true"/>
+                           <setting name="enableHighPriority" value="false"/>
+                           <struct name="adcConvSeqConfig">
+                              <setting name="triggerMask" value="0U"/>
+                              <setting name="triggerPolarity" value="kADC_TriggerPolarityNegativeEdge"/>
+                              <setting name="enableSyncBypass" value="false"/>
+                              <setting name="enableSingleStep" value="false"/>
+                              <setting name="interruptMode" value="kADC_InterruptForEachSequence"/>
+                           </struct>
+                        </struct>
+                        <array name="channels">
+                           <struct name="0">
+                              <setting name="channelNumber" value="CH.4"/>
+                              <setting name="channelThresholdPair" value="thresholdPair0"/>
+                              <setting name="thresholdInterruptMode" value="kADC_ThresholdInterruptDisabled"/>
+                              <setting name="conversion_sequence" value="a"/>
+                           </struct>
+                           <struct name="1">
+                              <setting name="channelNumber" value="CH.5"/>
+                              <setting name="channelThresholdPair" value="thresholdPair0"/>
+                              <setting name="thresholdInterruptMode" value="kADC_ThresholdInterruptDisabled"/>
+                              <setting name="conversion_sequence" value="a"/>
+                           </struct>
+                           <struct name="2">
+                              <setting name="channelNumber" value="CH.6"/>
+                              <setting name="channelThresholdPair" value="thresholdPair0"/>
+                              <setting name="thresholdInterruptMode" value="kADC_ThresholdInterruptDisabled"/>
+                              <setting name="conversion_sequence" value="b"/>
+                           </struct>
+                           <struct name="3">
+                              <setting name="channelNumber" value="CH.7"/>
+                              <setting name="channelThresholdPair" value="thresholdPair0"/>
+                              <setting name="thresholdInterruptMode" value="kADC_ThresholdInterruptDisabled"/>
+                              <setting name="conversion_sequence" value="b"/>
                            </struct>
                         </array>
                      </config_set>

@@ -16,6 +16,8 @@ functionalGroups:
 - name: BOARD_InitPeripherals
   called_from_default_init: true
   selectedCore: core0
+- name: PERIPH_InitAdc
+  selectedCore: core0
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 
 /* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
@@ -88,12 +90,136 @@ void GPIO_1_init(void) {
 }
 
 /***********************************************************************************************************************
+ * PERIPH_InitAdc functional group
+ **********************************************************************************************************************/
+/***********************************************************************************************************************
+ * ADC_1 initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'ADC_1'
+- type: 'lpc_adc'
+- mode: 'ADC'
+- type_id: 'lpc_adc_c8a42a3971e43028d68a2161b5fcb2b2'
+- functional_group: 'PERIPH_InitAdc'
+- peripheral: 'ADC0'
+- config_sets:
+  - fsl_adc:
+    - enable_irq: 'false'
+    - irq_src: 'kADC_ConvSeqAInterruptEnable'
+    - adc_interrupt:
+      - IRQn: 'ADC0_SEQA_IRQn'
+      - enable_priority: 'false'
+      - enable_custom_name: 'false'
+    - doSelfCalibration: 'true'
+    - enableTempSensor: 'false'
+    - adcConfig:
+      - clockMode: 'kADC_ClockSynchronousMode'
+      - clockDividerNumber: '1'
+      - resolution: 'kADC_Resolution12bit'
+      - sampleTimeNumber: '0'
+      - enableBypassCalibration: 'false'
+    - thresholdConfig:
+      - thresholdSettingsPair0:
+        - ADC_SetThreshold: 'false'
+      - thresholdSettingsPair1:
+        - ADC_SetThreshold: 'false'
+    - adcConvSeqConfigA:
+      - enableSeqConfiguration: 'true'
+      - enableHighPriority: 'false'
+      - adcConvSeqConfig:
+        - triggerMask: '0U'
+        - triggerPolarity: 'kADC_TriggerPolarityNegativeEdge'
+        - enableSyncBypass: 'false'
+        - enableSingleStep: 'false'
+        - interruptMode: 'kADC_InterruptForEachSequence'
+    - adcConvSeqConfigB:
+      - enableSeqConfiguration: 'true'
+      - enableHighPriority: 'false'
+      - adcConvSeqConfig:
+        - triggerMask: '0U'
+        - triggerPolarity: 'kADC_TriggerPolarityNegativeEdge'
+        - enableSyncBypass: 'false'
+        - enableSingleStep: 'false'
+        - interruptMode: 'kADC_InterruptForEachSequence'
+    - channels:
+      - 0:
+        - channelNumber: 'CH.4'
+        - channelThresholdPair: 'thresholdPair0'
+        - thresholdInterruptMode: 'kADC_ThresholdInterruptDisabled'
+        - conversion_sequence: 'a'
+      - 1:
+        - channelNumber: 'CH.5'
+        - channelThresholdPair: 'thresholdPair0'
+        - thresholdInterruptMode: 'kADC_ThresholdInterruptDisabled'
+        - conversion_sequence: 'a'
+      - 2:
+        - channelNumber: 'CH.6'
+        - channelThresholdPair: 'thresholdPair0'
+        - thresholdInterruptMode: 'kADC_ThresholdInterruptDisabled'
+        - conversion_sequence: 'b'
+      - 3:
+        - channelNumber: 'CH.7'
+        - channelThresholdPair: 'thresholdPair0'
+        - thresholdInterruptMode: 'kADC_ThresholdInterruptDisabled'
+        - conversion_sequence: 'b'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+const adc_config_t ADC_1configStruct = {
+  .clockMode = kADC_ClockSynchronousMode,
+  .clockDividerNumber = 1,
+  .resolution = kADC_Resolution12bit,
+  .sampleTimeNumber = 0,
+  .enableBypassCalibration = false
+};
+/* Conversion sequence A configuration structure */
+const adc_conv_seq_config_t ADC_1ConvSeqAConfigStruct = {
+  .channelMask = 16U | 32U,
+  .triggerMask = 0U,
+  .triggerPolarity = kADC_TriggerPolarityNegativeEdge,
+  .enableSyncBypass = false,
+  .enableSingleStep = false,
+  .interruptMode = kADC_InterruptForEachSequence
+};
+/* Conversion sequence B configuration structure */
+const adc_conv_seq_config_t ADC_1ConvSeqBConfigStruct = {
+  .channelMask = 64U | 128U,
+  .triggerMask = 0U,
+  .triggerPolarity = kADC_TriggerPolarityNegativeEdge,
+  .enableSyncBypass = false,
+  .enableSingleStep = false,
+  .interruptMode = kADC_InterruptForEachSequence
+};
+
+void ADC_1_init(void) {
+  /* Perform self calibration */
+  ADC_DoSelfCalibration(ADC_1_PERIPHERAL);
+  /* Initialize ADC0 peripheral */
+  ADC_Init(ADC_1_PERIPHERAL, &ADC_1configStruct);
+  /* Configure the conversion sequence A */
+  ADC_SetConvSeqAConfig(ADC_1_PERIPHERAL, &ADC_1ConvSeqAConfigStruct);
+  /* Enable the conversion sequence A */
+  ADC_EnableConvSeqA(ADC_1_PERIPHERAL, true);
+  /* Configure the conversion sequence B */
+  ADC_SetConvSeqBConfig(ADC_1_PERIPHERAL, &ADC_1ConvSeqBConfigStruct);
+  /* Enable the conversion sequence B */
+  ADC_EnableConvSeqB(ADC_1_PERIPHERAL, true);
+}
+
+/***********************************************************************************************************************
  * Initialization functions
  **********************************************************************************************************************/
 void BOARD_InitPeripherals(void)
 {
   /* Initialize components */
   GPIO_1_init();
+}
+
+void PERIPH_InitAdc(void)
+{
+  /* Initialize components */
+  ADC_1_init();
 }
 
 /***********************************************************************************************************************

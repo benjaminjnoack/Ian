@@ -11,6 +11,7 @@
  **********************************************************************************************************************/
 #include "fsl_common.h"
 #include "fsl_gpio.h"
+#include "fsl_adc.h"
 
 #if defined(__cplusplus)
 extern "C" {
@@ -23,15 +24,23 @@ extern "C" {
 /* Alias for GPIO peripheral */
 #define GPIO_1_GPIO GPIO
 
+/* Definitions for PERIPH_InitAdc functional group */
+/* Alias for ADC0 peripheral */
+#define ADC_1_PERIPHERAL ADC0
+
 /***********************************************************************************************************************
  * Global variables
  **********************************************************************************************************************/
 extern gpio_pin_config_t GPIO_1_config[3];
+extern const adc_config_t ADC_1configStruct;
+extern const adc_conv_seq_config_t ADC_1ConvSeqAConfigStruct;
+extern const adc_conv_seq_config_t ADC_1ConvSeqBConfigStruct;
 
 /***********************************************************************************************************************
  * Initialization functions
  **********************************************************************************************************************/
 void BOARD_InitPeripherals(void);
+void PERIPH_InitAdc(void);
 
 /***********************************************************************************************************************
  * BOARD_InitBootPeripherals function

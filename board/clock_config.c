@@ -64,6 +64,7 @@ outputs:
 - {id: MAIN_clock.outFreq, value: 12 MHz}
 - {id: System_clock.outFreq, value: 12 MHz}
 settings:
+- {id: SYSCON.ADCCLKSEL.sel, value: SYSCON.PLL_BYPASS}
 - {id: SYSCON.EMCCLKDIV.scale, value: '1', locked: true}
 - {id: SYSCON.FXCLKSEL4.sel, value: SYSCON.fro_12m}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/

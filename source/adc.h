@@ -21,7 +21,6 @@
 
 void ADC_Read_A(void *pvParameters);
 void ADC_Read_B(void *pvParameters);
-void ADC_Conversion_Configuration(void);
 void ADC_ClockPower_Configuration(void);
 void Joy_ADC_Init(void);
 
