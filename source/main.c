@@ -14,6 +14,7 @@
 #include "pin_mux.h"
 #include "adc.h"
 #include "fsl_gpio.h"
+#include "joystick.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -42,7 +43,8 @@ int main(void)
     GPIO_PortInit(GPIO, 3U);
     /* Enable the power and clock for ADC. */
     BOARD_InitBootPeripherals();
-    Joy_ADC_Init();
+    initializeJoystick();
+    initializeADC();
     PRINTF("Configuration Done.\r\n");
 
 	vTaskStartScheduler();

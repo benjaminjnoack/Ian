@@ -18,10 +18,8 @@
 #include "peripherals.h"
 #include "fsl_gpio.h"
 #include "pin_mux.h"
+#include "joystick.h"
 
-void ADC_Read_A(void *pvParameters);
-void ADC_Read_B(void *pvParameters);
-void ADC_ClockPower_Configuration(void);
-void Joy_ADC_Init(void);
+void initializeADC(void);
 
 #endif /* ADC_H_ */

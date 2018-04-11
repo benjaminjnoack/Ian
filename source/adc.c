@@ -12,16 +12,21 @@
 SemaphoreHandle_t xSequenceASemaphore = NULL;
 SemaphoreHandle_t xSequenceBSemaphore = NULL;
 
+void ADC_Read_A(void *pvParameters);
+void ADC_Read_B(void *pvParameters);
+void ADC_ClockPower_Configuration(void);
+
 void ADC_Read_A(void *pvParameters) {
 	static adc_result_info_t yaw;
 	static adc_result_info_t power;
-	static int reads = 0;
+	static int count = 0;
 
 	for (;;) {
 		xSemaphoreTake(xSequenceASemaphore, portMAX_DELAY);
+		joystick_read_t read;
 
-		if (++reads == 1000) {
-			reads = 0;
+		if (++count == 1000) {
+			count = 0;
 			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED1_PORT, 1 << BOARD_INITPINS_LED1_PIN);
 		}
 
@@ -31,19 +36,28 @@ void ADC_Read_A(void *pvParameters) {
 		ADC_GetChannelConversionResult(ADC0, 5U, &power);
 		//PRINTF("POW = %d\t", power.result);
 
-		ADC_DoSoftwareTriggerConvSeqB(ADC0);
+		read.joystick = JOYSTICK_A;
+		read.horizontal_axis = yaw.result;
+		read.vertical_axis = power.result;
+
+		if (sendToJoystickQueue(&read) == pdPASS) {
+			ADC_DoSoftwareTriggerConvSeqB(ADC0);
+			taskYIELD();
+		}
 	}
 }
 
 void ADC_Read_B(void *pvParameters) {
 	static adc_result_info_t pitch;
 	static adc_result_info_t roll;
-	static int reads = 0;
+	static int count = 0;
+
 	for (;;) {
 		xSemaphoreTake(xSequenceBSemaphore, portMAX_DELAY);
+		joystick_read_t read;
 
-		if (++reads == 1000) {
-			reads = 0;
+		if (++count == 1000) {
+			count = 0;
 			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED2_PORT, 1 << BOARD_INITPINS_LED2_PIN);
 		}
 
@@ -53,11 +67,18 @@ void ADC_Read_B(void *pvParameters) {
 		ADC_GetChannelConversionResult(ADC0, 7U, &roll);
 		//PRINTF("ROLL = %d\r\n", roll.result);
 
-		ADC_DoSoftwareTriggerConvSeqA(ADC0);
+		read.joystick = JOYSTICK_B;
+		read.horizontal_axis = roll.result;
+		read.vertical_axis = pitch.result;
+
+		if (sendToJoystickQueue(&read) == pdPASS) {
+			ADC_DoSoftwareTriggerConvSeqA(ADC0);
+			taskYIELD();
+		}
 	}
 }
 
-void Joy_ADC_Init(void) {
+void initializeADC(void) {
 	ADC_ClockPower_Configuration();
 	PERIPH_InitAdc();
 
