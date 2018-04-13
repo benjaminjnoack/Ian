@@ -9,21 +9,41 @@
 
 #include "adc.h"
 
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+
 SemaphoreHandle_t xSequenceASemaphore = NULL;
 SemaphoreHandle_t xSequenceBSemaphore = NULL;
+
+static const uint32_t DEAD_CENTER = 0x800;
+
+static uint32_t rollBuffer[BUFFER_LENGTH];
+uint32_t *rollPtr = rollBuffer;
+static uint32_t thrustBuffer[BUFFER_LENGTH];
+uint32_t *thrustPtr = thrustBuffer;
+static uint32_t pitchBuffer[BUFFER_LENGTH];
+uint32_t *pitchPtr = pitchBuffer;
+static uint32_t yawBuffer[BUFFER_LENGTH];
+uint32_t *yawPtr = yawBuffer;
+/*******************************************************************************
+ * Prototypes
+ ******************************************************************************/
 
 void ADC_Read_A(void *pvParameters);
 void ADC_Read_B(void *pvParameters);
 void ADC_ClockPower_Configuration(void);
+uint32_t doBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading);
 
 void ADC_Read_A(void *pvParameters) {
 	static adc_result_info_t yaw;
-	static adc_result_info_t power;
+	uint32_t avgYaw = 0;
+	static adc_result_info_t thrust;
+	uint32_t avgThrust = 0;
 	static int count = 0;
 
 	for (;;) {
 		xSemaphoreTake(xSequenceASemaphore, portMAX_DELAY);
-		joystick_read_t read;
 
 		if (++count == 1000) {
 			count = 0;
@@ -32,29 +52,28 @@ void ADC_Read_A(void *pvParameters) {
 
 		ADC_GetChannelConversionResult(ADC0, 4U, &yaw);
 		//PRINTF("YAW = %d\t", yaw.result);
+		avgYaw = doBoxcarAverage(yawBuffer, &yawPtr, yaw.result);
+		PRINTF("YAW = %d\t", avgYaw);
 
-		ADC_GetChannelConversionResult(ADC0, 5U, &power);
-		//PRINTF("POW = %d\t", power.result);
 
-		read.joystick = JOYSTICK_A;
-		read.horizontal_axis = yaw.result;
-		read.vertical_axis = power.result;
+		ADC_GetChannelConversionResult(ADC0, 5U, &thrust);
+		avgThrust = doBoxcarAverage(thrustBuffer, &thrustPtr, thrust.result);
+		PRINTF("THR = %d\t", avgThrust);
 
-		if (sendToJoystickQueue(&read) == pdPASS) {
-			ADC_DoSoftwareTriggerConvSeqB(ADC0);
-			taskYIELD();
-		}
+		ADC_DoSoftwareTriggerConvSeqB(ADC0);
+		taskYIELD();
 	}
 }
 
 void ADC_Read_B(void *pvParameters) {
 	static adc_result_info_t pitch;
+	uint32_t avgPitch = 0;
 	static adc_result_info_t roll;
+	uint32_t avgRoll = 0;
 	static int count = 0;
 
 	for (;;) {
 		xSemaphoreTake(xSequenceBSemaphore, portMAX_DELAY);
-		joystick_read_t read;
 
 		if (++count == 1000) {
 			count = 0;
@@ -62,19 +81,15 @@ void ADC_Read_B(void *pvParameters) {
 		}
 
 		ADC_GetChannelConversionResult(ADC0, 6U, &pitch);
-		//PRINTF("PITCH = %d\t", pitch.result);
+		avgPitch = doBoxcarAverage(pitchBuffer, &pitchPtr, pitch.result);
+		PRINTF("PITCH = %d\t", avgPitch);
 
 		ADC_GetChannelConversionResult(ADC0, 7U, &roll);
-		//PRINTF("ROLL = %d\r\n", roll.result);
+		avgRoll = doBoxcarAverage(rollBuffer, &rollPtr, roll.result);
+		PRINTF("ROLL = %d\r\n", avgRoll);
 
-		read.joystick = JOYSTICK_B;
-		read.horizontal_axis = roll.result;
-		read.vertical_axis = pitch.result;
-
-		if (sendToJoystickQueue(&read) == pdPASS) {
-			ADC_DoSoftwareTriggerConvSeqA(ADC0);
-			taskYIELD();
-		}
+		ADC_DoSoftwareTriggerConvSeqA(ADC0);
+		taskYIELD();
 	}
 }
 
@@ -84,6 +99,15 @@ void initializeADC(void) {
 
 	xSequenceASemaphore = xSemaphoreCreateBinary();
 	xSequenceBSemaphore = xSemaphoreCreateBinary();
+
+	int i;
+
+	for (i = 0; i < BUFFER_LENGTH; i++) {
+		rollBuffer[i] = DEAD_CENTER;
+		yawBuffer[i] = DEAD_CENTER;
+		pitchBuffer[i] = DEAD_CENTER;
+		thrustBuffer[i] = DEAD_CENTER;
+	}
 
     if (xTaskCreate(ADC_Read_A, "Sequence A Task", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), NULL) != pdPASS)
 	{
@@ -151,4 +175,20 @@ void ADC0_SEQB_IRQHandler(void)
     	ADC_ClearStatusFlags(ADC0, kADC_ConvSeqBInterruptFlag);
     	xSemaphoreGiveFromISR(xSequenceBSemaphore, &xHigherPriorityTaskWoken);
     }
+}
+
+uint32_t doBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading) {
+	uint32_t avg = 0;
+	int i;
+
+	*(*bufferPtr) = reading;
+	if (++(*bufferPtr) == (buffer + (BUFFER_LENGTH - 1))) {
+		(*bufferPtr) = buffer;
+	}
+
+	for (i = 0; i < BUFFER_LENGTH; i++) {
+		avg += buffer[i];
+	}
+
+	return avg / BUFFER_LENGTH;
 }
