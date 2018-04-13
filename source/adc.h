@@ -18,7 +18,7 @@
 #include "peripherals.h"
 #include "fsl_gpio.h"
 #include "pin_mux.h"
-
+#include <stdlib.h>
 #define BUFFER_LENGTH 32
 
 void initializeADC(void);

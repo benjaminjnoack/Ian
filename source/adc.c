@@ -20,12 +20,19 @@ static const uint32_t DEAD_CENTER = 0x800;
 
 static uint32_t rollBuffer[BUFFER_LENGTH];
 uint32_t *rollPtr = rollBuffer;
+uint8_t lastRoll = 0x80;
+
 static uint32_t thrustBuffer[BUFFER_LENGTH];
 uint32_t *thrustPtr = thrustBuffer;
+uint8_t lastThrust = 0x80;
+
 static uint32_t pitchBuffer[BUFFER_LENGTH];
 uint32_t *pitchPtr = pitchBuffer;
+uint8_t lastPitch = 0x80;
+
 static uint32_t yawBuffer[BUFFER_LENGTH];
 uint32_t *yawPtr = yawBuffer;
+uint8_t lastYaw = 0x80;
 /*******************************************************************************
  * Prototypes
  ******************************************************************************/
@@ -51,14 +58,21 @@ void ADC_Read_A(void *pvParameters) {
 		}
 
 		ADC_GetChannelConversionResult(ADC0, 4U, &yaw);
-		//PRINTF("YAW = %d\t", yaw.result);
 		avgYaw = doBoxcarAverage(yawBuffer, &yawPtr, yaw.result);
-		PRINTF("YAW = %d\t", avgYaw);
+		avgYaw = avgYaw >> 4;
+		if (abs((int)lastYaw - (int)avgYaw) > 0x03) {
+			lastYaw = avgYaw;
+			PRINTF("YAW = %d\r\n", lastYaw);
+		}
 
 
 		ADC_GetChannelConversionResult(ADC0, 5U, &thrust);
 		avgThrust = doBoxcarAverage(thrustBuffer, &thrustPtr, thrust.result);
-		PRINTF("THR = %d\t", avgThrust);
+		avgThrust = avgThrust >> 4;
+		if (abs((int)lastThrust - (int)avgThrust) > 0x03) {
+			lastThrust = avgThrust;
+			PRINTF("THR = %d\r\n", lastThrust);
+		}
 
 		ADC_DoSoftwareTriggerConvSeqB(ADC0);
 		taskYIELD();
@@ -82,11 +96,21 @@ void ADC_Read_B(void *pvParameters) {
 
 		ADC_GetChannelConversionResult(ADC0, 6U, &pitch);
 		avgPitch = doBoxcarAverage(pitchBuffer, &pitchPtr, pitch.result);
-		PRINTF("PITCH = %d\t", avgPitch);
+		avgPitch = avgPitch >> 4;
+		if (abs((int)lastPitch - (int)avgPitch) > 0x03) {
+			lastPitch = avgPitch;
+			PRINTF("PITCH = %d\r\n", lastPitch);
+		}
+
+
 
 		ADC_GetChannelConversionResult(ADC0, 7U, &roll);
 		avgRoll = doBoxcarAverage(rollBuffer, &rollPtr, roll.result);
-		PRINTF("ROLL = %d\r\n", avgRoll);
+		avgRoll = avgRoll >> 4;
+		if (abs((int)lastRoll - (int)avgRoll) > 0x03) {
+			lastRoll = avgRoll;
+			PRINTF("ROLL = %d\r\n", lastRoll);
+		}
 
 		ADC_DoSoftwareTriggerConvSeqA(ADC0);
 		taskYIELD();
