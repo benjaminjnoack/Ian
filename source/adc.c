@@ -40,7 +40,7 @@ uint8_t lastYaw = 0x80;
 void ADC_Read_A(void *pvParameters);
 void ADC_Read_B(void *pvParameters);
 void ADC_ClockPower_Configuration(void);
-uint32_t doBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading);
+uint8_t doBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading);
 
 void ADC_Read_A(void *pvParameters) {
 	static adc_result_info_t yaw;
@@ -59,7 +59,6 @@ void ADC_Read_A(void *pvParameters) {
 
 		ADC_GetChannelConversionResult(ADC0, 4U, &yaw);
 		avgYaw = doBoxcarAverage(yawBuffer, &yawPtr, yaw.result);
-		avgYaw = avgYaw >> 4;
 		if (abs((int)lastYaw - (int)avgYaw) > 0x03) {
 			lastYaw = avgYaw;
 			PRINTF("YAW = %d\r\n", lastYaw);
@@ -68,7 +67,6 @@ void ADC_Read_A(void *pvParameters) {
 
 		ADC_GetChannelConversionResult(ADC0, 5U, &thrust);
 		avgThrust = doBoxcarAverage(thrustBuffer, &thrustPtr, thrust.result);
-		avgThrust = avgThrust >> 4;
 		if (abs((int)lastThrust - (int)avgThrust) > 0x03) {
 			lastThrust = avgThrust;
 			PRINTF("THR = %d\r\n", lastThrust);
@@ -96,7 +94,6 @@ void ADC_Read_B(void *pvParameters) {
 
 		ADC_GetChannelConversionResult(ADC0, 6U, &pitch);
 		avgPitch = doBoxcarAverage(pitchBuffer, &pitchPtr, pitch.result);
-		avgPitch = avgPitch >> 4;
 		if (abs((int)lastPitch - (int)avgPitch) > 0x03) {
 			lastPitch = avgPitch;
 			PRINTF("PITCH = %d\r\n", lastPitch);
@@ -106,7 +103,6 @@ void ADC_Read_B(void *pvParameters) {
 
 		ADC_GetChannelConversionResult(ADC0, 7U, &roll);
 		avgRoll = doBoxcarAverage(rollBuffer, &rollPtr, roll.result);
-		avgRoll = avgRoll >> 4;
 		if (abs((int)lastRoll - (int)avgRoll) > 0x03) {
 			lastRoll = avgRoll;
 			PRINTF("ROLL = %d\r\n", lastRoll);
@@ -201,7 +197,7 @@ void ADC0_SEQB_IRQHandler(void)
     }
 }
 
-uint32_t doBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading) {
+uint8_t doBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading) {
 	uint32_t avg = 0;
 	int i;
 
@@ -214,5 +210,5 @@ uint32_t doBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t readin
 		avg += buffer[i];
 	}
 
-	return avg / BUFFER_LENGTH;
+	return (uint8_t)((avg / BUFFER_LENGTH) >> 4);
 }
