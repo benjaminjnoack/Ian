@@ -25,7 +25,7 @@ void usartInitialize(void) {
 	xUartQueue = xQueueCreate(10, USART_BUF_SIZE);
 
 	usartConfig.base = USART4;
-	usartConfig.baudrate = 115200;
+	usartConfig.baudrate = 9600U;
 	usartConfig.buffer = txBuffer;
 	usartConfig.buffer_size = USART_BUF_SIZE;
 	usartConfig.parity = kUSART_ParityDisabled;
