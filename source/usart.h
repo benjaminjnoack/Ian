@@ -12,6 +12,8 @@
 #include "task.h"
 #include "queue.h"
 
+#include "fsl_common.h"
+#include "fsl_clock.h"
 #include "fsl_debug_console.h"
 #include "fsl_usart_freertos.h"
 

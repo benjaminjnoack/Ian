@@ -21,20 +21,15 @@ usart_handle_t usartHandle;
 usart_rtos_handle_t usartRtosHandle;
 
 void usartInitialize(void) {
-	/**
-	 * TODO
-	 * enable the usart interrupt?
-	 * init the USART peripheral -  what is the clock speed? is it correct to use FRO?
-	 */
-	xUartQueue = xQueueCreate(10, USART_BUF_SIZE);
 
+	xUartQueue = xQueueCreate(10, USART_BUF_SIZE);
 
 	usartConfig.base = USART4;
 	usartConfig.baudrate = 115200;
 	usartConfig.buffer = txBuffer;
 	usartConfig.buffer_size = USART_BUF_SIZE;
 	usartConfig.parity = kUSART_ParityDisabled;
-	usartConfig.srcclk = 48000000U;
+	usartConfig.srcclk = CLOCK_GetFreq(kCLOCK_FroHf);
 	usartConfig.stopbits = kUSART_OneStopBit;
 
 	NVIC_SetPriority(FLEXCOMM4_IRQn, 4);
