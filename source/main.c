@@ -1,19 +1,20 @@
 #include "FreeRTOS.h"
 #include "task.h"
-#include "queue.h"
-#include "timers.h"
-#include "semphr.h"
 
 #include "fsl_device_registers.h"
 #include "fsl_debug_console.h"
-#include "board.h"
 #include "fsl_adc.h"
 #include "fsl_clock.h"
 #include "fsl_power.h"
+#include "fsl_gpio.h"
+
+#include "board.h"
 #include "peripherals.h"
 #include "pin_mux.h"
+
 #include "adc.h"
-#include "fsl_gpio.h"
+#include "usart.h"
+
 
 /*!
  * @brief Main function
@@ -31,7 +32,8 @@ int main(void)
     GPIO_PortInit(GPIO, 3U);
     /* Enable the power and clock for ADC. */
     BOARD_InitBootPeripherals();
-    initializeADC();
+    adcInitialize();
+    usartInitialize();
     PRINTF("Configuration Done.\r\n");
 
 	vTaskStartScheduler();

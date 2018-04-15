@@ -266,7 +266,7 @@ outputs:
 - {id: CLKOUT_clock.outFreq, value: 22 MHz}
 - {id: FRO12M_clock.outFreq, value: 12 MHz}
 - {id: FROHF_clock.outFreq, value: 48 MHz}
-- {id: FXCOM4_clock.outFreq, value: 12 MHz}
+- {id: FXCOM4_clock.outFreq, value: 48 MHz}
 - {id: MAIN_clock.outFreq, value: 220 MHz}
 - {id: SYSPLL_clock.outFreq, value: 220 MHz}
 - {id: System_clock.outFreq, value: 220 MHz, locked: true, accuracy: '0.001'}
@@ -275,7 +275,7 @@ settings:
 - {id: SYSCON.ADCCLKSEL.sel, value: SYSCON.PLL_BYPASS}
 - {id: SYSCON.CLKOUTDIV.scale, value: '10', locked: true}
 - {id: SYSCON.CLKOUTSELA.sel, value: SYSCON.PLL_BYPASS}
-- {id: SYSCON.FXCLKSEL4.sel, value: SYSCON.fro_12m}
+- {id: SYSCON.FXCLKSEL4.sel, value: SYSCON.FROHFCLKDIV}
 - {id: SYSCON.MAINCLKSELB.sel, value: SYSCON.PLL_BYPASS}
 - {id: SYSCON.M_MULT.scale, value: '110'}
 - {id: SYSCON.PDEC.scale, value: '2', locked: true}
@@ -310,6 +310,7 @@ void BOARD_BootClockPLL220M(void)
     };
     CLOCK_AttachClk(kFRO12M_to_SYS_PLL);        /*!< Set sys pll clock source*/
     CLOCK_SetPLLFreq(&pllSetup);                 /*!< Configure PLL to the desired value */
+    CLOCK_SetupFROClocking(48000000U);              /*!< Set up high frequency FRO output to selected frequency */
 
     /*!< Set up dividers */
     CLOCK_SetClkDiv(kCLOCK_DivAhbClk, 1U, false);                  /*!< Reset divider counter and set divider to value 1 */
@@ -321,7 +322,8 @@ void BOARD_BootClockPLL220M(void)
     /*!< Set up clock selectors - Attach clocks to the peripheries */
     CLOCK_AttachClk(kSYS_PLL_to_MAIN_CLK);                  /*!< Switch MAIN_CLK to SYS_PLL */
     CLOCK_AttachClk(kSYS_PLL_to_ADC_CLK);                  /*!< Switch ADC_CLK to SYS_PLL */
-    CLOCK_AttachClk(kFRO12M_to_FLEXCOMM4);                  /*!< Switch FLEXCOMM4 to FRO12M */
+    SYSCON->FROHFCLKDIV = ((SYSCON->FROHFCLKDIV & ~SYSCON_FROHFCLKDIV_DIV_MASK) | SYSCON_FROHFCLKDIV_DIV(0U)); /*!< Set FROHF CLKDIV  to value 0 */
+    CLOCK_AttachClk(kFRO_HF_to_FLEXCOMM4);                      /*!< Switch FLEXCOMM4 to FRO_HF */
     CLOCK_AttachClk(kSYS_PLL_to_CLKOUT);                  /*!< Switch CLKOUT to SYS_PLL */
     SYSCON->MAINCLKSELA = ((SYSCON->MAINCLKSELA & ~SYSCON_MAINCLKSELA_SEL_MASK) | SYSCON_MAINCLKSELA_SEL(0U)); /*!< Switch MAINCLKSELA to FRO12M even it is not used for MAINCLKSELB */
     /* Set SystemCoreClock variable. */

@@ -21,100 +21,61 @@ static const uint32_t DEAD_CENTER = 0x800;
 static uint32_t rollBuffer[BUFFER_LENGTH];
 uint32_t *rollPtr = rollBuffer;
 uint8_t lastRoll = 0x80;
+uint8_t rollCmd[USART_BUF_SIZE] = {AXIS_ROLL};
 
 static uint32_t thrustBuffer[BUFFER_LENGTH];
 uint32_t *thrustPtr = thrustBuffer;
 uint8_t lastThrust = 0x80;
+uint8_t thrustCmd[USART_BUF_SIZE] = {AXIS_THRUST};
 
 static uint32_t pitchBuffer[BUFFER_LENGTH];
 uint32_t *pitchPtr = pitchBuffer;
 uint8_t lastPitch = 0x80;
+uint8_t pitchCmd[USART_BUF_SIZE] = {AXIS_PITCH};
 
 static uint32_t yawBuffer[BUFFER_LENGTH];
 uint32_t *yawPtr = yawBuffer;
 uint8_t lastYaw = 0x80;
+uint8_t yawCmd[USART_BUF_SIZE] = {AXIS_YAW};
 /*******************************************************************************
  * Prototypes
  ******************************************************************************/
 
-void ADC_Read_A(void *pvParameters);
-void ADC_Read_B(void *pvParameters);
-void ADC_ClockPower_Configuration(void);
-uint8_t doBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading);
-
-void ADC_Read_A(void *pvParameters) {
-	static adc_result_info_t yaw;
-	uint32_t avgYaw = 0;
-	static adc_result_info_t thrust;
-	uint32_t avgThrust = 0;
-	static int count = 0;
-
-	for (;;) {
-		xSemaphoreTake(xSequenceASemaphore, portMAX_DELAY);
-
-		if (++count == 1000) {
-			count = 0;
-			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED1_PORT, 1 << BOARD_INITPINS_LED1_PIN);
-		}
-
-		ADC_GetChannelConversionResult(ADC0, 4U, &yaw);
-		avgYaw = doBoxcarAverage(yawBuffer, &yawPtr, yaw.result);
-		if (abs((int)lastYaw - (int)avgYaw) > 0x03) {
-			lastYaw = avgYaw;
-			PRINTF("YAW = %d\r\n", lastYaw);
-		}
+void adcReadSequenceATask(void *pvParameters);
+void adcReadSequenceBTask(void *pvParameters);
+uint8_t adcDoBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading);
 
 
-		ADC_GetChannelConversionResult(ADC0, 5U, &thrust);
-		avgThrust = doBoxcarAverage(thrustBuffer, &thrustPtr, thrust.result);
-		if (abs((int)lastThrust - (int)avgThrust) > 0x03) {
-			lastThrust = avgThrust;
-			PRINTF("THR = %d\r\n", lastThrust);
-		}
+/*******************************************************************************
+ * Code
+ ******************************************************************************/
 
-		ADC_DoSoftwareTriggerConvSeqB(ADC0);
-		taskYIELD();
+uint8_t adcDoBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading) {
+	uint32_t avg = 0;
+	int i;
+
+	*(*bufferPtr) = reading;
+	if (++(*bufferPtr) == (buffer + (BUFFER_LENGTH - 1))) {
+		(*bufferPtr) = buffer;
 	}
+
+	for (i = 0; i < BUFFER_LENGTH; i++) {
+		avg += buffer[i];
+	}
+
+	return (uint8_t)((avg / BUFFER_LENGTH) >> 4);
 }
 
-void ADC_Read_B(void *pvParameters) {
-	static adc_result_info_t pitch;
-	uint32_t avgPitch = 0;
-	static adc_result_info_t roll;
-	uint32_t avgRoll = 0;
-	static int count = 0;
+void adcInitialize(void) {
+	/* SYSCON power. */
+	POWER_DisablePD(kPDRUNCFG_PD_VDDA);    /* Power on VDDA. */
+	POWER_DisablePD(kPDRUNCFG_PD_ADC0);    /* Power on the ADC converter. */
+	POWER_DisablePD(kPDRUNCFG_PD_VD2_ANA); /* Power on the analog power supply. */
+	POWER_DisablePD(kPDRUNCFG_PD_VREFP);   /* Power on the reference voltage source. */
+	POWER_DisablePD(kPDRUNCFG_PD_TS);      /* Power on the temperature sensor. */
 
-	for (;;) {
-		xSemaphoreTake(xSequenceBSemaphore, portMAX_DELAY);
+	CLOCK_EnableClock(kCLOCK_Adc0); /* SYSCON->AHBCLKCTRL[0] |= SYSCON_AHBCLKCTRL_ADC0_MASK; */
 
-		if (++count == 1000) {
-			count = 0;
-			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED2_PORT, 1 << BOARD_INITPINS_LED2_PIN);
-		}
-
-		ADC_GetChannelConversionResult(ADC0, 6U, &pitch);
-		avgPitch = doBoxcarAverage(pitchBuffer, &pitchPtr, pitch.result);
-		if (abs((int)lastPitch - (int)avgPitch) > 0x03) {
-			lastPitch = avgPitch;
-			PRINTF("PITCH = %d\r\n", lastPitch);
-		}
-
-
-
-		ADC_GetChannelConversionResult(ADC0, 7U, &roll);
-		avgRoll = doBoxcarAverage(rollBuffer, &rollPtr, roll.result);
-		if (abs((int)lastRoll - (int)avgRoll) > 0x03) {
-			lastRoll = avgRoll;
-			PRINTF("ROLL = %d\r\n", lastRoll);
-		}
-
-		ADC_DoSoftwareTriggerConvSeqA(ADC0);
-		taskYIELD();
-	}
-}
-
-void initializeADC(void) {
-	ADC_ClockPower_Configuration();
 	PERIPH_InitAdc();
 
 	xSequenceASemaphore = xSemaphoreCreateBinary();
@@ -129,14 +90,14 @@ void initializeADC(void) {
 		thrustBuffer[i] = DEAD_CENTER;
 	}
 
-    if (xTaskCreate(ADC_Read_A, "Sequence A Task", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), NULL) != pdPASS)
+    if (xTaskCreate(adcReadSequenceATask, "Sequence A Task", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), NULL) != pdPASS)
 	{
 		PRINTF(" Sequence A Task creation failed!.\r\n");
 		while (1)
 			;
 	}
 
-	if (xTaskCreate(ADC_Read_B, "Sequence B Task", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), NULL) != pdPASS)
+	if (xTaskCreate(adcReadSequenceBTask, "Sequence B Task", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), NULL) != pdPASS)
 	{
 		PRINTF("Sequence B Task creation failed!.\r\n");
 		while (1)
@@ -155,22 +116,94 @@ void initializeADC(void) {
 	ADC_DoSoftwareTriggerConvSeqA(ADC0);
 }
 
-void ADC_ClockPower_Configuration(void)
-{
-    /* SYSCON power. */
-    POWER_DisablePD(kPDRUNCFG_PD_VDDA);    /* Power on VDDA. */
-    POWER_DisablePD(kPDRUNCFG_PD_ADC0);    /* Power on the ADC converter. */
-    POWER_DisablePD(kPDRUNCFG_PD_VD2_ANA); /* Power on the analog power supply. */
-    POWER_DisablePD(kPDRUNCFG_PD_VREFP);   /* Power on the reference voltage source. */
-    POWER_DisablePD(kPDRUNCFG_PD_TS);      /* Power on the temperature sensor. */
+void adcReadSequenceATask(void *pvParameters) {
+	static adc_result_info_t yaw;
+	uint32_t avgYaw = 0;
+	static adc_result_info_t thrust;
+	uint32_t avgThrust = 0;
+	static int count = 0;
 
-    CLOCK_EnableClock(kCLOCK_Adc0); /* SYSCON->AHBCLKCTRL[0] |= SYSCON_AHBCLKCTRL_ADC0_MASK; */
+	for (;;) {
+		xSemaphoreTake(xSequenceASemaphore, portMAX_DELAY);
+
+		if (++count == 1000) {
+			count = 0;
+			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED1_PORT, 1 << BOARD_INITPINS_LED1_PIN);
+		}
+
+		ADC_GetChannelConversionResult(ADC0, 4U, &yaw);
+		avgYaw = adcDoBoxcarAverage(yawBuffer, &yawPtr, yaw.result);
+		if (abs((int)lastYaw - (int)avgYaw) > 0x03) {
+			yawCmd[1] = avgYaw;
+			if (pdTRUE == usartSendToQueue(yawCmd, 0)) {
+				lastYaw = avgYaw;
+			}
+			//PRINTF("YAW = %d\r\n", avgYaw);
+		}
+
+
+		ADC_GetChannelConversionResult(ADC0, 5U, &thrust);
+		avgThrust = adcDoBoxcarAverage(thrustBuffer, &thrustPtr, thrust.result);
+		if (abs((int)lastThrust - (int)avgThrust) > 0x03) {
+			thrustCmd[1] = avgThrust;
+			if (pdTRUE == usartSendToQueue(thrustCmd, 0)) {
+				lastThrust = avgThrust;
+			}
+			//PRINTF("THR = %d\r\n", lastThrust);
+		}
+
+		ADC_DoSoftwareTriggerConvSeqB(ADC0);
+		taskYIELD();
+	}
+}
+
+void adcReadSequenceBTask(void *pvParameters) {
+	static adc_result_info_t pitch;
+	uint32_t avgPitch = 0;
+	static adc_result_info_t roll;
+	uint32_t avgRoll = 0;
+	static int count = 0;
+
+	for (;;) {
+		xSemaphoreTake(xSequenceBSemaphore, portMAX_DELAY);
+
+		if (++count == 1000) {
+			count = 0;
+			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED2_PORT, 1 << BOARD_INITPINS_LED2_PIN);
+		}
+
+		ADC_GetChannelConversionResult(ADC0, 6U, &pitch);
+		avgPitch = adcDoBoxcarAverage(pitchBuffer, &pitchPtr, pitch.result);
+		if (abs((int)lastPitch - (int)avgPitch) > 0x03) {
+			pitchCmd[1] = avgPitch;
+			if (pdTRUE == usartSendToQueue(pitchCmd, 0)) {
+				lastPitch = avgPitch;
+			}
+
+//			PRINTF("PITCH = %d\r\n", lastPitch);
+		}
+
+
+
+		ADC_GetChannelConversionResult(ADC0, 7U, &roll);
+		avgRoll = adcDoBoxcarAverage(rollBuffer, &rollPtr, roll.result);
+		if (abs((int)lastRoll - (int)avgRoll) > 0x03) {
+			rollCmd[1] = avgRoll;
+			if (pdTRUE == usartSendToQueue(rollCmd, 0)) {
+				lastRoll = avgRoll;
+			}
+
+//			PRINTF("ROLL = %d\r\n", lastRoll);
+		}
+
+		ADC_DoSoftwareTriggerConvSeqA(ADC0);
+		taskYIELD();
+	}
 }
 
 /*
  * ISR for ADC conversion
  * Release semaphore for the completed conversion sequence
- * Trigger the next sequence (TODO can this be done in hardware through configuration?)
  */
 void ADC0_SEQA_IRQHandler(void)
 {
@@ -185,7 +218,6 @@ void ADC0_SEQA_IRQHandler(void)
 /*
  * ISR for ADC conversion
  * Release semaphore for the completed conversion sequence
- * Trigger the next sequence (TODO can this be done in hardware through configuration?)
  */
 void ADC0_SEQB_IRQHandler(void)
 {
@@ -195,20 +227,4 @@ void ADC0_SEQB_IRQHandler(void)
     	ADC_ClearStatusFlags(ADC0, kADC_ConvSeqBInterruptFlag);
     	xSemaphoreGiveFromISR(xSequenceBSemaphore, &xHigherPriorityTaskWoken);
     }
-}
-
-uint8_t doBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading) {
-	uint32_t avg = 0;
-	int i;
-
-	*(*bufferPtr) = reading;
-	if (++(*bufferPtr) == (buffer + (BUFFER_LENGTH - 1))) {
-		(*bufferPtr) = buffer;
-	}
-
-	for (i = 0; i < BUFFER_LENGTH; i++) {
-		avg += buffer[i];
-	}
-
-	return (uint8_t)((avg / BUFFER_LENGTH) >> 4);
 }

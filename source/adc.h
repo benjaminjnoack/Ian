@@ -19,8 +19,19 @@
 #include "fsl_gpio.h"
 #include "pin_mux.h"
 #include <stdlib.h>
+#include "usart.h"
+
+#define UART_MESSAGE_LENGTH 3
 #define BUFFER_LENGTH 32
 
-void initializeADC(void);
+typedef enum {
+	AXIS_THRUST = 0x54,
+	AXIS_YAW = 0x59,
+	AXIS_ROLL = 0x52,
+	AXIS_PITCH = 0x50
+} axis_t;
+
+
+void adcInitialize(void);
 
 #endif /* ADC_H_ */
