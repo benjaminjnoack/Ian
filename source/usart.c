@@ -13,6 +13,7 @@
 
 QueueHandle_t xUartQueue;
 SemaphoreHandle_t xUartTxSemaphore;
+TaskHandle_t xUartTxTask;
 
 void usartInitialize(void) {
 
@@ -30,7 +31,7 @@ void usartInitialize(void) {
 //			;
 //	}
 
-	if (xTaskCreate(usartTxTask, "USART TX", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), NULL) != pdPASS)
+	if (xTaskCreate(usartTxTask, "USART TX", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), &xUartTxTask) != pdPASS)
 	{
 		PRINTF("Sequence B Task creation failed!.\r\n");
 		while (1)
@@ -44,13 +45,26 @@ void usartRxTask(void *pvParameters) {
 	 */
 }
 
+/**
+ * TODO
+ * use the clear to send semaphore to ensure the XBee is ready to receive
+ */
 void usartTxTask(void *pvParameters) {
+	static status_t txStatus;
+
 	for (;;) {
 		xQueueReceive(xUartQueue, USART_1_txTransfer.data, portMAX_DELAY);
 		xSemaphoreTake(xUartTxSemaphore, portMAX_DELAY);
 		//TODO casting usart_transfer_t is a hack to avoid compile warnings
-		USART_TransferSendNonBlocking(USART4, &USART_1_handle, (usart_transfer_t *)&USART_1_txTransfer);
+		txStatus = USART_TransferSendNonBlocking(USART4, &USART_1_handle, (usart_transfer_t *)&USART_1_txTransfer);
+
+		if (txStatus != kStatus_Success) {
+			PRINTF("TX ERR: %d", txStatus);
+			break;
+		}
 	}
+
+	vTaskDelete(xUartTxTask);
 }
 
 portBASE_TYPE usartSendToQueue(uint8_t *buf, TickType_t n) {
