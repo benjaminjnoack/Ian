@@ -21,7 +21,6 @@
 #include <stdlib.h>
 #include "usart.h"
 
-#define UART_MESSAGE_LENGTH 3
 #define BUFFER_LENGTH 32
 
 typedef enum {

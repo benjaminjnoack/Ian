@@ -11,6 +11,9 @@
  **********************************************************************************************************************/
 #include "fsl_common.h"
 #include "fsl_gpio.h"
+#include "fsl_reset.h"
+#include "fsl_usart.h"
+#include "fsl_clock.h"
 #include "fsl_adc.h"
 
 #if defined(__cplusplus)
@@ -23,6 +26,14 @@ extern "C" {
 /* Definitions for BOARD_InitPeripherals functional group */
 /* Alias for GPIO peripheral */
 #define GPIO_1_GPIO GPIO
+/* Definition of peripheral ID */
+#define USART_1_PERIPHERAL ((USART_Type *)FLEXCOMM4)
+/* Definition of the clock source frequency */
+#define USART_1_CLOCK_SOURCE CLOCK_GetFreq(kCLOCK_Flexcomm4)
+/* Rx transfer buffer size. */
+#define USART_1_RX_BUFFER_SIZE 10
+/* Rx transfer buffer size. */
+#define USART_1_TX_BUFFER_SIZE 2
 
 /* Definitions for PERIPH_InitAdc functional group */
 /* Alias for ADC0 peripheral */
@@ -32,9 +43,21 @@ extern "C" {
  * Global variables
  **********************************************************************************************************************/
 extern gpio_pin_config_t GPIO_1_config[3];
+extern const usart_config_t USART_1_config;
+extern usart_handle_t USART_1_handle;
+extern uint8_t USART_1_rxBuffer[USART_1_RX_BUFFER_SIZE];
+extern const usart_transfer_t USART_1_rxTransfer;
+extern uint8_t USART_1_txBuffer[USART_1_TX_BUFFER_SIZE];
+extern const usart_transfer_t USART_1_txTransfer;
 extern const adc_config_t ADC_1configStruct;
 extern const adc_conv_seq_config_t ADC_1ConvSeqAConfigStruct;
 extern const adc_conv_seq_config_t ADC_1ConvSeqBConfigStruct;
+
+/***********************************************************************************************************************
+ * Callback functions
+ **********************************************************************************************************************/
+/* USART transfer callback function for the USART_1 component (init. function BOARD_InitPeripherals)*/
+extern void USART_UserCallback(USART_Type *base, usart_handle_t *handle, status_t status, void *userData);
 
 /***********************************************************************************************************************
  * Initialization functions

@@ -21,22 +21,22 @@ static const uint32_t DEAD_CENTER = 0x800;
 static uint32_t rollBuffer[BUFFER_LENGTH];
 uint32_t *rollPtr = rollBuffer;
 uint8_t lastRoll = 0x80;
-uint8_t rollCmd[USART_BUF_SIZE] = {AXIS_ROLL};
+uint8_t rollCmd[USART_1_TX_BUFFER_SIZE] = {AXIS_ROLL};
 
 static uint32_t thrustBuffer[BUFFER_LENGTH];
 uint32_t *thrustPtr = thrustBuffer;
 uint8_t lastThrust = 0x80;
-uint8_t thrustCmd[USART_BUF_SIZE] = {AXIS_THRUST};
+uint8_t thrustCmd[USART_1_TX_BUFFER_SIZE] = {AXIS_THRUST};
 
 static uint32_t pitchBuffer[BUFFER_LENGTH];
 uint32_t *pitchPtr = pitchBuffer;
 uint8_t lastPitch = 0x80;
-uint8_t pitchCmd[USART_BUF_SIZE] = {AXIS_PITCH};
+uint8_t pitchCmd[USART_1_TX_BUFFER_SIZE] = {AXIS_PITCH};
 
 static uint32_t yawBuffer[BUFFER_LENGTH];
 uint32_t *yawPtr = yawBuffer;
 uint8_t lastYaw = 0x80;
-uint8_t yawCmd[USART_BUF_SIZE] = {AXIS_YAW};
+uint8_t yawCmd[USART_1_TX_BUFFER_SIZE] = {AXIS_YAW};
 /*******************************************************************************
  * Prototypes
  ******************************************************************************/

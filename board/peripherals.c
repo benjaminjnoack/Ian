@@ -90,6 +90,73 @@ void GPIO_1_init(void) {
 }
 
 /***********************************************************************************************************************
+ * USART_1 initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'USART_1'
+- type: 'flexcomm_usart'
+- mode: 'transfer'
+- type_id: 'flexcomm_usart_fcc110cc6b16332e9dfd9e0df675e21f'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'FLEXCOMM4'
+- config_sets:
+  - transferCfg:
+    - transfer:
+      - init_rx_transfer: 'true'
+      - rx_transfer:
+        - data_size: '10'
+      - init_tx_transfer: 'true'
+      - tx_transfer:
+        - data_size: '2'
+      - init_callback: 'true'
+      - callback_fcn: 'USART_UserCallback'
+      - user_data: ''
+  - usartConfig_t:
+    - usartConfig:
+      - baudRate_Bps: '115200'
+      - parityMode: 'kUSART_ParityDisabled'
+      - stopBitCount: 'kUSART_OneStopBit'
+      - bitCountPerChar: 'kUSART_8BitsPerChar'
+      - loopback: 'false'
+      - txWatermark: 'kUSART_TxFifo0'
+      - rxWatermark: 'kUSART_RxFifo1'
+      - enableRx: 'true'
+      - enableTx: 'true'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+const usart_config_t USART_1_config = {
+  .baudRate_Bps = 115200,
+  .parityMode = kUSART_ParityDisabled,
+  .stopBitCount = kUSART_OneStopBit,
+  .bitCountPerChar = kUSART_8BitsPerChar,
+  .loopback = false,
+  .txWatermark = kUSART_TxFifo0,
+  .rxWatermark = kUSART_RxFifo1,
+  .enableRx = true,
+  .enableTx = true
+};
+usart_handle_t USART_1_handle;
+uint8_t USART_1_rxBuffer[USART_1_RX_BUFFER_SIZE];
+const usart_transfer_t USART_1_rxTransfer = {
+  .data = USART_1_rxBuffer,
+  .dataSize = USART_1_RX_BUFFER_SIZE
+};
+uint8_t USART_1_txBuffer[USART_1_TX_BUFFER_SIZE];
+const usart_transfer_t USART_1_txTransfer = {
+  .data = USART_1_txBuffer,
+  .dataSize = USART_1_TX_BUFFER_SIZE
+};
+
+void USART_1_init(void) {
+  /* Reset FLEXCOMM device */
+  RESET_PeripheralReset(kFC4_RST_SHIFT_RSTn);
+  USART_Init(USART_1_PERIPHERAL, &USART_1_config, USART_1_CLOCK_SOURCE);
+  USART_TransferCreateHandle(USART_1_PERIPHERAL, &USART_1_handle, USART_UserCallback, NULL);
+}
+
+/***********************************************************************************************************************
  * PERIPH_InitAdc functional group
  **********************************************************************************************************************/
 /***********************************************************************************************************************
@@ -214,6 +281,7 @@ void BOARD_InitPeripherals(void)
 {
   /* Initialize components */
   GPIO_1_init();
+  USART_1_init();
 }
 
 void PERIPH_InitAdc(void)
