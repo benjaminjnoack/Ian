@@ -104,6 +104,8 @@
                   <pin peripheral="FLEXCOMM4" signal="RXD_SDA_MOSI" pin_num="K5" pin_signal="PIO3_26/SCT0_OUT0/FC4_RXD_SDA_MOSI/EMC_A(15)"/>
                   <pin peripheral="FLEXCOMM4" signal="TXD_SCL_MISO" pin_num="P14" pin_signal="PIO3_27/SCT0_OUT1/FC4_TXD_SCL_MISO/EMC_A(16)"/>
                   <pin peripheral="SYSCON" signal="CLKOUT" pin_num="N2" pin_signal="PIO3_20/FC9_SCK/SD_CARD_INT_N/CLKOUT/SCT0_OUT7"/>
+                  <pin peripheral="FLEXCOMM4" signal="CTS_SDA_SSEL0" pin_num="M11" pin_signal="PIO3_28/SCT0_OUT2/FC4_CTS_SDA_SSEL0/EMC_A(17)"/>
+                  <pin peripheral="FLEXCOMM4" signal="RTS_SCL_SSEL1" pin_num="L13" pin_signal="PIO3_29/SCT0_OUT3/FC4_RTS_SCL_SSEL1/EMC_A(18)"/>
                </pins>
             </function>
          </functions_list>

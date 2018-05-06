@@ -20,7 +20,6 @@
 
 /**
  * Break generation and detection
- * RTS/CTS
  */
 
 void usartInitialize(void);

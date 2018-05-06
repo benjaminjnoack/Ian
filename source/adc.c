@@ -18,30 +18,27 @@ SemaphoreHandle_t xSequenceBSemaphore = NULL;
 
 static const uint32_t DEAD_CENTER = 0x800;
 
-static uint32_t rollBuffer[BUFFER_LENGTH];
-uint32_t *rollPtr = rollBuffer;
-uint8_t lastRoll = 0x80;
 uint8_t rollCmd[USART_1_TX_BUFFER_SIZE] = {AXIS_ROLL};
 
-static uint32_t thrustBuffer[BUFFER_LENGTH];
-uint32_t *thrustPtr = thrustBuffer;
-uint8_t lastThrust = 0x80;
 uint8_t thrustCmd[USART_1_TX_BUFFER_SIZE] = {AXIS_THRUST};
 
-static uint32_t pitchBuffer[BUFFER_LENGTH];
-uint32_t *pitchPtr = pitchBuffer;
-uint8_t lastPitch = 0x80;
 uint8_t pitchCmd[USART_1_TX_BUFFER_SIZE] = {AXIS_PITCH};
 
-static uint32_t yawBuffer[BUFFER_LENGTH];
-uint32_t *yawPtr = yawBuffer;
-uint8_t lastYaw = 0x80;
 uint8_t yawCmd[USART_1_TX_BUFFER_SIZE] = {AXIS_YAW};
+
+struct sequence_parameter {
+	SemaphoreHandle_t semaphore;
+	int xChannel;
+	int yChannel;
+};
+
+struct sequence_parameter parameters[2];
+
 /*******************************************************************************
  * Prototypes
  ******************************************************************************/
 
-void adcReadSequenceATask(void *pvParameters);
+void adcReadSequenceTask(void *pvParameters);
 void adcReadSequenceBTask(void *pvParameters);
 uint8_t adcDoBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading);
 
@@ -81,23 +78,21 @@ void adcInitialize(void) {
 	xSequenceASemaphore = xSemaphoreCreateBinary();
 	xSequenceBSemaphore = xSemaphoreCreateBinary();
 
-	int i;
+	parameters[0].semaphore = xSequenceASemaphore;
+	parameters[0].xChannel = 4;
+	parameters[0].yChannel = 5;
+	parameters[1].semaphore = xSequenceBSemaphore;
+	parameters[1].xChannel = 6;
+	parameters[1].yChannel = 7;
 
-	for (i = 0; i < BUFFER_LENGTH; i++) {
-		rollBuffer[i] = DEAD_CENTER;
-		yawBuffer[i] = DEAD_CENTER;
-		pitchBuffer[i] = DEAD_CENTER;
-		thrustBuffer[i] = DEAD_CENTER;
-	}
-
-    if (xTaskCreate(adcReadSequenceATask, "Sequence A Task", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), NULL) != pdPASS)
+    if (xTaskCreate(adcReadSequenceTask, "Sequence A", configMINIMAL_STACK_SIZE + 128, &parameters[0], (configMAX_PRIORITIES + 1), NULL) != pdPASS)
 	{
 		PRINTF(" Sequence A Task creation failed!.\r\n");
 		while (1)
 			;
 	}
 
-	if (xTaskCreate(adcReadSequenceBTask, "Sequence B Task", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), NULL) != pdPASS)
+	if (xTaskCreate(adcReadSequenceTask, "Sequence B", configMINIMAL_STACK_SIZE + 128, &parameters[1], (configMAX_PRIORITIES + 1), NULL) != pdPASS)
 	{
 		PRINTF("Sequence B Task creation failed!.\r\n");
 		while (1)
@@ -116,38 +111,60 @@ void adcInitialize(void) {
 	ADC_DoSoftwareTriggerConvSeqA(ADC0);
 }
 
-void adcReadSequenceATask(void *pvParameters) {
-	static adc_result_info_t yaw;
-	uint32_t avgYaw = 0;
-	static adc_result_info_t thrust;
-	uint32_t avgThrust = 0;
-	static int count = 0;
+//TODO initialize the buffers here, before the for loop
+void adcReadSequenceTask(void *pvParameters) {
+	int count, i;
+	struct sequence_parameter parameters;
+
+	uint32_t xAvgerage, yAverage;
+	uint32_t xBuffer[BUFFER_LENGTH];
+	uint32_t yBuffer[BUFFER_LENGTH];
+	uint8_t xCmd[USART_1_TX_BUFFER_SIZE];
+	uint8_t yCmd[USART_1_TX_BUFFER_SIZE];
+	uint8_t xLast, yLast;
+	uint32_t *xPtr, *yPtr;
+	adc_result_info_t xResult, yResult;
+
+	count = 0;
+	xAverage = 0;
+	yAverage = 0;
+	//TODO set the axis_t in the appropriate command
+	xLast = DEAD_CENTER;
+	yLast = DEAD_CENTER;
+	xPtr = xBuffer;
+	yPtr = yBuffer;
+
+	for (i = 0; i < BUFFER_LENGTH; i++) {
+		xBuffer[i] = DEAD_CENTER;
+		yBuffer[i] = DEAD_CENTER;
+	}
+
+	parameters = (sequence_parameter *) pvParameters;
 
 	for (;;) {
-		xSemaphoreTake(xSequenceASemaphore, portMAX_DELAY);
+		xSemaphoreTake(parameters.semaphore, portMAX_DELAY);
 
 		if (++count == 1000) {
 			count = 0;
-			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED1_PORT, 1 << BOARD_INITPINS_LED1_PIN);
+			GPIO_PortToggle(GPIO, BOARD_INITPINS_LED1_PORT, 1 << BOARD_INITPINS_LED1_PIN);//TODO pass the pin?
 		}
 
-		ADC_GetChannelConversionResult(ADC0, 4U, &yaw);
-		avgYaw = adcDoBoxcarAverage(yawBuffer, &yawPtr, yaw.result);
-		if (abs((int)lastYaw - (int)avgYaw) > 0x03) {
-			yawCmd[1] = avgYaw;
+		ADC_GetChannelConversionResult(ADC0, parameters.xChannel, &xResult);
+		xAverage = adcDoBoxcarAverage(xBuffer, &xPtr, xResult.result);
+		if (abs((int)xLast - (int)xAverage) > 0x03) {
+			yawCmd[1] = xAvg;
 			if (pdTRUE == usartSendToQueue(yawCmd, 0)) {
-				lastYaw = avgYaw;
+				xLast = xAvg;
 			}
-			//PRINTF("YAW = %d\r\n", avgYaw);
 		}
 
 
-		ADC_GetChannelConversionResult(ADC0, 5U, &thrust);
-		avgThrust = adcDoBoxcarAverage(thrustBuffer, &thrustPtr, thrust.result);
-		if (abs((int)lastThrust - (int)avgThrust) > 0x03) {
-			thrustCmd[1] = avgThrust;
+		ADC_GetChannelConversionResult(ADC0, 5U, &yRes);
+		yAvg = adcDoBoxcarAverage(thrustBuffer, &thrustPtr, yRes.result);
+		if (abs((int)lastThrust - (int)yAvg) > 0x03) {
+			thrustCmd[1] = yAvg;
 			if (pdTRUE == usartSendToQueue(thrustCmd, 0)) {
-				lastThrust = avgThrust;
+				lastThrust = yAvg;
 			}
 			//PRINTF("THR = %d\r\n", lastThrust);
 		}

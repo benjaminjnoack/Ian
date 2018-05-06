@@ -11,38 +11,25 @@
  * Definitions
  ******************************************************************************/
 
-QueueHandle_t xUartQueue;
+QueueHandle_t xUsartQueue;
 SemaphoreHandle_t xUartTxSemaphore;
-TaskHandle_t xUartTxTask;
+TaskHandle_t xUsartTxTask;
 
 void usartInitialize(void) {
 
-	xUartQueue = xQueueCreate(10, USART_1_TX_BUFFER_SIZE);
+	xUsartQueue = xQueueCreate(10, USART_1_TX_BUFFER_SIZE);
 
 	xUartTxSemaphore = xSemaphoreCreateBinary();
 	xSemaphoreGive(xUartTxSemaphore);
 
 	NVIC_SetPriority(FLEXCOMM4_IRQn, 4);
 
-//	if (xTaskCreate(usartRxTask, "USART RX", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), NULL) != pdPASS)
-//	{
-//		PRINTF(" Sequence A Task creation failed!.\r\n");
-//		while (1)
-//			;
-//	}
-
-	if (xTaskCreate(usartTxTask, "USART TX", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), &xUartTxTask) != pdPASS)
+	if (xTaskCreate(usartTxTask, "USART TX", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), &xUsartTxTask) != pdPASS)
 	{
-		PRINTF("Sequence B Task creation failed!.\r\n");
+		PRINTF("USART TX Task creation failed!.\r\n");
 		while (1)
 			;
 	}
-}
-
-void usartRxTask(void *pvParameters) {
-	/**
-	 * TODO define a bare bones receive task
-	 */
 }
 
 /**
@@ -53,7 +40,7 @@ void usartTxTask(void *pvParameters) {
 	static status_t txStatus;
 
 	for (;;) {
-		xQueueReceive(xUartQueue, USART_1_txTransfer.data, portMAX_DELAY);
+		xQueueReceive(xUsartQueue, USART_1_txTransfer.data, portMAX_DELAY);
 		xSemaphoreTake(xUartTxSemaphore, portMAX_DELAY);
 		//TODO casting usart_transfer_t is a hack to avoid compile warnings
 		txStatus = USART_TransferSendNonBlocking(USART4, &USART_1_handle, (usart_transfer_t *)&USART_1_txTransfer);
@@ -64,11 +51,11 @@ void usartTxTask(void *pvParameters) {
 		}
 	}
 
-	vTaskDelete(xUartTxTask);
+	vTaskDelete(xUsartTxTask);
 }
 
 portBASE_TYPE usartSendToQueue(uint8_t *buf, TickType_t n) {
-	return xQueueSendToBack(xUartQueue, buf, n);
+	return xQueueSendToBack(xUsartQueue, buf, n);
 }
 
 void USART_UserCallback(USART_Type *base, usart_handle_t *handle, status_t status, void *userData) {

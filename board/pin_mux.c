@@ -52,6 +52,8 @@ BOARD_InitPins:
   - {pin_num: K5, peripheral: FLEXCOMM4, signal: RXD_SDA_MOSI, pin_signal: PIO3_26/SCT0_OUT0/FC4_RXD_SDA_MOSI/EMC_A(15)}
   - {pin_num: P14, peripheral: FLEXCOMM4, signal: TXD_SCL_MISO, pin_signal: PIO3_27/SCT0_OUT1/FC4_TXD_SCL_MISO/EMC_A(16)}
   - {pin_num: N2, peripheral: SYSCON, signal: CLKOUT, pin_signal: PIO3_20/FC9_SCK/SD_CARD_INT_N/CLKOUT/SCT0_OUT7}
+  - {pin_num: M11, peripheral: FLEXCOMM4, signal: CTS_SDA_SSEL0, pin_signal: PIO3_28/SCT0_OUT2/FC4_CTS_SDA_SSEL0/EMC_A(17)}
+  - {pin_num: L13, peripheral: FLEXCOMM4, signal: RTS_SCL_SSEL1, pin_signal: PIO3_29/SCT0_OUT3/FC4_RTS_SCL_SSEL1/EMC_A(18)}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -191,6 +193,26 @@ void BOARD_InitPins(void)
 
                          /* Select Analog/Digital mode.: Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO327_DIGIMODE_DIGITAL));
+
+    IOCON->PIO[3][28] = ((IOCON->PIO[3][28] &
+                          /* Mask bits to zero which are setting */
+                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
+
+                         /* Selects pin function.: PORT328 (pin M11) is configured as FC4_CTS_SDA_SSEL0 */
+                         | IOCON_PIO_FUNC(PIO328_FUNC_ALT3)
+
+                         /* Select Analog/Digital mode.: Digital mode. */
+                         | IOCON_PIO_DIGIMODE(PIO328_DIGIMODE_DIGITAL));
+
+    IOCON->PIO[3][29] = ((IOCON->PIO[3][29] &
+                          /* Mask bits to zero which are setting */
+                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
+
+                         /* Selects pin function.: PORT329 (pin L13) is configured as FC4_RTS_SCL_SSEL1 */
+                         | IOCON_PIO_FUNC(PIO329_FUNC_ALT3)
+
+                         /* Select Analog/Digital mode.: Digital mode. */
+                         | IOCON_PIO_DIGIMODE(PIO329_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][3] = ((IOCON->PIO[3][3] &
                          /* Mask bits to zero which are setting */
