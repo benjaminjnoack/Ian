@@ -106,6 +106,13 @@
                   <pin peripheral="SYSCON" signal="CLKOUT" pin_num="N2" pin_signal="PIO3_20/FC9_SCK/SD_CARD_INT_N/CLKOUT/SCT0_OUT7"/>
                   <pin peripheral="FLEXCOMM4" signal="CTS_SDA_SSEL0" pin_num="M11" pin_signal="PIO3_28/SCT0_OUT2/FC4_CTS_SDA_SSEL0/EMC_A(17)"/>
                   <pin peripheral="FLEXCOMM4" signal="RTS_SCL_SSEL1" pin_num="L13" pin_signal="PIO3_29/SCT0_OUT3/FC4_RTS_SCL_SSEL1/EMC_A(18)"/>
+                  <pin peripheral="GPIO" signal="PIO3, 24" pin_num="E2" pin_signal="PIO3_24/FC2_RTS_SCL_SSEL1/CTIMER4_CAP0/USB0_VBUS">
+                     <pin_features>
+                        <pin_feature name="direction" value="OUTPUT"/>
+                        <pin_feature name="i2c_drive" value="no_init"/>
+                        <pin_feature name="i2c_filter" value="disabled"/>
+                     </pin_features>
+                  </pin>
                </pins>
             </function>
          </functions_list>
@@ -289,6 +296,7 @@
                <clock_sources/>
                <clock_outputs>
                   <clock_output id="ADC_clock.outFreq" value="220 MHz" locked="false" accuracy=""/>
+                  <clock_output id="ASYNCAPB_clock.outFreq" value="12 MHz" locked="false" accuracy=""/>
                   <clock_output id="CLKOUT_clock.outFreq" value="22 MHz" locked="false" accuracy=""/>
                   <clock_output id="FRO12M_clock.outFreq" value="12 MHz" locked="false" accuracy=""/>
                   <clock_output id="FROHF_clock.outFreq" value="48 MHz" locked="false" accuracy=""/>
@@ -298,6 +306,8 @@
                   <clock_output id="System_clock.outFreq" value="220 MHz" locked="true" accuracy="0.001"/>
                </clock_outputs>
                <clock_settings>
+                  <setting id="ASYNCAPBCLK_OUTPUT_ENDI" value="Enabled" locked="false"/>
+                  <setting id="ASYNC_SYSCON.ASYNCAPBCLKSELA.sel" value="SYSCON.fro_12m_clk" locked="false"/>
                   <setting id="SYSCON.ADCCLKDIV.scale" value="1" locked="true"/>
                   <setting id="SYSCON.ADCCLKSEL.sel" value="SYSCON.PLL_BYPASS" locked="false"/>
                   <setting id="SYSCON.CLKOUTDIV.scale" value="10" locked="true"/>
@@ -383,6 +393,16 @@
                         <data type="String">OUTPUT</data>
                      </feature>
                   </dependency>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="GPIO.pio3.24" description="Signal channel 24 of the peripheral GPIO - PIO3 is not routed." problem_level="1" source="Peripherals: BOARD_InitPeripherals">
+                     <feature name="routed" evaluation="">
+                        <data type="Boolean">true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="GPIO.pio3.24" description="Direction of channel 24 of peripheral GPIO - PIO3 does not match with direction in pins tool." problem_level="1" source="Peripherals: BOARD_InitPeripherals">
+                     <feature name="direction" evaluation="equal">
+                        <data type="String">OUTPUT</data>
+                     </feature>
+                  </dependency>
                   <dependency resourceType="PeripheralUnifiedSignal" resourceId="FLEXCOMM4.usart_rxd" description="Signal RX of the peripheral FLEXCOMM4 is not routed." problem_level="1" source="Peripherals: BOARD_InitPeripherals">
                      <feature name="routed" evaluation="equal">
                         <data type="Boolean">true</data>
@@ -410,6 +430,11 @@
                            </struct>
                            <struct name="2">
                               <setting name="signal_number" value="PIO2.2"/>
+                              <setting name="pinDirection" value="kGPIO_DigitalOutput"/>
+                              <setting name="outputLogic" value="0U"/>
+                           </struct>
+                           <struct name="3">
+                              <setting name="signal_number" value="PIO3.24"/>
                               <setting name="pinDirection" value="kGPIO_DigitalOutput"/>
                               <setting name="outputLogic" value="0U"/>
                            </struct>

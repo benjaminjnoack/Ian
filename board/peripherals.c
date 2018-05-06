@@ -63,9 +63,13 @@ instance:
         - signal_number: 'PIO2.2'
         - pinDirection: 'kGPIO_DigitalOutput'
         - outputLogic: '0U'
+      - 3:
+        - signal_number: 'PIO3.24'
+        - pinDirection: 'kGPIO_DigitalOutput'
+        - outputLogic: '0U'
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
-gpio_pin_config_t GPIO_1_config[3] = {
+gpio_pin_config_t GPIO_1_config[4] = {
   {
     .pinDirection = kGPIO_DigitalOutput,
     .outputLogic = 1U
@@ -73,6 +77,10 @@ gpio_pin_config_t GPIO_1_config[3] = {
   {
     .pinDirection = kGPIO_DigitalOutput,
     .outputLogic = 1U
+  },
+  {
+    .pinDirection = kGPIO_DigitalOutput,
+    .outputLogic = 0U
   },
   {
     .pinDirection = kGPIO_DigitalOutput,
@@ -87,6 +95,8 @@ void GPIO_1_init(void) {
   GPIO_PinInit(GPIO_1_GPIO, 3U, 3U, &GPIO_1_config[1]);
   /* Initialize GPIO functionality on pin PIO2_2 */
   GPIO_PinInit(GPIO_1_GPIO, 2U, 2U, &GPIO_1_config[2]);
+  /* Initialize GPIO functionality on pin PIO3_24 */
+  GPIO_PinInit(GPIO_1_GPIO, 3U, 24U, &GPIO_1_config[3]);
 }
 
 /***********************************************************************************************************************

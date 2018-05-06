@@ -42,7 +42,7 @@ extern "C" {
 /***********************************************************************************************************************
  * Global variables
  **********************************************************************************************************************/
-extern gpio_pin_config_t GPIO_1_config[3];
+extern gpio_pin_config_t GPIO_1_config[4];
 extern const usart_config_t USART_1_config;
 extern usart_handle_t USART_1_handle;
 extern uint8_t USART_1_rxBuffer[USART_1_RX_BUFFER_SIZE];

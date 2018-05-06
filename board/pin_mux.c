@@ -54,6 +54,7 @@ BOARD_InitPins:
   - {pin_num: N2, peripheral: SYSCON, signal: CLKOUT, pin_signal: PIO3_20/FC9_SCK/SD_CARD_INT_N/CLKOUT/SCT0_OUT7}
   - {pin_num: M11, peripheral: FLEXCOMM4, signal: CTS_SDA_SSEL0, pin_signal: PIO3_28/SCT0_OUT2/FC4_CTS_SDA_SSEL0/EMC_A(17)}
   - {pin_num: L13, peripheral: FLEXCOMM4, signal: RTS_SCL_SSEL1, pin_signal: PIO3_29/SCT0_OUT3/FC4_RTS_SCL_SSEL1/EMC_A(18)}
+  - {pin_num: E2, peripheral: GPIO, signal: 'PIO3, 24', pin_signal: PIO3_24/FC2_RTS_SCL_SSEL1/CTIMER4_CAP0/USB0_VBUS, direction: OUTPUT, i2c_drive: no_init, i2c_filter: disabled}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -173,6 +174,20 @@ void BOARD_InitPins(void)
 
                          /* Select Analog/Digital mode.: Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO320_DIGIMODE_DIGITAL));
+
+    IOCON->PIO[3][24] = ((IOCON->PIO[3][24] &
+                          /* Mask bits to zero which are setting */
+                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK | IOCON_PIO_I2CFILTER_MASK)))
+
+                         /* Selects pin function.: PORT324 (pin E2) is configured as PIO3_24 */
+                         | IOCON_PIO_FUNC(PIO324_FUNC_ALT0)
+
+                         /* Select Analog/Digital mode.: Digital mode. */
+                         | IOCON_PIO_DIGIMODE(PIO324_DIGIMODE_DIGITAL)
+
+                         /* Configures I2C features for standard mode, fast mode, and Fast Mode Plus operation.:
+                          * Disabled. I2C 50 ns glitch filter disabled. */
+                         | IOCON_PIO_I2CFILTER(PIO324_I2CFILTER_DISABLED));
 
     IOCON->PIO[3][26] = ((IOCON->PIO[3][26] &
                           /* Mask bits to zero which are setting */

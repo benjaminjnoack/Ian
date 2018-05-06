@@ -37,37 +37,112 @@ extern "C" {
  */
 void BOARD_InitBootPins(void);
 
-#define IOCON_PIO_DIGITAL_EN 0x0100u  /*!<@brief Enables digital function */
-#define IOCON_PIO_FUNC1 0x01u         /*!<@brief Selects pin function 1 */
-#define IOCON_PIO_INPFILT_OFF 0x0200u /*!<@brief Input filter disabled */
-#define IOCON_PIO_INV_DI 0x00u        /*!<@brief Input function is not inverted */
-#define IOCON_PIO_MODE_INACT 0x00u    /*!<@brief No addition pin function */
-#define IOCON_PIO_OPENDRAIN_DI 0x00u  /*!<@brief Open drain is disabled */
-#define IOCON_PIO_SLEW_STANDARD 0x00u /*!<@brief Standard mode, output slew rate control is enabled */
-#define PIO016_DIGIMODE_ANALOG 0x00u  /*!<@brief Select Analog/Digital mode.: Analog mode. */
-#define PIO016_FUNC_ALT0 0x00u        /*!<@brief Selects pin function.: Alternative connection 0. */
-#define PIO031_DIGIMODE_ANALOG 0x00u  /*!<@brief Select Analog/Digital mode.: Analog mode. */
-#define PIO031_FUNC_ALT0 0x00u        /*!<@brief Selects pin function.: Alternative connection 0. */
-#define PIO10_DIGIMODE_ANALOG 0x00u   /*!<@brief Select Analog/Digital mode.: Analog mode. */
-#define PIO10_FUNC_ALT0 0x00u         /*!<@brief Selects pin function.: Alternative connection 0. */
-#define PIO20_DIGIMODE_ANALOG 0x00u   /*!<@brief Select Analog/Digital mode.: Analog mode. */
-#define PIO20_FUNC_ALT0 0x00u         /*!<@brief Selects pin function.: Alternative connection 0. */
-#define PIO22_DIGIMODE_DIGITAL 0x01u  /*!<@brief Select Analog/Digital mode.: Digital mode. */
-#define PIO22_FUNC_ALT0 0x00u         /*!<@brief Selects pin function.: Alternative connection 0. */
-#define PIO314_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
-#define PIO314_FUNC_ALT0 0x00u        /*!<@brief Selects pin function.: Alternative connection 0. */
-#define PIO320_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
-#define PIO320_FUNC_ALT3 0x03u        /*!<@brief Selects pin function.: Alternative connection 3. */
-#define PIO326_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
-#define PIO326_FUNC_ALT3 0x03u        /*!<@brief Selects pin function.: Alternative connection 3. */
-#define PIO327_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
-#define PIO327_FUNC_ALT3 0x03u        /*!<@brief Selects pin function.: Alternative connection 3. */
-#define PIO328_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
-#define PIO328_FUNC_ALT3 0x03u        /*!<@brief Selects pin function.: Alternative connection 3. */
-#define PIO329_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
-#define PIO329_FUNC_ALT3 0x03u        /*!<@brief Selects pin function.: Alternative connection 3. */
-#define PIO33_DIGIMODE_DIGITAL 0x01u  /*!<@brief Select Analog/Digital mode.: Digital mode. */
-#define PIO33_FUNC_ALT0 0x00u         /*!<@brief Selects pin function.: Alternative connection 0. */
+/*!
+ * @brief Enables digital function */
+#define IOCON_PIO_DIGITAL_EN 0x0100u
+/*!
+ * @brief Selects pin function 1 */
+#define IOCON_PIO_FUNC1 0x01u
+/*!
+ * @brief Input filter disabled */
+#define IOCON_PIO_INPFILT_OFF 0x0200u
+/*!
+ * @brief Input function is not inverted */
+#define IOCON_PIO_INV_DI 0x00u
+/*!
+ * @brief No addition pin function */
+#define IOCON_PIO_MODE_INACT 0x00u
+/*!
+ * @brief Open drain is disabled */
+#define IOCON_PIO_OPENDRAIN_DI 0x00u
+/*!
+ * @brief Standard mode, output slew rate control is enabled */
+#define IOCON_PIO_SLEW_STANDARD 0x00u
+/*!
+ * @brief Select Analog/Digital mode.: Analog mode. */
+#define PIO016_DIGIMODE_ANALOG 0x00u
+/*!
+ * @brief Selects pin function.: Alternative connection 0. */
+#define PIO016_FUNC_ALT0 0x00u
+/*!
+ * @brief Select Analog/Digital mode.: Analog mode. */
+#define PIO031_DIGIMODE_ANALOG 0x00u
+/*!
+ * @brief Selects pin function.: Alternative connection 0. */
+#define PIO031_FUNC_ALT0 0x00u
+/*!
+ * @brief Select Analog/Digital mode.: Analog mode. */
+#define PIO10_DIGIMODE_ANALOG 0x00u
+/*!
+ * @brief Selects pin function.: Alternative connection 0. */
+#define PIO10_FUNC_ALT0 0x00u
+/*!
+ * @brief Select Analog/Digital mode.: Analog mode. */
+#define PIO20_DIGIMODE_ANALOG 0x00u
+/*!
+ * @brief Selects pin function.: Alternative connection 0. */
+#define PIO20_FUNC_ALT0 0x00u
+/*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO22_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 0. */
+#define PIO22_FUNC_ALT0 0x00u
+/*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO314_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 0. */
+#define PIO314_FUNC_ALT0 0x00u
+/*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO320_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 3. */
+#define PIO320_FUNC_ALT3 0x03u
+/*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO324_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 0. */
+#define PIO324_FUNC_ALT0 0x00u
+/*!
+ * @brief
+ * Configures I2C features for standard mode, fast mode, and Fast Mode Plus operation.
+ * : Disabled.
+ * I2C 50 ns glitch filter disabled.
+ */
+#define PIO324_I2CFILTER_DISABLED 0x01u
+/*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO326_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 3. */
+#define PIO326_FUNC_ALT3 0x03u
+/*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO327_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 3. */
+#define PIO327_FUNC_ALT3 0x03u
+/*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO328_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 3. */
+#define PIO328_FUNC_ALT3 0x03u
+/*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO329_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 3. */
+#define PIO329_FUNC_ALT3 0x03u
+/*!
+ * @brief Select Analog/Digital mode.: Digital mode. */
+#define PIO33_DIGIMODE_DIGITAL 0x01u
+/*!
+ * @brief Selects pin function.: Alternative connection 0. */
+#define PIO33_FUNC_ALT0 0x00u
 
 /*! @name FC0_RXD_SDA_MOSI (coord B13), U24[13]/P0_29-ISP_FC0_RXD
   @{ */
@@ -131,6 +206,43 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_LED3_NAME "LED3"                              /*!<@brief Identifier name */
 #define BOARD_INITPINS_LED3_DIRECTION kPIN_MUX_DirectionOutput       /*!<@brief Direction */
                                                                      /* @} */
+
+/*! @name PIO3_24 (coord E2), J11[9]/J9[1]/U10[2]/J17[4]/U19[2]/P3_24-FC2_SCLX
+  @{ */
+/*!
+ * @brief Device name: GPIO */
+#define BOARD_INITPINS_FC2_SCLX_PERIPHERAL GPIO
+/*!
+ * @brief GPIO signal: PIO3 */
+#define BOARD_INITPINS_FC2_SCLX_SIGNAL PIO3
+/*!
+ * @brief GPIO device name: GPIO */
+#define BOARD_INITPINS_FC2_SCLX_GPIO GPIO
+/*!
+ * @brief PIO3 pin index: 24 */
+#define BOARD_INITPINS_FC2_SCLX_GPIO_PIN 24U
+/*!
+ * @brief PORT device name: 3U */
+#define BOARD_INITPINS_FC2_SCLX_PORT 3U
+/*!
+ * @brief 3U pin index: 24 */
+#define BOARD_INITPINS_FC2_SCLX_PIN 24U
+/*!
+ * @brief GPIO PIO3 channel: 24 */
+#define BOARD_INITPINS_FC2_SCLX_CHANNEL 24
+/*!
+ * @brief Pin name */
+#define BOARD_INITPINS_FC2_SCLX_PIN_NAME PIO3_24
+/*!
+ * @brief Label */
+#define BOARD_INITPINS_FC2_SCLX_LABEL "J11[9]/J9[1]/U10[2]/J17[4]/U19[2]/P3_24-FC2_SCLX"
+/*!
+ * @brief Identifier name */
+#define BOARD_INITPINS_FC2_SCLX_NAME "FC2_SCLX"
+/*!
+ * @brief Direction */
+#define BOARD_INITPINS_FC2_SCLX_DIRECTION kPIN_MUX_DirectionOutput
+/* @} */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.
