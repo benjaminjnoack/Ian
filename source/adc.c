@@ -96,8 +96,8 @@ void adcInitialize(void) {
 	/* Enable interrupt from ADC */
 	ADC_EnableInterrupts(ADC0, kADC_ConvSeqAInterruptEnable | kADC_ConvSeqBInterruptEnable);
 	/* Enable interrupt in Nested Vectored Interrupt Controller */
-	NVIC_SetPriority(ADC0_SEQA_IRQn, 4U);
-	NVIC_SetPriority(ADC0_SEQB_IRQn, 4U);
+	NVIC_SetPriority(ADC0_SEQA_IRQn, 3U);
+	NVIC_SetPriority(ADC0_SEQB_IRQn, 3U);
 	NVIC_EnableIRQ(ADC0_SEQA_IRQn);
 	NVIC_EnableIRQ(ADC0_SEQB_IRQn);
 

@@ -22,7 +22,7 @@ void usartInitialize(void) {
 	xUartTxSemaphore = xSemaphoreCreateBinary();
 	xSemaphoreGive(xUartTxSemaphore);
 
-	NVIC_SetPriority(FLEXCOMM4_IRQn, 4);
+	NVIC_SetPriority(FLEXCOMM4_IRQn, 2U);
 
 	if (xTaskCreate(usartTxTask, "USART TX", configMINIMAL_STACK_SIZE + 128, NULL, (configMAX_PRIORITIES + 1), &xUsartTxTask) != pdPASS)
 	{
