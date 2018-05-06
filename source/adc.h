@@ -28,14 +28,20 @@ typedef enum {
 	AXIS_YAW = 'Y',		//0x59
 	AXIS_ROLL = 'R',	//0x52
 	AXIS_PITCH = 'P'	//0x50
+} axis_cmd_t;
+
+typedef struct axis {
+	uint8_t channel;
+	axis_cmd_t command;
 } axis_t;
 
-typedef struct joystick {
-	uint32_t xBuffer[BUFFER_LENGTH];
-	uint32_t *xPtr;
-	uint32_t yBuffer[BUFFER_LENGTH];
-	uint32_t *yPtr;
-} joystick_t;
+struct sequence_parameter {
+	uint8_t led;
+	SemaphoreHandle_t semaphore;
+	axis_t xAxis;
+	axis_t yAxis;
+	void (*next)(ADC_Type *base);
+};
 
 void adcInitialize(void);
 
