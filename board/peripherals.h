@@ -31,9 +31,7 @@ extern "C" {
 /* Definition of the clock source frequency */
 #define USART_1_CLOCK_SOURCE CLOCK_GetFreq(kCLOCK_Flexcomm4)
 /* Rx transfer buffer size. */
-#define USART_1_RX_BUFFER_SIZE 10
-/* Rx transfer buffer size. */
-#define USART_1_TX_BUFFER_SIZE 2
+#define USART_1_TX_BUFFER_SIZE 4
 
 /* Definitions for PERIPH_InitAdc functional group */
 /* Alias for ADC0 peripheral */
@@ -45,8 +43,6 @@ extern "C" {
 extern gpio_pin_config_t GPIO_1_config[4];
 extern const usart_config_t USART_1_config;
 extern usart_handle_t USART_1_handle;
-extern uint8_t USART_1_rxBuffer[USART_1_RX_BUFFER_SIZE];
-extern const usart_transfer_t USART_1_rxTransfer;
 extern uint8_t USART_1_txBuffer[USART_1_TX_BUFFER_SIZE];
 extern const usart_transfer_t USART_1_txTransfer;
 extern const adc_config_t ADC_1configStruct;

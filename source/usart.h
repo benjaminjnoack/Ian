@@ -22,6 +22,8 @@
  * Break generation and detection
  */
 
+#define FRAME_SIZE 0x04
+
 void usartInitialize(void);
 void usartTxTask(void *pvParameters);
 void usartRxTask(void *pvParameters);

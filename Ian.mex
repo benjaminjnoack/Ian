@@ -444,13 +444,13 @@
                   <instance name="USART_1" type="flexcomm_usart" type_id="flexcomm_usart_fcc110cc6b16332e9dfd9e0df675e21f" mode="transfer" peripheral="FLEXCOMM4" enabled="true">
                      <config_set name="transferCfg">
                         <struct name="transfer">
-                           <setting name="init_rx_transfer" value="true"/>
+                           <setting name="init_rx_transfer" value="false"/>
                            <struct name="rx_transfer">
                               <setting name="data_size" value="10"/>
                            </struct>
                            <setting name="init_tx_transfer" value="true"/>
                            <struct name="tx_transfer">
-                              <setting name="data_size" value="2"/>
+                              <setting name="data_size" value="4"/>
                            </struct>
                            <setting name="init_callback" value="true"/>
                            <setting name="callback_fcn" value="USART_UserCallback"/>

@@ -15,6 +15,8 @@ QueueHandle_t xUsartQueue;
 SemaphoreHandle_t xUartTxSemaphore;
 TaskHandle_t xUsartTxTask;
 
+uint8_t usartCalculateCRC(uint8_t *buf, int n);
+
 void usartInitialize(void) {
 
 	xUsartQueue = xQueueCreate(10, USART_1_TX_BUFFER_SIZE);
@@ -32,17 +34,34 @@ void usartInitialize(void) {
 	}
 }
 
+uint8_t usartCalculateCRC(uint8_t *buf, int n) {
+	uint8_t i, result;
+
+	result = 0xFF;
+
+	for (i = 0; i < n; i++) {
+		result = result ^ buf[i];
+	}
+
+	return result;
+}
+
 /**
  * TODO
  * use the clear to send semaphore to ensure the XBee is ready to receive
  */
 void usartTxTask(void *pvParameters) {
 	static status_t txStatus;
+	static uint8_t frame[FRAME_SIZE];
+
+	frame[0] = 0x01;
 
 	for (;;) {
-		xQueueReceive(xUsartQueue, USART_1_txTransfer.data, portMAX_DELAY);
+		xQueueReceive(xUsartQueue, &frame[1], portMAX_DELAY);
 		xSemaphoreTake(xUartTxSemaphore, portMAX_DELAY);
+		frame[3] = usartCalculateCRC(&frame[1], 2);
 		//TODO casting usart_transfer_t is a hack to avoid compile warnings
+		memcpy(USART_1_txTransfer.data, frame, FRAME_SIZE);
 		txStatus = USART_TransferSendNonBlocking(USART4, &USART_1_handle, (usart_transfer_t *)&USART_1_txTransfer);
 
 		if (txStatus != kStatus_Success) {

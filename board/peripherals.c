@@ -114,12 +114,12 @@ instance:
 - config_sets:
   - transferCfg:
     - transfer:
-      - init_rx_transfer: 'true'
+      - init_rx_transfer: 'false'
       - rx_transfer:
         - data_size: '10'
       - init_tx_transfer: 'true'
       - tx_transfer:
-        - data_size: '2'
+        - data_size: '4'
       - init_callback: 'true'
       - callback_fcn: 'USART_UserCallback'
       - user_data: ''
@@ -148,11 +148,6 @@ const usart_config_t USART_1_config = {
   .enableTx = true
 };
 usart_handle_t USART_1_handle;
-uint8_t USART_1_rxBuffer[USART_1_RX_BUFFER_SIZE];
-const usart_transfer_t USART_1_rxTransfer = {
-  .data = USART_1_rxBuffer,
-  .dataSize = USART_1_RX_BUFFER_SIZE
-};
 uint8_t USART_1_txBuffer[USART_1_TX_BUFFER_SIZE];
 const usart_transfer_t USART_1_txTransfer = {
   .data = USART_1_txBuffer,
