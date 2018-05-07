@@ -13,6 +13,7 @@
 #include "pin_mux.h"
 
 #include "adc.h"
+#include "ctimer.h"
 #include "usart.h"
 
 
@@ -32,9 +33,12 @@ int main(void)
     GPIO_PortInit(GPIO, 3U);
     /* Enable the power and clock for ADC. */
     BOARD_InitBootPeripherals();
+
+    ctimerInitialize();
     adcInitialize();
     usartInitialize();
-    PRINTF("Configuration Done.\r\n");
+
+    PRINTF("Initialization Complete\r\n");
 
 	vTaskStartScheduler();
 

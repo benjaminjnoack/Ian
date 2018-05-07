@@ -263,6 +263,7 @@ name: BOARD_BootClockPLL220M
 called_from_default_init: true
 outputs:
 - {id: ADC_clock.outFreq, value: 220 MHz}
+- {id: ASYNCAPB_clock.outFreq, value: 12 MHz}
 - {id: CLKOUT_clock.outFreq, value: 22 MHz}
 - {id: FRO12M_clock.outFreq, value: 12 MHz}
 - {id: FROHF_clock.outFreq, value: 48 MHz}
@@ -271,6 +272,8 @@ outputs:
 - {id: SYSPLL_clock.outFreq, value: 220 MHz}
 - {id: System_clock.outFreq, value: 220 MHz, locked: true, accuracy: '0.001'}
 settings:
+- {id: ASYNCAPBCLK_OUTPUT_ENDI, value: Enabled}
+- {id: ASYNC_SYSCON.ASYNCAPBCLKSELA.sel, value: SYSCON.fro_12m_clk}
 - {id: SYSCON.ADCCLKDIV.scale, value: '1', locked: true}
 - {id: SYSCON.ADCCLKSEL.sel, value: SYSCON.PLL_BYPASS}
 - {id: SYSCON.CLKOUTDIV.scale, value: '10', locked: true}
@@ -321,6 +324,8 @@ void BOARD_BootClockPLL220M(void)
 
     /*!< Set up clock selectors - Attach clocks to the peripheries */
     CLOCK_AttachClk(kSYS_PLL_to_MAIN_CLK);                  /*!< Switch MAIN_CLK to SYS_PLL */
+    SYSCON->ASYNCAPBCTRL = SYSCON_ASYNCAPBCTRL_ENABLE_MASK;       /*!< Enable ASYNC APB subsystem */
+    CLOCK_AttachClk(kFRO12M_to_ASYNC_APB);                  /*!< Switch ASYNC_APB to FRO12M */
     CLOCK_AttachClk(kSYS_PLL_to_ADC_CLK);                  /*!< Switch ADC_CLK to SYS_PLL */
     SYSCON->FROHFCLKDIV = ((SYSCON->FROHFCLKDIV & ~SYSCON_FROHFCLKDIV_DIV_MASK) | SYSCON_FROHFCLKDIV_DIV(0U)); /*!< Set FROHF CLKDIV  to value 0 */
     CLOCK_AttachClk(kFRO_HF_to_FLEXCOMM4);                      /*!< Switch FLEXCOMM4 to FRO_HF */

@@ -20,6 +20,7 @@
 #include "pin_mux.h"
 #include <stdlib.h>
 #include "usart.h"
+#include "ctimer.h"
 
 #define BUFFER_LENGTH 32
 

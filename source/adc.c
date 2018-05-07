@@ -102,6 +102,7 @@ void adcInitialize(void) {
 	NVIC_EnableIRQ(ADC0_SEQB_IRQn);
 
 	//kick it off
+	CTIMER_StartTimer(CTIMER0);
 	ADC_DoSoftwareTriggerConvSeqA(ADC0);
 }
 
@@ -136,7 +137,7 @@ void adcReadSequenceTask(void *pvParameters) {
 	for (;;) {
 		xSemaphoreTake(parameters.semaphore, portMAX_DELAY);
 
-		if (++count == 1000) {
+		if (++count == 100) {
 			count = 0;
 			GPIO_PortToggle(GPIO, 3U, 1 << parameters.led);
 		}
@@ -162,6 +163,8 @@ void adcReadSequenceTask(void *pvParameters) {
 			}
 		}
 
+		xSemaphoreTake(timer0Semaphore, portMAX_DELAY);
+		CTIMER_StartTimer(CTIMER0);
 		parameters.next(ADC0);
 		taskYIELD();
 	}
