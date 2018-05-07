@@ -37,9 +37,7 @@ void usartInitialize(void) {
 uint8_t usartCalculateCRC(uint8_t *buf, int n) {
 	uint8_t i, result;
 
-	result = 0xFF;
-
-	for (i = 0; i < n; i++) {
+	for (i = 0, result = 0xFF; i < n; i++) {
 		result = result ^ buf[i];
 	}
 
