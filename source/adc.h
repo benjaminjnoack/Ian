@@ -25,10 +25,10 @@
 #define BUFFER_LENGTH 32
 
 typedef enum {
-	AXIS_THRUST = 'T',	//0x54
-	AXIS_YAW = 'Y',		//0x59
+	AXIS_PITCH = 'P',	//0x50
 	AXIS_ROLL = 'R',	//0x52
-	AXIS_PITCH = 'P'	//0x50
+	AXIS_THRUST = 'T',	//0x54
+	AXIS_YAW = 'Y'		//0x59
 } axis_cmd_t;
 
 typedef struct axis {

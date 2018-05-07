@@ -58,7 +58,6 @@ void usartTxTask(void *pvParameters) {
 		xQueueReceive(xUsartQueue, &frame[1], portMAX_DELAY);
 		xSemaphoreTake(xUartTxSemaphore, portMAX_DELAY);
 		frame[3] = usartCalculateCRC(&frame[1], 2);
-		//TODO casting usart_transfer_t is a hack to avoid compile warnings
 		memcpy(USART_1_txTransfer.data, frame, FRAME_SIZE);
 		txStatus = USART_TransferSendNonBlocking(USART4, &USART_1_handle, (usart_transfer_t *)&USART_1_txTransfer);
 
