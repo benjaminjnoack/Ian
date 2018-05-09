@@ -11,7 +11,7 @@ SemaphoreHandle_t timer0Semaphore = NULL;
 
 void ctimerMatch0(uint32_t flags);
 
-ctimer_callback_t timer_callback;
+ctimer_callback_t timer_callback = ctimerMatch0;
 
 void ctimerInitialize(void) {
 	ctimer_config_t config;
