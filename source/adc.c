@@ -108,7 +108,7 @@ void adcInitialize(void) {
 
 void adcReadSequenceTask(void *pvParameters) {
 	int count;
-	struct sequence_parameter parameters;
+	struct sequence_parameter *parameters;
 
 	uint32_t xAverage, yAverage;
 	uint32_t xBuffer[BUFFER_LENGTH];
@@ -130,19 +130,19 @@ void adcReadSequenceTask(void *pvParameters) {
 	memset(xBuffer, DEAD_CENTER, BUFFER_LENGTH);
 	memset(yBuffer, DEAD_CENTER, BUFFER_LENGTH);
 
-	parameters = *(struct sequence_parameter *) pvParameters;
-	xCmd[0] = parameters.xAxis.command;
-	yCmd[0] = parameters.yAxis.command;
+	parameters = (struct sequence_parameter *) pvParameters;
+	xCmd[0] = parameters->xAxis.command;
+	yCmd[0] = parameters->yAxis.command;
 
 	for (;;) {
-		xSemaphoreTake(parameters.semaphore, portMAX_DELAY);
+		xSemaphoreTake(parameters->semaphore, portMAX_DELAY);
 
 		if (++count == 100) {
 			count = 0;
-			GPIO_PortToggle(GPIO, 3U, 1 << parameters.led);
+			GPIO_PortToggle(GPIO, 3U, 1 << parameters->led);
 		}
 
-		ADC_GetChannelConversionResult(ADC0, parameters.xAxis.channel, &xResult);
+		ADC_GetChannelConversionResult(ADC0, parameters->xAxis.channel, &xResult);
 		xAverage = adcDoBoxcarAverage(xBuffer, &xPtr, xResult.result);
 		if (abs((int)xLast - (int)xAverage) > 0x03) {
 			xCmd[1] = xAverage;
@@ -153,7 +153,7 @@ void adcReadSequenceTask(void *pvParameters) {
 		}
 
 
-		ADC_GetChannelConversionResult(ADC0, parameters.yAxis.channel, &yResult);
+		ADC_GetChannelConversionResult(ADC0, parameters->yAxis.channel, &yResult);
 		yAverage = adcDoBoxcarAverage(yBuffer, &yPtr, yResult.result);
 		if (abs((int)yLast - (int)yAverage) > 0x03) {
 			yCmd[1] = yAverage;
@@ -165,7 +165,7 @@ void adcReadSequenceTask(void *pvParameters) {
 
 		xSemaphoreTake(timer0Semaphore, portMAX_DELAY);
 		CTIMER_StartTimer(CTIMER0);
-		parameters.next(ADC0);
+		parameters->next(ADC0);
 		taskYIELD();
 	}
 }
