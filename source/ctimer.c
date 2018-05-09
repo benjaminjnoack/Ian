@@ -10,10 +10,8 @@
 SemaphoreHandle_t timer0Semaphore = NULL;
 
 void ctimerMatch0(uint32_t flags);
-//TODO figure out a more elegant way of doing this
-ctimer_callback_t timer_callbacks[] = {
-		ctimerMatch0, NULL, NULL, NULL, NULL, NULL, NULL, NULL
-};
+
+ctimer_callback_t timer_callback;
 
 void ctimerInitialize(void) {
 	ctimer_config_t config;
@@ -33,7 +31,7 @@ void ctimerInitialize(void) {
 	CTIMER_SetupMatch(CTIMER0, kCTIMER_Match_0, &match);
 
 	NVIC_SetPriority(CTIMER0_IRQn, 2);
-	CTIMER_RegisterCallBack(CTIMER0, &timer_callbacks[0], kCTIMER_SingleCallback);
+	CTIMER_RegisterCallBack(CTIMER0, &timer_callback, kCTIMER_SingleCallback);
 }
 
 void ctimerMatch0(uint32_t flags) {
