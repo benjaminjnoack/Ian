@@ -34,6 +34,12 @@
 
 #include "fsl_gpio.h"
 
+/* Component ID definition, used by tools. */
+#ifndef FSL_COMPONENT_ID
+#define FSL_COMPONENT_ID "platform.drivers.lpc_gpio"
+#endif
+
+
 /*******************************************************************************
  * Variables
  ******************************************************************************/

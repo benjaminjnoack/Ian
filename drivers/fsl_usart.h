@@ -47,8 +47,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief USART driver version 2.0.0. */
-#define FSL_USART_DRIVER_VERSION (MAKE_VERSION(2, 0, 0))
+/*! @brief USART driver version 2.0.1. */
+#define FSL_USART_DRIVER_VERSION (MAKE_VERSION(2, 0, 1))
 /*@}*/
 
 #define USART_FIFOTRIG_TXLVL_GET(base) (((base)->FIFOTRIG & USART_FIFOTRIG_TXLVL_MASK) >> USART_FIFOTRIG_TXLVL_SHIFT)

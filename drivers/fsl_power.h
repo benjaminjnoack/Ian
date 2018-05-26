@@ -47,7 +47,7 @@
 #define FSL_POWER_DRIVER_VERSION (MAKE_VERSION(2, 0, 0))
 /*@}*/
 
-#define MAKE_PD_BITS(reg, slot) ((reg << 8) | slot)
+#define MAKE_PD_BITS(reg, slot) (((reg) << 8) | (slot))
 #define PDRCFG0 0x0U
 #define PDRCFG1 0x1U
 
@@ -85,6 +85,10 @@ typedef enum pd_bits
     kPDRUNCFG_PD_EEPROM = MAKE_PD_BITS(PDRCFG1, 5U),
     kPDRUNCFG_PD_rng = MAKE_PD_BITS(PDRCFG1, 6U),
 
+    /*
+    This enum member has no practical meaning,it is used to avoid MISRA issue,
+    user should not trying to use it.
+    */
     kPDRUNCFG_ForceUnsigned = 0x80000000U,
 } pd_bit_t;
 
@@ -152,7 +156,7 @@ static inline void POWER_EnableDeepSleep(void)
  */
 static inline void POWER_DisableDeepSleep(void)
 {
-    SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
+    SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
 }
 
 /*!
@@ -201,7 +205,8 @@ void POWER_SetUsbPhy(void);
 /*!
  * @brief Power Library API to enter different power mode.
  *
- * @param exclude_from_pd  Bit mask of the PDRUNCFG0(low 32bits) and PDRUNCFG1(high 32bits) that needs to be powered on during power mode selected.
+ * @param exclude_from_pd  Bit mask of the PDRUNCFG0(low 32bits) and PDRUNCFG1(high 32bits) that needs to be powered on
+ * during power mode selected.
  * @return none
  */
 void POWER_EnterPowerMode(power_mode_cfg_t mode, uint64_t exclude_from_pd);
@@ -216,7 +221,8 @@ void POWER_EnterSleep(void);
 /*!
  * @brief Power Library API to enter deep sleep mode.
  *
- * @param exclude_from_pd  Bit mask of the PDRUNCFG0(low 32bits) and PDRUNCFG1(high 32bits) bits that needs to be powered on during deep sleep
+ * @param exclude_from_pd  Bit mask of the PDRUNCFG0(low 32bits) and PDRUNCFG1(high 32bits) bits that needs to be
+ * powered on during deep sleep
  * @return none
  */
 void POWER_EnterDeepSleep(uint64_t exclude_from_pd);
@@ -224,9 +230,10 @@ void POWER_EnterDeepSleep(uint64_t exclude_from_pd);
 /*!
  * @brief Power Library API to enter deep power down mode.
  *
- * @param exclude_from_pd   Bit mask of the PDRUNCFG0(low 32bits) and PDRUNCFG1(high 32bits) that needs to be powered on during deep power 
+ * @param exclude_from_pd   Bit mask of the PDRUNCFG0(low 32bits) and PDRUNCFG1(high 32bits) that needs to be powered on
+ during deep power
  *                          down mode, but this is has no effect as the voltages are cut off.
- 
+
  * @return none
  */
 void POWER_EnterDeepPowerDown(uint64_t exclude_from_pd);
@@ -234,7 +241,7 @@ void POWER_EnterDeepPowerDown(uint64_t exclude_from_pd);
 /*!
  * @brief Power Library API to choose normal regulation and set the voltage for the desired operating frequency.
  *
- * @param freq  - The desired frequency at which the part would like to operate, 
+ * @param freq  - The desired frequency at which the part would like to operate,
  *                note that the voltage and flash wait states should be set before changing frequency
  * @return none
  */

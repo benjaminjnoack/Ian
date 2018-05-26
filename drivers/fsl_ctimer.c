@@ -34,6 +34,12 @@
 
 #include "fsl_ctimer.h"
 
+/* Component ID definition, used by tools. */
+#ifndef FSL_COMPONENT_ID
+#define FSL_COMPONENT_ID "platform.drivers.ctimer"
+#endif
+
+
 /*******************************************************************************
  * Prototypes
  ******************************************************************************/
@@ -57,8 +63,13 @@ static CTIMER_Type *const s_ctimerBases[] = CTIMER_BASE_PTRS;
 static const clock_ip_name_t s_ctimerClocks[] = CTIMER_CLOCKS;
 #endif /* FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL */
 
-/*! @brief Pointers to Timer resets for each instance. */
+#if defined(FSL_FEATURE_CTIMER_WRITE_ZERO_ASSERT_RESET) && FSL_FEATURE_CTIMER_WRITE_ZERO_ASSERT_RESET
+/*! @brief Pointers to Timer resets for each instance, writing a zero asserts the reset */
+static const reset_ip_name_t s_ctimerResets[] = CTIMER_RSTS_N;
+#else
+/*! @brief Pointers to Timer resets for each instance, writing a one asserts the reset */
 static const reset_ip_name_t s_ctimerResets[] = CTIMER_RSTS;
+#endif
 
 /*! @brief Pointers real ISRs installed by drivers for each instance. */
 static ctimer_callback_t *s_ctimerCallback[FSL_FEATURE_SOC_CTIMER_COUNT] = {0};
@@ -189,6 +200,54 @@ status_t CTIMER_SetupPwm(CTIMER_Type *base,
 
     /* Match on channel 3 will define the PWM period */
     base->MR[kCTIMER_Match_3] = period;
+
+    /* This will define the PWM pulse period */
+    base->MR[matchChannel] = pulsePeriod;
+    /* Clear status flags */
+    CTIMER_ClearStatusFlags(base, CTIMER_IR_MR0INT_MASK << matchChannel);
+    /* If call back function is valid then enable interrupt and update the call back function */
+    if (enableInt)
+    {
+        EnableIRQ(s_ctimerIRQ[index]);
+    }
+
+    return kStatus_Success;
+}
+
+status_t CTIMER_SetupPwmPeriod(CTIMER_Type *base,
+                         ctimer_match_t matchChannel,
+                         uint32_t pwmPeriod,
+                         uint32_t pulsePeriod,
+                         bool enableInt)
+{
+    uint32_t reg;
+    uint32_t index = CTIMER_GetInstance(base);
+
+    if (matchChannel == kCTIMER_Match_3)
+    {
+        return kStatus_Fail;
+    }
+
+    /* Enable PWM mode on the channel */
+    base->PWMC |= (1U << matchChannel);
+
+    /* Clear the stop, reset and interrupt bits for this channel */
+    reg = base->MCR;
+    reg &= ~((CTIMER_MCR_MR0R_MASK | CTIMER_MCR_MR0S_MASK | CTIMER_MCR_MR0I_MASK) << (matchChannel * 3));
+
+    /* If call back function is valid then enable match interrupt for the channel */
+    if (enableInt)
+    {
+        reg |= (CTIMER_MCR_MR0I_MASK << (CTIMER_MCR_MR0I_SHIFT + (matchChannel * 3)));
+    }
+
+    /* Reset the counter when match on channel 3 */
+    reg |= CTIMER_MCR_MR3R_MASK;
+
+    base->MCR = reg;
+
+    /* Match on channel 3 will define the PWM period */
+    base->MR[kCTIMER_Match_3] = pwmPeriod;
 
     /* This will define the PWM pulse period */
     base->MR[matchChannel] = pulsePeriod;

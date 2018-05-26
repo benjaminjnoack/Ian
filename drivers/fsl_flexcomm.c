@@ -3,7 +3,7 @@
  * Copyright (c) 2016, Freescale Semiconductor, Inc.
  * Copyright 2016-2017 NXP
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided
  *  that the following conditions are met:
@@ -39,6 +39,20 @@
  * Definitions
  ******************************************************************************/
 
+/* Component ID definition, used by tools. */
+#ifndef FSL_COMPONENT_ID
+#define FSL_COMPONENT_ID "platform.drivers.flexcomm"
+#endif
+
+/*******************************************************************************
+ * Prototypes
+ ******************************************************************************/
+/*! @brief Set the FLEXCOMM mode . */
+static status_t FLEXCOMM_SetPeriph(FLEXCOMM_Type *base, FLEXCOMM_PERIPH_T periph, int lock);
+
+/*! @brief check whether flexcomm supports peripheral type */
+static bool FLEXCOMM_PeripheralIsPresent(FLEXCOMM_Type *base, FLEXCOMM_PERIPH_T periph);
+
 /*******************************************************************************
  * Variables
  ******************************************************************************/
@@ -71,13 +85,13 @@ static bool FLEXCOMM_PeripheralIsPresent(FLEXCOMM_Type *base, FLEXCOMM_PERIPH_T 
     {
         return true;
     }
-    else if ((periph >= FLEXCOMM_PERIPH_USART) && (periph <= FLEXCOMM_PERIPH_I2S_TX))
+    else if (periph <= FLEXCOMM_PERIPH_I2S_TX)
     {
-        return (base->PSELID & (uint32_t)(1 << ((uint32_t)periph + 3))) > 0 ? true : false;
+        return (base->PSELID & (uint32_t)(1 << ((uint32_t)periph + 3))) > (uint32_t)0 ? true : false;
     }
     else if (periph == FLEXCOMM_PERIPH_I2S_RX)
     {
-        return (base->PSELID & (1 << 7)) > 0 ? true : false;
+        return (base->PSELID & (1 << 7)) > (uint32_t)0 ? true : false;
     }
     else
     {
@@ -103,7 +117,7 @@ uint32_t FLEXCOMM_GetInstance(void *base)
 }
 
 /* Changes FLEXCOMM mode */
-status_t FLEXCOMM_SetPeriph(FLEXCOMM_Type *base, FLEXCOMM_PERIPH_T periph, int lock)
+static status_t FLEXCOMM_SetPeriph(FLEXCOMM_Type *base, FLEXCOMM_PERIPH_T periph, int lock)
 {
     /* Check whether peripheral type is present */
     if (!FLEXCOMM_PeripheralIsPresent(base, periph))
@@ -159,8 +173,8 @@ void FLEXCOMM_SetIRQHandler(void *base, flexcomm_irq_handler_t handler, void *ha
     s_flexcommIrqHandler[instance] = NULL;
     s_flexcommHandle[instance] = handle;
     s_flexcommIrqHandler[instance] = handler;
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -172,8 +186,8 @@ void FLEXCOMM0_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[0]);
     s_flexcommIrqHandler[0]((void *)s_flexcommBaseAddrs[0], s_flexcommHandle[0]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -185,8 +199,8 @@ void FLEXCOMM1_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[1]);
     s_flexcommIrqHandler[1]((void *)s_flexcommBaseAddrs[1], s_flexcommHandle[1]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -198,8 +212,8 @@ void FLEXCOMM2_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[2]);
     s_flexcommIrqHandler[2]((void *)s_flexcommBaseAddrs[2], s_flexcommHandle[2]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -211,8 +225,8 @@ void FLEXCOMM3_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[3]);
     s_flexcommIrqHandler[3]((void *)s_flexcommBaseAddrs[3], s_flexcommHandle[3]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -224,8 +238,8 @@ void FLEXCOMM4_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[4]);
     s_flexcommIrqHandler[4]((void *)s_flexcommBaseAddrs[4], s_flexcommHandle[4]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -238,8 +252,8 @@ void FLEXCOMM5_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[5]);
     s_flexcommIrqHandler[5]((void *)s_flexcommBaseAddrs[5], s_flexcommHandle[5]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -251,8 +265,8 @@ void FLEXCOMM6_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[6]);
     s_flexcommIrqHandler[6]((void *)s_flexcommBaseAddrs[6], s_flexcommHandle[6]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -264,8 +278,8 @@ void FLEXCOMM7_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[7]);
     s_flexcommIrqHandler[7]((void *)s_flexcommBaseAddrs[7], s_flexcommHandle[7]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -277,8 +291,8 @@ void FLEXCOMM8_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[8]);
     s_flexcommIrqHandler[8]((void *)s_flexcommBaseAddrs[8], s_flexcommHandle[8]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif
@@ -290,8 +304,8 @@ void FLEXCOMM9_DriverIRQHandler(void)
 {
     assert(s_flexcommIrqHandler[9]);
     s_flexcommIrqHandler[9]((void *)s_flexcommBaseAddrs[9], s_flexcommHandle[9]);
-    /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
-      exception return operation might vector to incorrect interrupt */
+/* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
+  exception return operation might vector to incorrect interrupt */
 #if defined __CORTEX_M && (__CORTEX_M == 4U)
     __DSB();
 #endif

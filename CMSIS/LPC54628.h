@@ -8,7 +8,7 @@
 **
 **     Reference manual:    LPC546xx User manual Rev.1.9  5 June 2017
 **     Version:             rev. 1.2, 2017-06-08
-**     Build:               b180227
+**     Build:               b180328
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for LPC54628
@@ -1676,8 +1676,8 @@ typedef struct {
 
 /*! @name MRBA - CAN Message RAM Base Address */
 /*! @{ */
-#define CAN_MRBA_BA_MASK                         (0xFFFFFFFFU)
-#define CAN_MRBA_BA_SHIFT                        (0U)
+#define CAN_MRBA_BA_MASK                         (0xFFFF0000U)
+#define CAN_MRBA_BA_SHIFT                        (16U)
 #define CAN_MRBA_BA(x)                           (((uint32_t)(((uint32_t)(x)) << CAN_MRBA_BA_SHIFT)) & CAN_MRBA_BA_MASK)
 /*! @} */
 

@@ -36,6 +36,12 @@
 #include "fsl_device_registers.h"
 #include "fsl_flexcomm.h"
 
+/* Component ID definition, used by tools. */
+#ifndef FSL_COMPONENT_ID
+#define FSL_COMPONENT_ID "platform.drivers.flexcomm_usart"
+#endif
+
+
 enum _usart_transfer_states
 {
     kUSART_TxIdle, /* TX idle. */
@@ -377,7 +383,7 @@ status_t USART_TransferCreateHandle(USART_Type *base,
     handle->rxWatermark = (usart_rxfifo_watermark_t)USART_FIFOTRIG_RXLVL_GET(base);
     handle->txWatermark = (usart_txfifo_watermark_t)USART_FIFOTRIG_TXLVL_GET(base);
 
-    FLEXCOMM_SetIRQHandler(base, (flexcomm_irq_handler_t)(uintptr_t)USART_TransferHandleIRQ, handle);
+    FLEXCOMM_SetIRQHandler(base, (flexcomm_irq_handler_t)USART_TransferHandleIRQ, handle);
 
     /* Enable interrupt in NVIC. */
     EnableIRQ(s_usartIRQ[instance]);

@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.2, 2017-06-08
-**     Build:               b180309
+**     Build:               b180327
 **
 **     Abstract:
 **         Chip specific module features.
@@ -282,6 +282,8 @@
 #define FSL_FEATURE_SCT_NUMBER_OF_STATES (10)
 /* @brief Number of match capture */
 #define FSL_FEATURE_SCT_NUMBER_OF_MATCH_CAPTURE (10)
+/* @brief Number of outputs */
+#define FSL_FEATURE_SCT_NUMBER_OF_OUTPUTS (10)
 
 /* SDIF module features */
 

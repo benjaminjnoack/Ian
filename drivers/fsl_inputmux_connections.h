@@ -39,6 +39,10 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+/* Component ID definition, used by tools. */
+#ifndef FSL_COMPONENT_ID
+#define FSL_COMPONENT_ID "platform.drivers.inputmux_connections"
+#endif
 
 /*!
  * @addtogroup inputmux_driver

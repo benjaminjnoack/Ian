@@ -88,6 +88,21 @@ void INPUTMUX_Init(INPUTMUX_Type *base);
 */
 void INPUTMUX_AttachSignal(INPUTMUX_Type *base, uint32_t index, inputmux_connection_t connection);
 
+#if defined(FSL_FEATURE_INPUTMUX_HAS_SIGNAL_ENA)
+/*!
+ * @brief Enable/disable a signal
+ *
+ * This function gates the INPUTPMUX clock.
+ *
+ * @param base Base address of the INPUTMUX peripheral.
+ * @param signal Enable signal register id and bit offset.
+ * @param enable Selects enable or disable.
+ *
+ * @retval None.
+*/
+void INPUTMUX_EnableSignal(INPUTMUX_Type *base, inputmux_signal_t signal, bool enable);
+#endif
+
 /*!
  * @brief	Deinitialize INPUTMUX peripheral.
 
