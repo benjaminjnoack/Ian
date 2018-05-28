@@ -19,11 +19,11 @@
 /* clang-format off */
 /* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Clocks v4.0
+product: Clocks v4.1
 processor: LPC54628J512
 package_id: LPC54628J512ET180
 mcu_data: ksdk2_0
-processor_version: 3.0.1
+processor_version: 4.0.0
 board: LPCXpresso54628
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */

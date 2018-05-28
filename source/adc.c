@@ -16,7 +16,7 @@
 SemaphoreHandle_t xSequenceASemaphore = NULL;
 SemaphoreHandle_t xSequenceBSemaphore = NULL;
 
-static const uint32_t DEAD_CENTER = 0x800;
+static const uint8_t DEAD_CENTER = 0x80;
 
 struct sequence_parameter parameters[2];
 
@@ -25,28 +25,10 @@ struct sequence_parameter parameters[2];
  ******************************************************************************/
 
 void adcReadSequenceTask(void *pvParameters);
-uint8_t adcDoBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading);
-
 
 /*******************************************************************************
  * Code
  ******************************************************************************/
-
-uint8_t adcDoBoxcarAverage(uint32_t *buffer, uint32_t **bufferPtr, uint32_t reading) {
-	uint32_t avg = 0;
-	int i;
-
-	*(*bufferPtr) = reading;
-	if (++(*bufferPtr) == (buffer + (BUFFER_LENGTH - 1))) {
-		(*bufferPtr) = buffer;
-	}
-
-	for (i = 0; i < BUFFER_LENGTH; i++) {
-		avg += buffer[i];
-	}
-
-	return (uint8_t)((avg / BUFFER_LENGTH) >> 4);
-}
 
 void adcInitialize(void) {
 	/* SYSCON power. */
@@ -110,25 +92,15 @@ void adcReadSequenceTask(void *pvParameters) {
 	int count;
 	struct sequence_parameter *parameters;
 
-	uint32_t xAverage, yAverage;
-	uint32_t xBuffer[BUFFER_LENGTH];
-	uint32_t yBuffer[BUFFER_LENGTH];
+	uint8_t xResult, yResult;
 	uint8_t xCmd[USART_1_TX_BUFFER_SIZE];
 	uint8_t yCmd[USART_1_TX_BUFFER_SIZE];
 	uint8_t xLast, yLast;
-	uint32_t *xPtr, *yPtr;
-	adc_result_info_t xResult, yResult;
+	adc_result_info_t xConversion, yConversion;
 
 	count = 0;
-	xAverage = 0;
-	yAverage = 0;
 	xLast = DEAD_CENTER;
 	yLast = DEAD_CENTER;
-	xPtr = xBuffer;
-	yPtr = yBuffer;
-
-	memset(xBuffer, DEAD_CENTER, BUFFER_LENGTH);
-	memset(yBuffer, DEAD_CENTER, BUFFER_LENGTH);
 
 	parameters = (struct sequence_parameter *) pvParameters;
 	xCmd[0] = parameters->xAxis.command;
@@ -142,24 +114,24 @@ void adcReadSequenceTask(void *pvParameters) {
 			GPIO_PortToggle(GPIO, 3U, 1 << parameters->led);
 		}
 
-		ADC_GetChannelConversionResult(ADC0, parameters->xAxis.channel, &xResult);
-		xAverage = adcDoBoxcarAverage(xBuffer, &xPtr, xResult.result);
-		if (abs((int)xLast - (int)xAverage) > 0x03) {
-			xCmd[1] = xAverage;
+		ADC_GetChannelConversionResult(ADC0, parameters->xAxis.channel, &xConversion);
+		xResult = xConversion.result >> 4;
+		if (abs((int)xLast - (int)xResult) > 0x0A) {
+			xCmd[1] = xResult;
 			if (pdTRUE == usartSendToQueue(xCmd, 0)) {
-				xLast = xAverage;
-//				PRINTF("%c = %d\r\n", xCmd[0], xLast);
+//				PRINTF("%c = %d -> %d\r\n", xCmd[0], xResult, xLast);
+				xLast = xResult;
 			}
 		}
 
 
-		ADC_GetChannelConversionResult(ADC0, parameters->yAxis.channel, &yResult);
-		yAverage = adcDoBoxcarAverage(yBuffer, &yPtr, yResult.result);
-		if (abs((int)yLast - (int)yAverage) > 0x03) {
-			yCmd[1] = yAverage;
+		ADC_GetChannelConversionResult(ADC0, parameters->yAxis.channel, &yConversion);
+		yResult = yConversion.result >>  4;
+		if (abs((int)yLast - (int)yResult) > 0x0A) {
+			yCmd[1] = yResult;
 			if (pdTRUE == usartSendToQueue(yCmd, 0)) {
-				yLast = yAverage;
-//				PRINTF("%c = %d\r\n", yCmd[0], yLast);
+//				PRINTF("%c = %d -> %d\r\n", yCmd[0], yResult, yLast);
+				yLast = yResult;
 			}
 		}
 

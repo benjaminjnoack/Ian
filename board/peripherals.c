@@ -6,11 +6,11 @@
 /* clang-format off */
 /* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Peripherals v1.0
+product: Peripherals v4.1
 processor: LPC54628J512
 package_id: LPC54628J512ET180
 mcu_data: ksdk2_0
-processor_version: 3.0.1
+processor_version: 4.0.0
 board: LPCXpresso54628
 functionalGroups:
 - name: BOARD_InitPeripherals
@@ -125,6 +125,8 @@ instance:
       - user_data: ''
   - usartConfig_t:
     - usartConfig:
+      - clockSource: 'FXCOMFunctionClock'
+      - clockSourceFreq: 'GetFreq'
       - baudRate_Bps: '115200'
       - parityMode: 'kUSART_ParityDisabled'
       - stopBitCount: 'kUSART_OneStopBit'
@@ -189,7 +191,7 @@ instance:
     - adcConfig:
       - clockMode: 'kADC_ClockSynchronousMode'
       - clockDividerNumber: '1'
-      - resolution: 'kADC_Resolution12bit'
+      - resolution: 'kADC_Resolution8bit'
       - sampleTimeNumber: '0'
       - enableBypassCalibration: 'false'
     - thresholdConfig:
@@ -241,7 +243,7 @@ instance:
 const adc_config_t ADC_1configStruct = {
   .clockMode = kADC_ClockSynchronousMode,
   .clockDividerNumber = 1,
-  .resolution = kADC_Resolution12bit,
+  .resolution = kADC_Resolution8bit,
   .sampleTimeNumber = 0,
   .enableBypassCalibration = false
 };

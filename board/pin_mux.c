@@ -7,17 +7,18 @@
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Pins v4.0
+product: Pins v4.1
 processor: LPC54628J512
 package_id: LPC54628J512ET180
 mcu_data: ksdk2_0
-processor_version: 3.0.1
+processor_version: 4.0.0
 board: LPCXpresso54628
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
 
 #include "fsl_common.h"
+#include "fsl_gpio.h"
 #include "fsl_iocon.h"
 #include "pin_mux.h"
 
@@ -70,15 +71,49 @@ void BOARD_InitPins(void)
 {
     /* Enables the clock for the IOCON block. 0 = Disable; 1 = Enable.: 0x01u */
     CLOCK_EnableClock(kCLOCK_Iocon);
+    /* Enables the clock for the GPIO2 module */
+    CLOCK_EnableClock(kCLOCK_Gpio2);
+    /* Enables the clock for the GPIO3 module */
+    CLOCK_EnableClock(kCLOCK_Gpio3);
+
+    gpio_pin_config_t LED3_config = {
+        .pinDirection = kGPIO_DigitalOutput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PIO2_2 (pin C3)  */
+    GPIO_PinInit(BOARD_INITPINS_LED3_GPIO, BOARD_INITPINS_LED3_PORT, BOARD_INITPINS_LED3_PIN, &LED3_config);
+
+    gpio_pin_config_t LED2_config = {
+        .pinDirection = kGPIO_DigitalOutput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PIO3_3 (pin A13)  */
+    GPIO_PinInit(BOARD_INITPINS_LED2_GPIO, BOARD_INITPINS_LED2_PORT, BOARD_INITPINS_LED2_PIN, &LED2_config);
+
+    gpio_pin_config_t LED1_config = {
+        .pinDirection = kGPIO_DigitalOutput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PIO3_14 (pin E3)  */
+    GPIO_PinInit(BOARD_INITPINS_LED1_GPIO, BOARD_INITPINS_LED1_PORT, BOARD_INITPINS_LED1_PIN, &LED1_config);
+
+    gpio_pin_config_t FC2_SCLX_config = {
+        .pinDirection = kGPIO_DigitalOutput,
+        .outputLogic = 0U
+    };
+    /* Initialize GPIO functionality on pin PIO3_24 (pin E2)  */
+    GPIO_PinInit(BOARD_INITPINS_FC2_SCLX_GPIO, BOARD_INITPINS_FC2_SCLX_PORT, BOARD_INITPINS_FC2_SCLX_PIN, &FC2_SCLX_config);
 
     IOCON->PIO[0][16] = ((IOCON->PIO[0][16] &
                           /* Mask bits to zero which are setting */
                           (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                         /* Selects pin function.: PORT016 (pin M4) is configured as ADC0_4 */
+                         /* Selects pin function.
+                          * : PORT016 (pin M4) is configured as ADC0_4. */
                          | IOCON_PIO_FUNC(PIO016_FUNC_ALT0)
 
-                         /* Select Analog/Digital mode.: Analog mode. */
+                         /* Select Analog/Digital mode.
+                          * : Analog mode. */
                          | IOCON_PIO_DIGIMODE(PIO016_DIGIMODE_ANALOG));
 
     const uint32_t port0_pin29_config = (/* Pin is configured as FC0_RXD_SDA_MOSI */
@@ -119,124 +154,149 @@ void BOARD_InitPins(void)
                           /* Mask bits to zero which are setting */
                           (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                         /* Selects pin function.: PORT031 (pin M5) is configured as ADC0_5 */
+                         /* Selects pin function.
+                          * : PORT031 (pin M5) is configured as ADC0_5. */
                          | IOCON_PIO_FUNC(PIO031_FUNC_ALT0)
 
-                         /* Select Analog/Digital mode.: Analog mode. */
+                         /* Select Analog/Digital mode.
+                          * : Analog mode. */
                          | IOCON_PIO_DIGIMODE(PIO031_DIGIMODE_ANALOG));
 
     IOCON->PIO[1][0] = ((IOCON->PIO[1][0] &
                          /* Mask bits to zero which are setting */
                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                        /* Selects pin function.: PORT10 (pin N3) is configured as ADC0_6 */
+                        /* Selects pin function.
+                         * : PORT10 (pin N3) is configured as ADC0_6. */
                         | IOCON_PIO_FUNC(PIO10_FUNC_ALT0)
 
-                        /* Select Analog/Digital mode.: Analog mode. */
+                        /* Select Analog/Digital mode.
+                         * : Analog mode. */
                         | IOCON_PIO_DIGIMODE(PIO10_DIGIMODE_ANALOG));
 
     IOCON->PIO[2][0] = ((IOCON->PIO[2][0] &
                          /* Mask bits to zero which are setting */
                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                        /* Selects pin function.: PORT20 (pin P3) is configured as ADC0_7 */
+                        /* Selects pin function.
+                         * : PORT20 (pin P3) is configured as ADC0_7. */
                         | IOCON_PIO_FUNC(PIO20_FUNC_ALT0)
 
-                        /* Select Analog/Digital mode.: Analog mode. */
+                        /* Select Analog/Digital mode.
+                         * : Analog mode. */
                         | IOCON_PIO_DIGIMODE(PIO20_DIGIMODE_ANALOG));
 
     IOCON->PIO[2][2] = ((IOCON->PIO[2][2] &
                          /* Mask bits to zero which are setting */
                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                        /* Selects pin function.: PORT22 (pin C3) is configured as PIO2_2 */
+                        /* Selects pin function.
+                         * : PORT22 (pin C3) is configured as PIO2_2. */
                         | IOCON_PIO_FUNC(PIO22_FUNC_ALT0)
 
-                        /* Select Analog/Digital mode.: Digital mode. */
+                        /* Select Analog/Digital mode.
+                         * : Digital mode. */
                         | IOCON_PIO_DIGIMODE(PIO22_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][14] = ((IOCON->PIO[3][14] &
                           /* Mask bits to zero which are setting */
                           (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                         /* Selects pin function.: PORT314 (pin E3) is configured as PIO3_14 */
+                         /* Selects pin function.
+                          * : PORT314 (pin E3) is configured as PIO3_14. */
                          | IOCON_PIO_FUNC(PIO314_FUNC_ALT0)
 
-                         /* Select Analog/Digital mode.: Digital mode. */
+                         /* Select Analog/Digital mode.
+                          * : Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO314_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][20] = ((IOCON->PIO[3][20] &
                           /* Mask bits to zero which are setting */
                           (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                         /* Selects pin function.: PORT320 (pin N2) is configured as CLKOUT */
+                         /* Selects pin function.
+                          * : PORT320 (pin N2) is configured as CLKOUT. */
                          | IOCON_PIO_FUNC(PIO320_FUNC_ALT3)
 
-                         /* Select Analog/Digital mode.: Digital mode. */
+                         /* Select Analog/Digital mode.
+                          * : Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO320_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][24] = ((IOCON->PIO[3][24] &
                           /* Mask bits to zero which are setting */
                           (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK | IOCON_PIO_I2CFILTER_MASK)))
 
-                         /* Selects pin function.: PORT324 (pin E2) is configured as PIO3_24 */
+                         /* Selects pin function.
+                          * : PORT324 (pin E2) is configured as PIO3_24. */
                          | IOCON_PIO_FUNC(PIO324_FUNC_ALT0)
 
-                         /* Select Analog/Digital mode.: Digital mode. */
+                         /* Select Analog/Digital mode.
+                          * : Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO324_DIGIMODE_DIGITAL)
 
-                         /* Configures I2C features for standard mode, fast mode, and Fast Mode Plus operation.:
-                          * Disabled. I2C 50 ns glitch filter disabled. */
+                         /* Configures I2C features for standard mode, fast mode, and Fast Mode Plus operation.
+                          * : Disabled.
+                          * I2C 50 ns glitch filter disabled. */
                          | IOCON_PIO_I2CFILTER(PIO324_I2CFILTER_DISABLED));
 
     IOCON->PIO[3][26] = ((IOCON->PIO[3][26] &
                           /* Mask bits to zero which are setting */
                           (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                         /* Selects pin function.: PORT326 (pin K5) is configured as FC4_RXD_SDA_MOSI */
+                         /* Selects pin function.
+                          * : PORT326 (pin K5) is configured as FC4_RXD_SDA_MOSI. */
                          | IOCON_PIO_FUNC(PIO326_FUNC_ALT3)
 
-                         /* Select Analog/Digital mode.: Digital mode. */
+                         /* Select Analog/Digital mode.
+                          * : Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO326_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][27] = ((IOCON->PIO[3][27] &
                           /* Mask bits to zero which are setting */
                           (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                         /* Selects pin function.: PORT327 (pin P14) is configured as FC4_TXD_SCL_MISO */
+                         /* Selects pin function.
+                          * : PORT327 (pin P14) is configured as FC4_TXD_SCL_MISO. */
                          | IOCON_PIO_FUNC(PIO327_FUNC_ALT3)
 
-                         /* Select Analog/Digital mode.: Digital mode. */
+                         /* Select Analog/Digital mode.
+                          * : Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO327_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][28] = ((IOCON->PIO[3][28] &
                           /* Mask bits to zero which are setting */
                           (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                         /* Selects pin function.: PORT328 (pin M11) is configured as FC4_CTS_SDA_SSEL0 */
+                         /* Selects pin function.
+                          * : PORT328 (pin M11) is configured as FC4_CTS_SDA_SSEL0. */
                          | IOCON_PIO_FUNC(PIO328_FUNC_ALT3)
 
-                         /* Select Analog/Digital mode.: Digital mode. */
+                         /* Select Analog/Digital mode.
+                          * : Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO328_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][29] = ((IOCON->PIO[3][29] &
                           /* Mask bits to zero which are setting */
                           (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                         /* Selects pin function.: PORT329 (pin L13) is configured as FC4_RTS_SCL_SSEL1 */
+                         /* Selects pin function.
+                          * : PORT329 (pin L13) is configured as FC4_RTS_SCL_SSEL1. */
                          | IOCON_PIO_FUNC(PIO329_FUNC_ALT3)
 
-                         /* Select Analog/Digital mode.: Digital mode. */
+                         /* Select Analog/Digital mode.
+                          * : Digital mode. */
                          | IOCON_PIO_DIGIMODE(PIO329_DIGIMODE_DIGITAL));
 
     IOCON->PIO[3][3] = ((IOCON->PIO[3][3] &
                          /* Mask bits to zero which are setting */
                          (~(IOCON_PIO_FUNC_MASK | IOCON_PIO_DIGIMODE_MASK)))
 
-                        /* Selects pin function.: PORT33 (pin A13) is configured as PIO3_3 */
+                        /* Selects pin function.
+                         * : PORT33 (pin A13) is configured as PIO3_3. */
                         | IOCON_PIO_FUNC(PIO33_FUNC_ALT0)
 
-                        /* Select Analog/Digital mode.: Digital mode. */
+                        /* Select Analog/Digital mode.
+                         * : Digital mode. */
                         | IOCON_PIO_DIGIMODE(PIO33_DIGIMODE_DIGITAL));
 }
 /***********************************************************************************************************************
